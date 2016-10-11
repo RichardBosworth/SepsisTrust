@@ -38,7 +38,7 @@ namespace Guidelines.Model.Links
         /// <returns>Returns the entity with the specified identifier.</returns>
         public IIdentifiableGuidelineEntity ObtainEntity(string identifier)
         {
-            var entityPair = _guidelineEntities.SingleOrDefault(pair => pair.Key.ToLower() == identifier.ToLower());
+            var entityPair = _guidelineEntities.SingleOrDefault(pair => pair.Key.ToLower() == identifier?.ToLower());
             return entityPair.Value;
         }
     }

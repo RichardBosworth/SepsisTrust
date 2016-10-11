@@ -50,6 +50,7 @@
     <Compile Include="Model\Phase.cs" />
     <Compile Include="Model\Links\Link.cs" />
     <Compile Include="Model\Blocks\SummaryBlock.cs" />
+    <Compile Include="Model\Running\DefaultGuidelineRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
