@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Characteristics\CharacteristicsHolder.cs" />
     <Compile Include="Characteristics\ICharacteristic.cs" />
+    <Compile Include="IO\IGuidelineRetriever.cs" />
     <Compile Include="Model\Blocks\ActionBlock.cs" />
     <Compile Include="Model\Blocks\AssessmentBlock.cs" />
     <Compile Include="Model\Blocks\Block.cs" />

@@ -4,9 +4,9 @@ namespace Guidelines.Model.Running
 {
     public class DefaultGuidelineRunner : IGuidelineRunner
     {
-        private Block _workingBlock = null;
         private readonly Guideline _guideline;
-        private Block _previousBlock = null;
+        private Block _previousBlock;
+        private Block _workingBlock;
 
         public DefaultGuidelineRunner(Guideline guideline)
         {
@@ -16,7 +16,9 @@ namespace Guidelines.Model.Running
         public Block Start()
         {
             var block = _guideline.EntryPhase.EntryBlock;
+
             _workingBlock = block;
+
             return block;
         }
 
@@ -25,8 +27,8 @@ namespace Guidelines.Model.Running
             // Save the previous block.
             _previousBlock = _workingBlock;
 
-            Link nextBlockLink = _workingBlock.Links.FirstOrDefault(link => link.Valid(_workingBlock.Score));
-            Block block = _guideline.LinkManager.ObtainEntity(nextBlockLink.LinkedGuidelineEntityIdentifier) as Block;
+            var nextBlockLink = _workingBlock.Links.FirstOrDefault(link => link.Valid(_workingBlock.Score));
+            var block = _guideline.LinkManager.ObtainEntity(nextBlockLink.LinkedGuidelineEntityIdentifier) as Block;
 
             _workingBlock = block;
 

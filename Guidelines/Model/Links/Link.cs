@@ -1,5 +1,8 @@
 ﻿namespace Guidelines.Model
 {
+    /// <summary>
+    /// Represents a link between entities.
+    /// </summary>
     public class Link
     {
         public Link(double minimumScoreToActivate, double maximumScoreToActivate, IIdentifiableGuidelineEntity linkedGuidelineEntity)
