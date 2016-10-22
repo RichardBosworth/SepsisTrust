@@ -23,16 +23,6 @@ namespace Guidelines.Model.Running
             }
         }
 
-        public Block PreviousBlock
-        {
-            get { return _previousBlock; }
-            set
-            {
-                _previousBlock = value; 
-                _previousBlock.CharacteristicsHolder.Finish();
-            }
-        }
-
         public Block Start()
         {
             var block = _guideline.EntryPhase.EntryBlock;
@@ -44,8 +34,8 @@ namespace Guidelines.Model.Running
 
         public Block MoveForwards()
         {
-            // Save the previous block.
-            PreviousBlock = WorkingBlock;
+            // Stop the previous block.
+            WorkingBlock.CharacteristicsHolder.Finish();
 
             var nextBlockLink = WorkingBlock.Links.FirstOrDefault(link => link.Valid(WorkingBlock.Score));
             var block = _guideline.LinkManager.ObtainEntity(nextBlockLink.LinkedGuidelineEntityIdentifier) as Block;
@@ -53,6 +43,11 @@ namespace Guidelines.Model.Running
             WorkingBlock = block;
 
             return block;
+        }
+
+        public void SetCurrentBlock(Block block)
+        {
+            WorkingBlock = block;
         }
     }
 }

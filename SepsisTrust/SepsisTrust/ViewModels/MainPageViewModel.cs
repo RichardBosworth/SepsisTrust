@@ -1,10 +1,11 @@
-﻿using Prism.Commands;
+﻿using Guidelines.IO;
+using Guidelines.Model;
+using Guidelines.Model.Running;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
-using SepsisTrust.Extensions;
 using SepsisTrust.Model;
-using SepsisTrust.Views;
-using Xamarin.Forms;
+using SepsisTrust.Model.Navigation;
 
 namespace SepsisTrust.ViewModels
 {
@@ -40,13 +41,16 @@ namespace SepsisTrust.ViewModels
 
         private async void Navigate()
         {
-            var navigationParameters = new NavigationParameters();
-            var patient = new Patient {Gender = true};
-            var switchView = new Switch();
-            switchView.SetBinding(Switch.IsToggledProperty, new Binding("Gender", BindingMode.TwoWay));
-            switchView.BindingContext = patient;
-            navigationParameters.ForPatientCharacteristicPage(patient, "Is this patient male?", switchView, new DelegateCommand(() => _navigationService.NavigateAsync("StartGuidelinePage")));
-            await _navigationService.NavigateAsync("CharacteristicPage", navigationParameters);
+            IGuidelineRetriever guidelineRetriever = new XmlFileGuidelineRetriever();
+            var guideline = await guidelineRetriever.RetrieveGuidelineAsync(string.Empty);
+            IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline);
+            var startBlock = guidelineRunner.Start();
+            var navigationModel = new GuidelinePageNavigationModel
+                                  {
+                                      CurrentBlock = startBlock,
+                                      CurrentGuidelineRunner = guidelineRunner
+                                  };
+            await _navigationService.NavigateAsync("GNav/GuidelinePage", navigationModel.ToNavigationParameters());
         }
     }
 }

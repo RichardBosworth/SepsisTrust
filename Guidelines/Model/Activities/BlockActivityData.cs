@@ -7,7 +7,9 @@ namespace Guidelines.Model
     /// </summary>
     public class BlockActivityData
     {
-        public BlockActivityData(string title, int scoreWhenActivated = 1)
+
+
+        public BlockActivityData(string title = "", int scoreWhenActivated = 1)
         {
             Title = title;
             ScoreWhenActivated = scoreWhenActivated;

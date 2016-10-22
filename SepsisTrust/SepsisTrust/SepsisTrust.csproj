@@ -36,19 +36,35 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Extensions\NavigationParametersExtensions.cs" />
+    <Compile Include="GuidelineUI\Views\ActionBlockTemplate.xaml.cs">
+      <DependentUpon>ActionBlockTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidelineUI\Views\AssessmentBlockTemplate.xaml.cs">
+      <DependentUpon>AssessmentBlockTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidelineUI\Views\SummaryBlockTemplate.xaml.cs">
+      <DependentUpon>SummaryBlockTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Navigation\GuidelinePageNavigationModel.cs" />
+    <Compile Include="Model\Navigation\INavigationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditPatientCharacteristicPageViewModel.cs" />
+    <Compile Include="ViewModels\GuidelinePageViewModel.cs" />
+    <Compile Include="GuidelineUI\IGuidelineUITemplateSelector.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="GuidelineUI\ReflectiveGuidelineUITemplateSelector.cs" />
     <Compile Include="ViewModels\SelectClinicalAreaPageViewModel.cs" />
-    <Compile Include="ViewModels\StartGuidelinePageViewModel.cs" />
     <Compile Include="Views\EditPatientCharacteristicPage.xaml.cs">
       <DependentUpon>EditPatientCharacteristicPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GuidelinePage.xaml.cs">
+      <DependentUpon>GuidelinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GuidelinesNavigationPage.xaml.cs">
+      <DependentUpon>GuidelinesNavigationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SelectClinicalAreaPage.xaml.cs">
       <DependentUpon>SelectClinicalAreaPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StartGuidelinePage.xaml.cs">
-      <DependentUpon>StartGuidelinePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +129,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Guidelines\Guidelines.csproj">
+      <Project>{AEAEAFF0-C95F-46E9-AEBF-F8DFEFD97183}</Project>
+      <Name>Guidelines</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SepsisTrust.Model\SepsisTrust.Model.csproj">
       <Project>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</Project>
       <Name>SepsisTrust.Model</Name>
@@ -125,7 +145,34 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\StartGuidelinePage.xaml">
+    <EmbeddedResource Include="Views\GuidelinePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Guideline\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GuidelineUI\Views\SummaryBlockTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GuidelineUI\Views\ActionBlockTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GuidelineUI\Views\AssessmentBlockTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\GuidelinesNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

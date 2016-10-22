@@ -39,6 +39,7 @@
     <Compile Include="Characteristics\ICharacteristic.cs" />
     <Compile Include="Characteristics\TimedActivityCharacteristic.cs" />
     <Compile Include="IO\IGuidelineRetriever.cs" />
+    <Compile Include="IO\XmlFileGuidelineRetriever.cs" />
     <Compile Include="Model\Blocks\ActionBlock.cs" />
     <Compile Include="Model\Blocks\AssessmentBlock.cs" />
     <Compile Include="Model\Blocks\Block.cs" />

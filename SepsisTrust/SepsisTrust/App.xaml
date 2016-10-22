@@ -24,12 +24,6 @@
                 <Setter Property="BorderRadius" Value="0" />
             </Style>
 
-            <Style x:Key="FloatingButtonStyle" TargetType="Button" BasedOn="{StaticResource BottomPageButtonStyle}">
-                <Setter Property="BorderRadius" Value="50" />
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-            </Style>
-
             <!--Text-->
             <Style x:Key="GenericHeadingLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource HeadingColor}" />
@@ -38,6 +32,13 @@
             <Style x:Key="TitleLabelStyle" TargetType="Label" BasedOn="{StaticResource GenericHeadingLabelStyle}">
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="28" />
+            </Style>
+          
+          <!--StackLayout-->
+            <Style x:Key="DefaultStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Margin" Value="40" />
             </Style>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>

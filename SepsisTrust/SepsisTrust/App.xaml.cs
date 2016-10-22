@@ -1,4 +1,5 @@
-﻿using Prism.Unity;
+﻿using Guidelines.IO;
+using Prism.Unity;
 using SepsisTrust.Views;
 
 namespace SepsisTrust
@@ -18,7 +19,8 @@ namespace SepsisTrust
         {
             Container.RegisterTypeForNavigation<MainPage>();
             Container.RegisterTypeForNavigation<EditPatientCharacteristicPage>("CharacteristicPage");
-            Container.RegisterTypeForNavigation<StartGuidelinePage>();
+            Container.RegisterTypeForNavigation<GuidelinePage>();
+            Container.RegisterTypeForNavigation<GuidelinesNavigationPage>("GNav");
         }
     }
 }

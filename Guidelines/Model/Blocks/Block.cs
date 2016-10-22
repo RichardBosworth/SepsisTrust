@@ -65,6 +65,11 @@ namespace Guidelines.Model
         /// </value>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Gets and sets a quick, interface friendly title that identifies the block.
+        /// </summary>
+        public string FriendlyTitle { get; set; }
+
         public string Identifier { get; set; }
     }
 }

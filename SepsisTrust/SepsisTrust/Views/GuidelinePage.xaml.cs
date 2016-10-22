@@ -2,11 +2,13 @@
 
 namespace SepsisTrust.Views
 {
-    public partial class StartGuidelinePage : ContentPage
+    public partial class GuidelinePage : ContentPage
     {
-        public StartGuidelinePage()
+        public GuidelinePage()
         {
             InitializeComponent();
         }
+
+  
     }
 }

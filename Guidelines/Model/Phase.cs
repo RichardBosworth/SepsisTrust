@@ -25,7 +25,6 @@ namespace Guidelines.Model
         /// </value>
         public Block EntryBlock { get; set; }
 
-        public List<Link> PhaseLinks { get; private set; } = new List<Link>();
         public CharacteristicsHolder CharacteristicsHolder { get; set; } = new CharacteristicsHolder();
 
         public string Identifier { get; set; }

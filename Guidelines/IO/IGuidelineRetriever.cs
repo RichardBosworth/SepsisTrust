@@ -13,6 +13,6 @@ namespace Guidelines.IO
         /// </summary>
         /// <param name="identifier">The identifier of the guideline that should be retrieved.</param>
         /// <returns>Returns the guideline with the specified identifier.</returns>
-        Task<Guideline> RetrieveGuideline(string identifier);
+        Task<Guideline> RetrieveGuidelineAsync(string identifier);
     }
 }

@@ -7,5 +7,6 @@
     {
         Block Start();
         Block MoveForwards();
+        void SetCurrentBlock(Block block);
     }
 }
