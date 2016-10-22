@@ -17,6 +17,8 @@ namespace SepsisTrust
         protected override void RegisterTypes()
         {
             Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<EditPatientCharacteristicPage>("CharacteristicPage");
+            Container.RegisterTypeForNavigation<StartGuidelinePage>();
         }
     }
 }

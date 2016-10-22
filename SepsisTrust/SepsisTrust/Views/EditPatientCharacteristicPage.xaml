@@ -7,8 +7,18 @@
              x:Class="SepsisTrust.Views.EditPatientCharacteristicPage"
              Title="{Binding CharacteristicName}">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="InnerLayoutStyle" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Margin" Value="30" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+  
     <StackLayout>
-        <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand">
+        <StackLayout Style="{StaticResource InnerLayoutStyle}">
           <Label Text="{Binding CharacteristicName}" Style="{StaticResource TitleLabelStyle}" />
           <ContentView Content="{Binding ControlsView}"></ContentView>
         </StackLayout>

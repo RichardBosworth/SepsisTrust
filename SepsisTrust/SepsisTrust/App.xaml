@@ -6,31 +6,38 @@
                         x:Class="SepsisTrust.App">
     <prism:PrismApplication.Resources>
         <ResourceDictionary>
-          <!--Colors-->
+            <!--Colors-->
             <Color x:Key="HeadingColor">#C33B0D</Color>
             <Color x:Key="BodyColor">Black</Color>
             <Color x:Key="ButtonTextColor">White</Color>
             <Color x:Key="GoodButtonColor">#20C342</Color>
             <Color x:Key="BadButtonColor">#F52212</Color>
             <Color x:Key="NeutralButtonColor">#203AC3</Color>
-          
-          <!--Styles-->
-          <Style x:Key="BottomPageButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="BackgroundColor" Value="{StaticResource GoodButtonColor}" />
-            <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
-            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="VerticalOptions" Value="End" />
-          </Style>
-          
-          <!--Text-->
+
+            <!--Styles-->
+            <Style x:Key="BottomPageButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="BackgroundColor" Value="{StaticResource GoodButtonColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="BorderRadius" Value="0" />
+            </Style>
+
+            <Style x:Key="FloatingButtonStyle" TargetType="Button" BasedOn="{StaticResource BottomPageButtonStyle}">
+                <Setter Property="BorderRadius" Value="50" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+
+            <!--Text-->
             <Style x:Key="GenericHeadingLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource HeadingColor}" />
             </Style>
 
             <Style x:Key="TitleLabelStyle" TargetType="Label" BasedOn="{StaticResource GenericHeadingLabelStyle}">
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontSize" Value="28" />
             </Style>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>
