@@ -1,7 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
                         x:Class="SepsisTrust.App">
+    <prism:PrismApplication.Resources>
+        <ResourceDictionary>
+          <!--Colors-->
+            <Color x:Key="HeadingColor">#C33B0D</Color>
+            <Color x:Key="BodyColor">Black</Color>
+            <Color x:Key="ButtonTextColor">White</Color>
+            <Color x:Key="GoodButtonColor">#20C342</Color>
+            <Color x:Key="BadButtonColor">#F52212</Color>
+            <Color x:Key="NeutralButtonColor">#203AC3</Color>
+          
+          <!--Styles-->
+          <Style x:Key="BottomPageButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="BackgroundColor" Value="{StaticResource GoodButtonColor}" />
+            <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="End" />
+          </Style>
+          
+          <!--Text-->
+            <Style x:Key="GenericHeadingLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource HeadingColor}" />
+            </Style>
 
+            <Style x:Key="TitleLabelStyle" TargetType="Label" BasedOn="{StaticResource GenericHeadingLabelStyle}">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
 </prism:PrismApplication>

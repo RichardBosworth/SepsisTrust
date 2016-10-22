@@ -7,5 +7,7 @@
         }
 
         public string SummaryText { get; set; }
+
+        public string SummaryImagePath { get; set; }
     }
 }

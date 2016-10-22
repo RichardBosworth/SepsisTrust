@@ -36,7 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClinicalArea.cs" />
+    <Compile Include="Patient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\IGuidelineFinder.cs" />
+    <Compile Include="Search\PatientCharacteristicsGuidelineFinder.cs" />
+    <Compile Include="SepsisGuideline.cs" />
     <Compile Include="TemporaryGuidelineGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

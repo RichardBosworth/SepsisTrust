@@ -32,7 +32,8 @@ namespace SepsisTrust.Model
             {
                 Title = "High Risk of Sepsis",
                 SummaryText = "Use Sepsis Six",
-                Identifier = "highrisk"
+                Identifier = "highrisk",
+                SummaryImagePath = ""
             };
 
             var infectionBlock = new AssessmentBlock(assessmentPhase)

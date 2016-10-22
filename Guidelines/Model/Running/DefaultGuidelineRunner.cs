@@ -13,11 +13,31 @@ namespace Guidelines.Model.Running
             _guideline = guideline;
         }
 
+        public Block WorkingBlock
+        {
+            get { return _workingBlock; }
+            set
+            {
+                _workingBlock = value;
+                _workingBlock.CharacteristicsHolder.Start();
+            }
+        }
+
+        public Block PreviousBlock
+        {
+            get { return _previousBlock; }
+            set
+            {
+                _previousBlock = value; 
+                _previousBlock.CharacteristicsHolder.Finish();
+            }
+        }
+
         public Block Start()
         {
             var block = _guideline.EntryPhase.EntryBlock;
 
-            _workingBlock = block;
+            WorkingBlock = block;
 
             return block;
         }
@@ -25,12 +45,12 @@ namespace Guidelines.Model.Running
         public Block MoveForwards()
         {
             // Save the previous block.
-            _previousBlock = _workingBlock;
+            PreviousBlock = WorkingBlock;
 
-            var nextBlockLink = _workingBlock.Links.FirstOrDefault(link => link.Valid(_workingBlock.Score));
+            var nextBlockLink = WorkingBlock.Links.FirstOrDefault(link => link.Valid(WorkingBlock.Score));
             var block = _guideline.LinkManager.ObtainEntity(nextBlockLink.LinkedGuidelineEntityIdentifier) as Block;
 
-            _workingBlock = block;
+            WorkingBlock = block;
 
             return block;
         }
