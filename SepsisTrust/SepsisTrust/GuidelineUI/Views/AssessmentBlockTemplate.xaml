@@ -7,27 +7,32 @@
             <Style TargetType="ListView">
                 <Setter Property="SeparatorVisibility" Value="None" />
             </Style>
-          <Style x:Key="AssessmentCellTitleStyle" TargetType="Label" BasedOn="{StaticResource GenericLabelStyle}">
-            <Setter Property="FontSize" Value="20" />
-          </Style>
-          <Style x:Key="AssessmentCellDetailStyle" TargetType="Label" BasedOn="{StaticResource GenericLabelStyle}">
-            <Setter Property="FontSize" Value="14" />
-          </Style>
+            <Style x:Key="AssessmentCellTitleStyle" TargetType="Label" BasedOn="{StaticResource GenericLabelStyle}">
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            <Style x:Key="AssessmentCellDetailStyle" TargetType="Label" BasedOn="{StaticResource GenericLabelStyle}">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
 
     <ContentView.Content>
-        <ListView ItemsSource="{Binding Block.BlockActivities}">
+        <ListView ItemsSource="{Binding Block.BlockActivities}" Header="{Binding .}" Footer="{Binding .}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label Style="{StaticResource TitleLabelStyle}" Text="{Binding Block.Title}" />
+                    <StackLayout HeightRequest="100">
+                        <Label Text="{Binding Block.Title}" Style="{StaticResource TitleLabelStyle}" />
                     </StackLayout>
                 </DataTemplate>
             </ListView.HeaderTemplate>
+            <ListView.FooterTemplate>
+                <DataTemplate>
+                    <ContentView />
+                </DataTemplate>
+            </ListView.FooterTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <SwitchCell Text="{Binding Title}" On="{Binding Activated, Mode=TwoWay}" Height="50" />
+                    <SwitchCell Text="{Binding Title}" On="{Binding Activated, Mode=TwoWay}" Height="70" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

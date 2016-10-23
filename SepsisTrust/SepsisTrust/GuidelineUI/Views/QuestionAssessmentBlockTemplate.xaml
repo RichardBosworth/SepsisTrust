@@ -5,7 +5,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <Style TargetType="ListView">
-                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="SeparatorVisibility" Value="Default" />
                 <Setter Property="HasUnevenRows" Value="True" />
             </Style>
             <Style x:Key="AssessmentQuestionCellTitleStyle" TargetType="Label"/>
@@ -14,14 +14,19 @@
 
     <ContentView.Content>
         <ListView ItemsSource="{Binding Block.BlockActivities}" Header="{Binding .}"
-                  ItemSelected="ListView_OnItemSelected">
+                  ItemSelected="ListView_OnItemSelected" Footer="{Binding .}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackLayout>
+                    <StackLayout HeightRequest="100">
                         <Label Text="{Binding Block.Title}" Style="{StaticResource TitleLabelStyle}" />
                     </StackLayout>
                 </DataTemplate>
             </ListView.HeaderTemplate>
+          <ListView.FooterTemplate>
+            <DataTemplate>
+              <ContentView />
+            </DataTemplate>
+          </ListView.FooterTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

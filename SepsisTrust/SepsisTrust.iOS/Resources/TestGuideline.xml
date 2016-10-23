@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Guideline Title="Test" Description="Nah" Identifier="adult-1" EntryPhaseId="AssessmentPhase">
 
-  <Phase Identifier="AssessmentPhase" EntryBlockId="AKIBlock">
+  <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
 
     <Block Type="Assessment" Title="Do you think the patient is ill?" Identifier="IllBlock" FriendlyTitle="?Sepsis">
       <Links>
