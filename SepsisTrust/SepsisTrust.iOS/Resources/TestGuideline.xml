@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Guideline Title="Test" Description="Nah" Identifier="adult-1" EntryPhaseId="AssessmentPhase">
 
-  <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
+  <Phase Identifier="AssessmentPhase" EntryBlockId="AKIBlock">
 
     <Block Type="Assessment" Title="Do you think the patient is ill?" Identifier="IllBlock" FriendlyTitle="?Sepsis">
       <Links>
@@ -84,14 +84,14 @@
       </Activities>
     </Block>
 
-    <Block Type="Assessment" Title="Is AKI Present?" Identifier="AKIBlock" FriendlyTitle="AKI Present?">
+    <Block Type="Assessment" Title="Is AKI Present?" Identifier="AKIBlock" FriendlyTitle="AKI Present?" AssessmentType="Question">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="AntimicrobialDecisionBlock" />
         <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="RedFlagSepsisBlock" />
       </Links>
       <Activities>
         <Activity Title="Yes" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="No" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="No" DescriptiveText="" ScoreWhenActivated="0" Activated="false" />
       </Activities>
     </Block>
 

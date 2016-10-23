@@ -25,7 +25,9 @@
             </Style>
 
             <!--Text-->
-            <Style x:Key="GenericHeadingLabelStyle" TargetType="Label">
+            <Style x:Key="GenericLabelStyle" TargetType="Label" />
+
+            <Style x:Key="GenericHeadingLabelStyle" TargetType="Label" BasedOn="{StaticResource GenericLabelStyle}">
                 <Setter Property="TextColor" Value="{StaticResource HeadingColor}" />
             </Style>
 
@@ -33,8 +35,9 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="28" />
             </Style>
-          
-          <!--StackLayout-->
+
+
+            <!--StackLayout-->
             <Style x:Key="DefaultStackLayoutStyle" TargetType="StackLayout">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />

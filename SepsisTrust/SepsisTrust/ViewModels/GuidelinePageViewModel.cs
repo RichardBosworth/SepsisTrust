@@ -20,7 +20,7 @@ namespace SepsisTrust.ViewModels
         private View _template;
 
 
-        public GuidelinePageViewModel(INavigationService navigationService)
+        public GuidelinePageViewModel( INavigationService navigationService )
         {
             _navigationService = navigationService;
         }
@@ -51,15 +51,16 @@ namespace SepsisTrust.ViewModels
             set { SetProperty(ref _proceedCommand, value); }
         }
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
+        public void OnNavigatedFrom( NavigationParameters parameters )
         {
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
+
+        public void OnNavigatedTo( NavigationParameters parameters )
         {
             // If the page is not currently associated with anything, then load the data.
             // Note that if the user presses the back button, then the page will still have the data associated with it.
-            if ((Block == null) || (GuidelineRunner == null))
+            if ( ( Block == null ) || ( GuidelineRunner == null ) )
             {
                 var navigationModel = new GuidelinePageNavigationModel(parameters);
                 Block = navigationModel.CurrentBlock;
@@ -76,7 +77,7 @@ namespace SepsisTrust.ViewModels
             Template.BindingContext = this;
 
             // Generate the proceed button text.
-            if (Block.Links.Count > 0)
+            if ( Block.Links.Count > 0 )
             {
                 ProceedButtonText = "NEXT";
                 ProceedCommand = new DelegateCommand(Proceed);
@@ -88,12 +89,13 @@ namespace SepsisTrust.ViewModels
             }
         }
 
-        private void Finish()
+
+        private void Finish( )
         {
             _navigationService.NavigateAsync("/MainPage");
         }
 
-        private async void Proceed()
+        private async void Proceed( )
         {
             // Ensure that the guideline runner has this block as the current block.
             GuidelineRunner.SetCurrentBlock(Block);

@@ -75,6 +75,18 @@ namespace Guidelines.IO
                 AddCommonProperties(blockElement, block);
             }
 
+            // If block is assessment block, add assessment type.
+            if ( block is AssessmentBlock )
+            {
+                var assessmentTypeString = blockElement.Attribute("AssessmentType")?.Value;
+                AssessmentType assessmentType;
+                var successful = Enum.TryParse(assessmentTypeString, out assessmentType);
+                if ( successful )
+                {
+                    ( (AssessmentBlock) block ).AssessmentType = assessmentType;
+                }
+            }
+
             // Add block links.
             var linksElement = blockElement.Descendants("Links").FirstOrDefault();
             if ( linksElement != null )

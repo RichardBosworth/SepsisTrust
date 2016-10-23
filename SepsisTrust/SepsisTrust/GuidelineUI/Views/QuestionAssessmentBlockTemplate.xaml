@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SepsisTrust.GuidelineUI.Views.QuestionAssessmentBlockTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ListView">
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="HasUnevenRows" Value="True" />
+            </Style>
+            <Style x:Key="AssessmentQuestionCellTitleStyle" TargetType="Label"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <ListView ItemsSource="{Binding Block.BlockActivities}" Header="{Binding .}"
+                  ItemSelected="ListView_OnItemSelected">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Block.Title}" Style="{StaticResource TitleLabelStyle}" />
+                    </StackLayout>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView HeightRequest="100" Margin="15">
+                            <ContentView.Content>
+                                <Label Text="{Binding Title}"
+                                       Style="{StaticResource AssessmentQuestionCellTitleStyle}" />
+                            </ContentView.Content>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentView.Content>
+</ContentView>

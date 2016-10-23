@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SepsisTrust.Views.MainPage"
              Title="MainPage">
-  <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
     <Button Text="Demo - Get Started" Style="{StaticResource BottomPageButtonStyle}" Command="{Binding NavigateCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
   </StackLayout>
 </ContentPage>

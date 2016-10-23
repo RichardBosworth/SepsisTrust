@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Guidelines.Model;
 using SepsisTrust.GuidelineUI.Views;
 using Xamarin.Forms;
@@ -8,27 +7,31 @@ namespace SepsisTrust.GuidelineUI
 {
     public class ReflectiveGuidelineUITemplateSelector : IGuidelineUITemplateSelector
     {
-        private readonly Dictionary<Type, Type> _blockTemplatesDictionary;
-
-        public ReflectiveGuidelineUITemplateSelector()
+        public View SelectUIForBlock( Block block )
         {
-            // Generate the block templates dictionary.
-            _blockTemplatesDictionary = new Dictionary<Type, Type>
-                                        {
-                                            {typeof(ActionBlock), typeof(ActionBlockTemplate)},
-                                            {typeof(AssessmentBlock), typeof(AssessmentBlockTemplate)},
-                                            {typeof(SummaryBlock), typeof(SummaryBlockTemplate)}
-                                        };
-        }
-
-        public View SelectUIForBlock(Block block)
-        {
-            var blockType = block.GetType();
-
-            if (_blockTemplatesDictionary.ContainsKey(blockType))
+            if ( block is SummaryBlock )
             {
-                var templateType = _blockTemplatesDictionary[blockType];
-                return Activator.CreateInstance(templateType) as View;
+                return new SummaryBlockTemplate();
+            }
+
+            if ( block is ActionBlock )
+            {
+                return new ActionBlockTemplate();
+            }
+
+            if ( block is AssessmentBlock )
+            {
+                var assessmentBlock = (AssessmentBlock) block;
+
+                switch ( assessmentBlock.AssessmentType )
+                {
+                    case AssessmentType.Question:
+                        return new QuestionAssessmentBlockTemplate();
+                    case AssessmentType.Checklist:
+                        return new AssessmentBlockTemplate();
+                    default:
+                        return new AssessmentBlockTemplate();
+                }
             }
 
             return new Label {Text = "Failed to find block."};
