@@ -3,6 +3,6 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SepsisTrust.GuidelineUI.Views.ActionBlockTemplate">
     <ContentView.Content>
-        <Label Text="{Binding CurrentBlock.Title}" />
+      
     </ContentView.Content>
 </ContentView>

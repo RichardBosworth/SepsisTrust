@@ -6,6 +6,6 @@
              x:Class="SepsisTrust.Views.MainPage"
              Title="MainPage">
   <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-    <Button Text="Demo - Get Started" Style="{StaticResource BottomPageButtonStyle}" Command="{Binding NavigateCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+    <Button Text="Demo - Get Started" Command="{Binding NavigateCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
   </StackLayout>
 </ContentPage>
