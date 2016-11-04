@@ -39,6 +39,9 @@
     <Compile Include="GuidelineUI\Views\ActionBlockTemplate.xaml.cs">
       <DependentUpon>ActionBlockTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GuidelineUI\Views\Blocks\ActionBlockListItemTemplate.xaml.cs">
+      <DependentUpon>ActionBlockListItemTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GuidelineUI\Views\QuestionAssessmentBlockTemplate.xaml.cs">
       <DependentUpon>QuestionAssessmentBlockTemplate.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,18 @@
     <EmbeddedResource Include="GuidelineUI\Views\QuestionAssessmentBlockTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GuidelineUI\Views\Blocks\ActionBlockListItemTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestGuideline.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

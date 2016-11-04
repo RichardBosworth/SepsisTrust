@@ -4,7 +4,6 @@ using Guidelines.Model.Running;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
-using SepsisTrust.Model;
 using SepsisTrust.Model.Navigation;
 
 namespace SepsisTrust.ViewModels
@@ -14,7 +13,7 @@ namespace SepsisTrust.ViewModels
         private readonly INavigationService _navigationService;
         private string _title;
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel( INavigationService navigationService )
         {
             _navigationService = navigationService;
             NavigateCommand = new DelegateCommand(Navigate);
@@ -29,17 +28,19 @@ namespace SepsisTrust.ViewModels
         public DelegateCommand NavigateCommand { get; set; }
 
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
+        public void OnNavigatedFrom( NavigationParameters parameters )
         {
         }
 
-        public async void OnNavigatedTo(NavigationParameters parameters)
+        public async void OnNavigatedTo( NavigationParameters parameters )
         {
-            if (parameters.ContainsKey("title"))
+            if ( parameters.ContainsKey("title") )
+            {
                 Title = (string) parameters["title"] + " and Prism";
+            }
         }
 
-        private async void Navigate()
+        private async void Navigate( )
         {
             IGuidelineRetriever guidelineRetriever = new XmlFileGuidelineRetriever();
             var guideline = await guidelineRetriever.RetrieveGuidelineAsync(string.Empty);

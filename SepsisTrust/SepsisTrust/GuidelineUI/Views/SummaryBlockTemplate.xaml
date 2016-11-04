@@ -1,17 +1,25 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SepsisTrust.GuidelineUI.Views.SummaryBlockTemplate">
+<ContentView x:Class="SepsisTrust.GuidelineUI.Views.SummaryBlockTemplate"
+             xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
 
-    
+
     <ContentView.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <StackLayout Margin="80">
-                <Image Source="{Binding Block.SummaryImagePath}" HeightRequest="64" WidthRequest="64"
-                       Aspect="AspectFit" VerticalOptions="FillAndExpand"/>
-                <Label Text="Hello" Style="{StaticResource TitleLabelStyle}" VerticalOptions="FillAndExpand" />
+                <StackLayout BackgroundColor="{StaticResource RedBaseColor}"
+                             HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+
+                    <Image Aspect="AspectFit" HeightRequest="64" HorizontalOptions="Center"
+                           Source="{Binding Block.SummaryImagePath}"
+                           VerticalOptions="Center" WidthRequest="64" />
+
+                </StackLayout>
+
+                <Label Style="{StaticResource TitleLabelStyle}"
+                       Text="Hello" VerticalOptions="FillAndExpand" />
+
                 <Label Text="{Binding Block.SummaryText}" VerticalOptions="FillAndExpand" />
             </StackLayout>
         </StackLayout>
