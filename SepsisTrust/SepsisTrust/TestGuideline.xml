@@ -50,7 +50,7 @@
       </Activities>
     </Block>
 
-    <Block Type="Summary" Title="Low Risk of Sepsis" Identifier="LowRiskBlock" FriendlyTitle="Low Risk" SummaryText="Use standard protocols, review if deteriorates" SummaryImagePath="">
+    <Block Type="Summary" Title="Low Risk of Sepsis" SummaryType="1" Identifier="LowRiskBlock" FriendlyTitle="Low Risk" SummaryText="Use standard protocols, review if deteriorates" SummaryImagePath="http://www.iconsdb.com/icons/preview/white/high-importance-xxl.png">
       <Links>
       </Links>
     </Block>

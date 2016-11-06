@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Guidelines.Model;
 using Microsoft.WindowsAzure.MobileServices;
-using Newtonsoft.Json.Linq;
-using PCLStorage;
-using SepsisTrust.Model.Azure;
-using Guideline = Guidelines.Model.Guideline;
 
 namespace Guidelines.IO
 {
@@ -19,7 +14,7 @@ namespace Guidelines.IO
         public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
         {
             // Load the guideline element data.
-            MobileServiceClient mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net");
+            var mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net");
             var guidelineTable = mobileServiceClient.GetTable("Guideline");
             var mainGuideline = await guidelineTable.LookupAsync("6b75729b504648e795cbef6dd75e0398");
             var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);
@@ -61,7 +56,7 @@ namespace Guidelines.IO
 
             // Add the entry block to the phase.
             var entryBlockIdentifier = phaseElement.Attribute("EntryBlockId")?.Value;
-            var identifiedBlock = phase.Blocks.FirstOrDefault(block => String.Compare(block.Identifier, entryBlockIdentifier, StringComparison.CurrentCultureIgnoreCase) == 0);
+            var identifiedBlock = phase.Blocks.FirstOrDefault(block => string.Compare(block.Identifier, entryBlockIdentifier, StringComparison.CurrentCultureIgnoreCase) == 0);
             phase.EntryBlock = identifiedBlock ?? phase.Blocks.First();
 
             // Add the phase to the guideline.
@@ -184,7 +179,15 @@ namespace Guidelines.IO
                 var value = xmlElement.Attribute(property.Name)?.Value;
                 if ( value != null )
                 {
-                    property.SetValue(obj, Convert.ChangeType(value, property.PropertyType));
+                    if ( property.PropertyType.GetTypeInfo().IsEnum )
+                    {
+                        var propertyEnumValue = Enum.Parse(property.PropertyType, value);
+                        property.SetValue(obj, propertyEnumValue);
+                    }
+                    else
+                    {
+                        property.SetValue(obj, Convert.ChangeType(value, property.PropertyType));
+                    }
                 }
             }
         }

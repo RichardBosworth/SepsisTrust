@@ -23,13 +23,15 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <ListView Footer="{Binding .}"
+        <ListView x:Name="ListView"
+                  Footer="{Binding .}"
                   HasUnevenRows="True"
                   Header="{Binding .}"
+                  ItemSelected="ListView_OnItemSelected"
                   ItemsSource="{Binding BlockActivityViewModels}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackLayout HeightRequest="100">
+                    <StackLayout Margin="0,0,0,30" HeightRequest="100">
                         <Label Style="{StaticResource TitleLabelStyle}" Text="{Binding Block.Title}" />
                     </StackLayout>
                 </DataTemplate>

@@ -1,27 +1,40 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 
 <ContentView x:Class="SepsisTrust.GuidelineUI.Views.SummaryBlockTemplate"
-             xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-
+             xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
 
     <ContentView.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <StackLayout Margin="80">
-                <StackLayout BackgroundColor="{StaticResource RedBaseColor}"
-                             HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+        <StackLayout HorizontalOptions="FillAndExpand" Spacing="40" VerticalOptions="FillAndExpand">
+            <StackLayout HeightRequest="200" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <StackLayout.Triggers>
+                    <DataTrigger Binding="{Binding Block.SummaryType}"
+                                 TargetType="StackLayout"
+                                 Value="1">
+                        <Setter Property="BackgroundColor" Value="{StaticResource YellowBaseColor}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Block.SummaryType}"
+                                 TargetType="StackLayout"
+                                 Value="2">
+                        <Setter Property="BackgroundColor" Value="{StaticResource LightOrangeBaseColor}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Block.SummaryType}"
+                                 TargetType="StackLayout"
+                                 Value="3">
+                        <Setter Property="BackgroundColor" Value="{StaticResource RedBaseColor}" />
+                    </DataTrigger>
 
-                    <Image Aspect="AspectFit" HeightRequest="64" HorizontalOptions="Center"
-                           Source="{Binding Block.SummaryImagePath}"
-                           VerticalOptions="Center" WidthRequest="64" />
-
-                </StackLayout>
-
+                </StackLayout.Triggers>
+                <Image Aspect="AspectFit" HeightRequest="140" HorizontalOptions="CenterAndExpand"
+                       Source="{Binding Block.SummaryImagePath}"
+                       VerticalOptions="CenterAndExpand" WidthRequest="140" />
+            </StackLayout>
+            <StackLayout Margin="20,10,20,10" Spacing="15">
                 <Label Style="{StaticResource TitleLabelStyle}"
                        Text="{Binding Block.Title}"
-                       VerticalOptions="FillAndExpand" />
-
-                <Label Text="{Binding Block.SummaryText}" VerticalOptions="FillAndExpand" />
+                       VerticalOptions="Start" />
+                <Label Text="{Binding Block.SummaryText}" VerticalOptions="Start" />
             </StackLayout>
         </StackLayout>
 
