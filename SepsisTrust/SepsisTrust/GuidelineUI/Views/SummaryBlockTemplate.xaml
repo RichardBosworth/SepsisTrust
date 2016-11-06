@@ -18,7 +18,8 @@
                 </StackLayout>
 
                 <Label Style="{StaticResource TitleLabelStyle}"
-                       Text="Hello" VerticalOptions="FillAndExpand" />
+                       Text="{Binding Block.Title}"
+                       VerticalOptions="FillAndExpand" />
 
                 <Label Text="{Binding Block.SummaryText}" VerticalOptions="FillAndExpand" />
             </StackLayout>

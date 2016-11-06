@@ -1,15 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<ContentPage x:Class="SepsisTrust.Views.GuidelinePage"
+             xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="SepsisTrust.Views.GuidelinePage"
-             Title="{Binding Block.Title}">
+             Title="{Binding Block.Title}"
+             prism:ViewModelLocator.AutowireViewModel="True">
 
-    <StackLayout>
-        <ContentView Content="{Binding Template}" />
-        <Button Text="{Binding ProceedButtonText}" Command="{Binding ProceedCommand}" Style="{DynamicResource BottomPageButtonStyle}" />
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ContentView Content="{Binding Template}"
+                     HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        <Button Command="{Binding ProceedCommand}"
+                Style="{StaticResource BottomPageButtonStyle}"
+                Text="{Binding ProceedButtonText}" />
+
     </StackLayout>
 
 </ContentPage>

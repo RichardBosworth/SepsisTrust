@@ -6,15 +6,23 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Guidelines.Model;
+using Microsoft.WindowsAzure.MobileServices;
+using Newtonsoft.Json.Linq;
+using PCLStorage;
+using SepsisTrust.Model.Azure;
+using Guideline = Guidelines.Model.Guideline;
 
 namespace Guidelines.IO
 {
     public class XmlFileGuidelineRetriever : IGuidelineRetriever
     {
-        public Task<Guideline> RetrieveGuidelineAsync( string identifier )
+        public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
         {
             // Load the guideline element data.
-            var guideLineElement = XElement.Load("TestGuideline.xml");
+            MobileServiceClient mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net");
+            var guidelineTable = mobileServiceClient.GetTable("Guideline");
+            var mainGuideline = await guidelineTable.LookupAsync("6b75729b504648e795cbef6dd75e0398");
+            var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);
 
             // Retrieve the data from that guideline elements.
             var guideline = new Guideline();
@@ -34,7 +42,7 @@ namespace Guidelines.IO
             var entryPhase = guideline.Phases.FirstOrDefault(phase => string.Compare(phase.Identifier, entryPhaseIdentifier, StringComparison.OrdinalIgnoreCase) == 0);
             guideline.EntryPhase = entryPhase ?? guideline.Phases.FirstOrDefault();
 
-            return Task.FromResult(guideline);
+            return guideline;
         }
 
         private static void ParsePhase( Guideline guideline, XElement phaseElement )
