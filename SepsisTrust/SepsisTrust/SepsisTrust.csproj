@@ -59,6 +59,7 @@
     <Compile Include="Model\Retrieval\XmlFileGuidelineRetriever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditPatientCharacteristicPageViewModel.cs" />
+    <Compile Include="ViewModels\BlockActivityViewModel.cs" />
     <Compile Include="ViewModels\GuidelinePageViewModel.cs" />
     <Compile Include="GuidelineUI\IGuidelineUITemplateSelector.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Guidelines.Model;
+using SepsisTrust.ViewModels;
 using Xamarin.Forms;
 
 namespace SepsisTrust.GuidelineUI.Views
@@ -18,8 +19,8 @@ namespace SepsisTrust.GuidelineUI.Views
         private void Cell_OnTapped( object sender, EventArgs e )
         {
             var viewCell = sender as ViewCell;
-            var blockActivityData = viewCell.BindingContext as BlockActivityData;
-            blockActivityData.Activated = !blockActivityData.Activated;
+            var blockActivityViewModel = viewCell.BindingContext as BlockActivityViewModel;
+            blockActivityViewModel.Activated = !blockActivityViewModel.Activated;
         }
     }
 }

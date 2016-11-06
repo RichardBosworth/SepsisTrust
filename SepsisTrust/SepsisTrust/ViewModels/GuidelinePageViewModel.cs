@@ -1,4 +1,5 @@
-﻿using Guidelines.Model;
+﻿using System.Collections.ObjectModel;
+using Guidelines.Model;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -12,6 +13,8 @@ namespace SepsisTrust.ViewModels
     {
         private readonly INavigationService _navigationService;
         private Block _block;
+
+        public ObservableCollection<BlockActivityViewModel> BlockActivityViewModels { get; set; }
 
         private string _proceedButtonText;
 
@@ -64,6 +67,7 @@ namespace SepsisTrust.ViewModels
             {
                 var navigationModel = new GuidelinePageNavigationModel(parameters);
                 Block = navigationModel.CurrentBlock;
+                GenerateBlockActivityViewModels();
                 GuidelineRunner = navigationModel.CurrentGuidelineRunner;
             }
             else
@@ -86,6 +90,15 @@ namespace SepsisTrust.ViewModels
             {
                 ProceedButtonText = "FINISH";
                 ProceedCommand = new DelegateCommand(Finish);
+            }
+        }
+
+        private void GenerateBlockActivityViewModels( )
+        {
+            BlockActivityViewModels = new ObservableCollection<BlockActivityViewModel>();
+            foreach ( var activity in Block.BlockActivities )
+            {
+                BlockActivityViewModels.Add(new BlockActivityViewModel(activity));
             }
         }
 

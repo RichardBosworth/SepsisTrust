@@ -26,7 +26,7 @@
         <ListView Footer="{Binding .}"
                   HasUnevenRows="True"
                   Header="{Binding .}"
-                  ItemsSource="{Binding Block.BlockActivities}">
+                  ItemsSource="{Binding BlockActivityViewModels}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout HeightRequest="100">
@@ -43,7 +43,7 @@
                 <DataTemplate>
                     <ViewCell Height="75" Tapped="Cell_OnTapped">
 
-                        <Grid Margin="10">
+                        <Grid Margin="15">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="7*" />
                                 <ColumnDefinition Width="1*" />
@@ -55,9 +55,11 @@
                             <Label Grid.Column="0" Text="{Binding Title}" />
 
                             <Image Grid.Column="1"
-                                   HeightRequest="32" HorizontalOptions="Center" IsVisible="True"
+                                   HeightRequest="32" HorizontalOptions="Center"
+                                   IsVisible="{Binding Activated}"
                                    Source="{global:ImageResource SepsisTrust.LocalIcons.success.png}"
                                    VerticalOptions="Center" WidthRequest="32" />
+
 
                         </Grid>
                     </ViewCell>
