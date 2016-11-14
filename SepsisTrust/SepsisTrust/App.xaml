@@ -47,7 +47,8 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="FontSize" Value="36" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="TextColor" Value="{StaticResource WhitishBaseColor}" />
             </Style>
 
 

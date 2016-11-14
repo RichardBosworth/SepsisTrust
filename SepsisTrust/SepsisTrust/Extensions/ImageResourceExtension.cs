@@ -1,4 +1,5 @@
 ﻿using System;
+using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +14,7 @@ public class ImageResourceExtension : IMarkupExtension
         {
             return null;
         }
+
         // Do your translation lookup here, using whatever method you require
         var imageSource = ImageSource.FromResource(Source);
 

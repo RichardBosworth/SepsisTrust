@@ -6,8 +6,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace SepsisTrust.Droid
 {
@@ -18,6 +20,9 @@ namespace SepsisTrust.Droid
         {
             TabLayoutResource = Resource.Layout.tabs;
             ToolbarResource = Resource.Layout.toolbar;
+
+            CurrentPlatform.Init();
+            CachedImageRenderer.Init();
 
             base.OnCreate(bundle);
 

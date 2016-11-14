@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FFImageLoading.Forms.Touch;
 using Foundation;
 using UIKit;
 using Prism.Unity;
@@ -27,6 +27,7 @@ namespace SepsisTrust.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             CurrentPlatform.Init();
+            CachedImageRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

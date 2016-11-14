@@ -1,11 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:global="clr-namespace:;assembly=SepsisTrust"
              x:Class="SepsisTrust.GuidelineUI.Views.GuidelineTitleBlockView"
              Padding="20"
              Margin="0,0,0,10"
-             BackgroundColor="{StaticResource WhitishBaseColor}">
+             BackgroundColor="{StaticResource DarkOrangeBaseColor}">
     <ContentView.Content>
-        <Label Style="{DynamicResource HeroTitleStyle}" Text="{Binding BlockTitle}" />
+        <StackLayout Spacing="10">
+            <forms:CachedImage FadeAnimationEnabled="True" Source="{global:ImageResource SepsisTrust.LocalIcons.flag.png}" HeightRequest="64" WidthRequest="64" />
+            <Label Style="{DynamicResource HeroTitleStyle}" Text="{Binding BlockTitle}" />
+        </StackLayout>
     </ContentView.Content>
 </ContentView>
