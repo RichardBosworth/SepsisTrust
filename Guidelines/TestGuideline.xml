@@ -3,7 +3,7 @@
 
   <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
 
-    <Block Type="Assessment" Title="Do you think the patient is ill?" Identifier="IllBlock" FriendlyTitle="?Sepsis">
+    <Block Type="Assessment" Title="Do you think the patient is ill?" Identifier="IllBlock" FriendlyTitle="?Sepsis" EntityIconName="fa-flag">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="LowRiskBlock" />
         <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="InfectiveSourcesBlock" />

@@ -8,7 +8,7 @@ namespace Guidelines.Model
     ///     Represents a block of activities within a Guideline phase.
     /// </summary>
     /// <seealso cref="IIdentifiableGuidelineEntity" />
-    public class Block : IIdentifiableGuidelineEntity
+    public class Block : IIdentifiableGuidelineEntity, IEntityWithIcon
     {
         public Block(Phase parentPhase)
         {
@@ -71,5 +71,6 @@ namespace Guidelines.Model
         public string FriendlyTitle { get; set; }
 
         public string Identifier { get; set; }
+        public string EntityIconName { get; set; }
     }
 }
