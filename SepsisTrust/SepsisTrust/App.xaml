@@ -12,6 +12,7 @@
             <Color x:Key="GoodButtonColor">#20C342</Color>
             <Color x:Key="BadButtonColor">#F52212</Color>
             <Color x:Key="NeutralButtonColor">#203AC3</Color>
+            <Color x:Key="LightGreyBackgroundColor">#F2F2F2</Color>
 
             <!--  Generic Colours  -->
             <Color x:Key="RedBaseColor">#F52212</Color>
@@ -39,7 +40,7 @@
                 <Setter Property="TextColor" Value="{StaticResource HeadingColor}" />
             </Style>
 
-            <Style x:Key="TitleLabelStyle"
+            <Style x:Key="HeroTitleStyle"
                    BasedOn="{StaticResource GenericHeadingLabelStyle}"
                    TargetType="Label">
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -60,6 +61,10 @@
             <Style x:Key="ActionOrAssessmentTitleLayoutStyle"
                    BasedOn="{StaticResource DefaultStackLayoutStyle}"
                    TargetType="StackLayout" />
+
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightGreyBackgroundColor}" />
+            </Style>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>
 </prism:PrismApplication>

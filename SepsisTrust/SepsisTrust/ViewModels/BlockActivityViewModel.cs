@@ -6,9 +6,7 @@ namespace SepsisTrust.ViewModels
     public class BlockActivityViewModel : BindableBase
     {
         private bool _activated;
-
         private string _descriptiveText;
-
         private string _title;
 
         public BlockActivityViewModel( BlockActivityData blockActivityData )

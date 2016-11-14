@@ -30,6 +30,14 @@ namespace SepsisTrust.ViewModels
             set { SetProperty(ref _block, value); }
         }
 
+        private string _blockTitle;
+
+        public string BlockTitle
+        {
+            get { return _blockTitle; }
+            set { SetProperty(ref _blockTitle, value); }
+        }
+
         public IGuidelineRunner GuidelineRunner { get; set; }
 
         public View Template
@@ -57,12 +65,22 @@ namespace SepsisTrust.ViewModels
 
         public void OnNavigatedTo( NavigationParameters parameters )
         {
+        }
+
+        public void OnNavigatingTo( NavigationParameters parameters )
+        {
+            Initiate(parameters);
+        }
+
+        private void Initiate( NavigationParameters parameters )
+        {
             // If the page is not currently associated with anything, then load the data.
             // Note that if the user presses the back button, then the page will still have the data associated with it.
             if ( ( Block == null ) || ( GuidelineRunner == null ) )
             {
                 var navigationModel = new GuidelinePageNavigationModel(parameters);
                 Block = navigationModel.CurrentBlock;
+                BlockTitle = Block.Title;
                 GenerateBlockActivityViewModels();
                 GuidelineRunner = navigationModel.CurrentGuidelineRunner;
             }
@@ -77,21 +95,9 @@ namespace SepsisTrust.ViewModels
             Template.BindingContext = this;
 
             // Generate the proceed button text.
-            if ( Block.Links.Count > 0 )
-            {
-                ProceedButtonText = "NEXT";
-                ProceedCommand = new DelegateCommand(Proceed);
-            }
-            else
-            {
-                ProceedButtonText = "FINISH";
-                ProceedCommand = new DelegateCommand(Finish);
-            }
-        }
-
-        public void OnNavigatingTo( NavigationParameters parameters )
-        {
-            
+            var hasLinks = Block.Links.Count > 0;
+            ProceedButtonText = hasLinks ? "NEXT" : "FINISH";
+            ProceedCommand = hasLinks ? new DelegateCommand(Proceed) : new DelegateCommand(Finish);
         }
 
         private void GenerateBlockActivityViewModels( )

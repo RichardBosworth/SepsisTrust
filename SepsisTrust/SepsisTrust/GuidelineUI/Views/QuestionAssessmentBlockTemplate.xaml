@@ -18,7 +18,7 @@
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout HeightRequest="100">
-                        <Label Text="{Binding Block.Title}" Style="{StaticResource TitleLabelStyle}" />
+                        <Label Text="{Binding Block.Title}" Style="{StaticResource HeroTitleStyle}" />
                     </StackLayout>
                 </DataTemplate>
             </ListView.HeaderTemplate>

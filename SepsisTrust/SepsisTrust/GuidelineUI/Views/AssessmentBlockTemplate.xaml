@@ -1,72 +1,13 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <ContentView x:Class="SepsisTrust.GuidelineUI.Views.AssessmentBlockTemplate"
              xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:global="clr-namespace:;assembly=SepsisTrust"
+             xmlns:blocks="clr-namespace:SepsisTrust.GuidelineUI.Views.Blocks;assembly=SepsisTrust"
              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <Style TargetType="ListView">
-                <Setter Property="SeparatorVisibility" Value="None" />
-            </Style>
-            <Style x:Key="AssessmentCellTitleStyle"
-                   BasedOn="{StaticResource GenericLabelStyle}"
-                   TargetType="Label">
-                <Setter Property="FontSize" Value="20" />
-            </Style>
-            <Style x:Key="AssessmentCellDetailStyle"
-                   BasedOn="{StaticResource GenericLabelStyle}"
-                   TargetType="Label">
-                <Setter Property="FontSize" Value="14" />
-            </Style>
-        </ResourceDictionary>
-    </ContentView.Resources>
+
 
     <ContentView.Content>
-        <ListView x:Name="ListView"
-                  Footer="{Binding .}"
-                  HasUnevenRows="True"
-                  Header="{Binding .}"
-                  ItemSelected="ListView_OnItemSelected"
-                  ItemsSource="{Binding BlockActivityViewModels}">
-            <ListView.HeaderTemplate>
-                <DataTemplate>
-                    <StackLayout Margin="0,0,0,30" HeightRequest="100">
-                        <Label Style="{StaticResource TitleLabelStyle}" Text="{Binding Block.Title}" />
-                    </StackLayout>
-                </DataTemplate>
-            </ListView.HeaderTemplate>
-            <ListView.FooterTemplate>
-                <DataTemplate>
-                    <ContentView />
-                </DataTemplate>
-            </ListView.FooterTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell Height="75" Tapped="Cell_OnTapped">
-
-                        <Grid Margin="15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <Label Grid.Column="0" Text="{Binding Title}" />
-
-                            <Image Grid.Column="1"
-                                   HeightRequest="32" HorizontalOptions="Center"
-                                   IsVisible="{Binding Activated}"
-                                   Source="{global:ImageResource SepsisTrust.LocalIcons.success.png}"
-                                   VerticalOptions="Center" WidthRequest="32" />
-
-
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <blocks:MultiItemListView ItemsSource="{Binding BlockActivityViewModels}"/>
     </ContentView.Content>
 </ContentView>

@@ -31,7 +31,7 @@
                        VerticalOptions="CenterAndExpand" WidthRequest="140" />
             </StackLayout>
             <StackLayout Margin="20,10,20,10" Spacing="15">
-                <Label Style="{StaticResource TitleLabelStyle}"
+                <Label Style="{StaticResource HeroTitleStyle}"
                        Text="{Binding Block.Title}"
                        VerticalOptions="Start" />
                 <Label Text="{Binding Block.SummaryText}" VerticalOptions="Start" />

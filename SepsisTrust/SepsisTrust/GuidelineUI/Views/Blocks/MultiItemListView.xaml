@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ListView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:global="clr-namespace:;assembly=SepsisTrust"
+          xmlns:behaviours="clr-namespace:SepsisTrust.Behaviours;assembly=SepsisTrust"
+          xmlns:views="clr-namespace:SepsisTrust.GuidelineUI.Views;assembly=SepsisTrust"
+          x:Class="SepsisTrust.GuidelineUI.Views.Blocks.MultiItemListView"
+          Header="{Binding .}" Footer="{Binding .}" HasUnevenRows="True" SeparatorVisibility="None"
+          BackgroundColor="{StaticResource WhitishBaseColor}">
+
+    <ListView.Behaviors>
+        <behaviours:ActivateSelectedItemBehaviour />
+        <behaviours:NonSelectableListBehaviour />
+    </ListView.Behaviors>
+
+    <ListView.HeaderTemplate>
+        <DataTemplate>
+            <views:GuidelineTitleBlockView />
+        </DataTemplate>
+    </ListView.HeaderTemplate>
+    <ListView.FooterTemplate>
+        <DataTemplate>
+            <ContentView />
+        </DataTemplate>
+    </ListView.FooterTemplate>
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <ViewCell>
+
+                <Grid Margin="15" Padding="10,20,10,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Text="{Binding Title}" />
+
+                    <Image Grid.Column="1"
+                           HeightRequest="32" HorizontalOptions="Center"
+                           IsVisible="{Binding Activated}"
+                           Source="{global:ImageResource SepsisTrust.LocalIcons.success.png}"
+                           VerticalOptions="Center" WidthRequest="32" />
+                </Grid>
+            </ViewCell>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+
+</ListView>

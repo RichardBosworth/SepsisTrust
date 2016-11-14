@@ -19,7 +19,7 @@
   
     <StackLayout>
         <StackLayout Style="{StaticResource InnerLayoutStyle}">
-          <Label Text="{Binding CharacteristicName}" Style="{StaticResource TitleLabelStyle}" />
+          <Label Text="{Binding CharacteristicName}" Style="{StaticResource HeroTitleStyle}" />
           <ContentView Content="{Binding ControlsView}"></ContentView>
         </StackLayout>
         <Button Text="{Binding ProceedButtonText}" Style="{StaticResource BottomPageButtonStyle}" Command="{Binding ProceedCommand}" />
