@@ -13,20 +13,16 @@ namespace SepsisTrust.ViewModels
     {
         private readonly INavigationService _navigationService;
         private Block _block;
-
-        public ObservableCollection<BlockActivityViewModel> BlockActivityViewModels { get; set; }
-
         private string _proceedButtonText;
-
         private DelegateCommand _proceedCommand;
-
         private View _template;
-
 
         public GuidelinePageViewModel( INavigationService navigationService )
         {
             _navigationService = navigationService;
         }
+
+        public ObservableCollection<BlockActivityViewModel> BlockActivityViewModels { get; set; }
 
         public Block Block
         {

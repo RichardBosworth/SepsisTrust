@@ -5,25 +5,11 @@ namespace SepsisTrust.ViewModels
 {
     public class BlockActivityViewModel : BindableBase
     {
-        public BlockActivityData BlockActivityData { get; set; }
-
-        private string _title;
-
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        private bool _activated;
 
         private string _descriptiveText;
 
-        public string DescriptiveText
-        {
-            get { return _descriptiveText; }
-            set { SetProperty(ref _descriptiveText, value); }
-        }
-
-        private bool _activated;
+        private string _title;
 
         public BlockActivityViewModel( BlockActivityData blockActivityData )
         {
@@ -31,6 +17,20 @@ namespace SepsisTrust.ViewModels
             Title = blockActivityData.Title;
             DescriptiveText = blockActivityData.DescriptiveText;
             Activated = blockActivityData.Activated;
+        }
+
+        public BlockActivityData BlockActivityData { get; set; }
+
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
+        public string DescriptiveText
+        {
+            get { return _descriptiveText; }
+            set { SetProperty(ref _descriptiveText, value); }
         }
 
         public bool Activated
