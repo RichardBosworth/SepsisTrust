@@ -40,6 +40,11 @@ namespace SepsisTrust.ViewModels
             }
         }
 
+        public void OnNavigatingTo( NavigationParameters parameters )
+        {
+            
+        }
+
         private async void Navigate( )
         {
             IGuidelineRetriever guidelineRetriever = new XmlFileGuidelineRetriever();

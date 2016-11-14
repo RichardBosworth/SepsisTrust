@@ -89,6 +89,11 @@ namespace SepsisTrust.ViewModels
             }
         }
 
+        public void OnNavigatingTo( NavigationParameters parameters )
+        {
+            
+        }
+
         private void GenerateBlockActivityViewModels( )
         {
             BlockActivityViewModels = new ObservableCollection<BlockActivityViewModel>();

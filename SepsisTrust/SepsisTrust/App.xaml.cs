@@ -1,6 +1,7 @@
 ﻿using Guidelines.IO;
 using Prism.Unity;
 using SepsisTrust.Views;
+using Xamarin.Forms.Xaml;
 
 namespace SepsisTrust
 {

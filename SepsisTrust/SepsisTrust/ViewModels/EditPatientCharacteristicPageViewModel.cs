@@ -64,5 +64,10 @@ namespace SepsisTrust.ViewModels
             if (parameters.ContainsKey("proceedCommand")) ProceedCommand = parameters["proceedCommand"] as DelegateCommand;
             ProceedButtonText = "NEXT";
         }
+
+        public void OnNavigatingTo( NavigationParameters parameters )
+        {
+            
+        }
     }
 }
