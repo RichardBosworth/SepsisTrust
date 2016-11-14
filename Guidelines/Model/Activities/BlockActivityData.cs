@@ -5,7 +5,7 @@ namespace Guidelines.Model
     /// <summary>
     /// Provides data about a block activity (the smallest unit of a guideline).
     /// </summary>
-    public class BlockActivityData : IEntityWithIcon
+    public class BlockActivityData
     {
 
 
@@ -54,7 +54,5 @@ namespace Guidelines.Model
         /// The score for the activity is calculated based on whether it is activated or not (<see cref="Activated"/>). If Activated is True, then this value is equal to the <see cref="ScoreWhenActivated"/>. When Activated is false, then this value is equal to 0.
         /// </value>
         public int Score => Activated ? ScoreWhenActivated : 0;
-
-        public string EntityIconName { get; set; }
     }
 }

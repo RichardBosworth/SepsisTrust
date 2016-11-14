@@ -3,14 +3,16 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:global="clr-namespace:;assembly=SepsisTrust"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              x:Class="SepsisTrust.GuidelineUI.Views.GuidelineTitleBlockView"
              Padding="20"
              Margin="0,0,0,10"
              BackgroundColor="{StaticResource DarkOrangeBaseColor}">
     <ContentView.Content>
         <StackLayout Spacing="10">
-            <forms:CachedImage FadeAnimationEnabled="True" Source="{global:ImageResource SepsisTrust.LocalIcons.flag.png}" HeightRequest="64" WidthRequest="64" />
+            <iconize:IconImage Icon="{Binding Block.EntityIconName}" IconSize="64" IconColor="White"></iconize:IconImage>
             <Label Style="{DynamicResource HeroTitleStyle}" Text="{Binding BlockTitle}" />
+            <Label Style="{DynamicResource HeroTitleStyle}" FontSize="12" Text="Select all that are present." />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

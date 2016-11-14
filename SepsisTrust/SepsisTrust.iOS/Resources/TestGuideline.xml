@@ -3,7 +3,10 @@
 
   <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
 
-    <Block Type="Assessment" Title="Do you think the patient is ill?" Identifier="IllBlock" FriendlyTitle="?Sepsis">
+    <Block Type="Assessment"
+           Title="Do you think the patient is ill?"
+           Identifier="IllBlock"
+           FriendlyTitle="?Sepsis" EntityIconName="ion-thermometer">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="LowRiskBlock" />
         <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="InfectiveSourcesBlock" />
@@ -13,8 +16,7 @@
         <Activity Title="AND/OR does the patient look sick?" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
       </Activities>
     </Block>
-
-    <Block Type="Assessment" Title="Could this be due to an infection?" Identifier="InfectiveSourcesBlock" FriendlyTitle="Infective Cause">
+    <Block Type="Assessment" Title="Could this be due to an infection?" Identifier="InfectiveSourcesBlock" FriendlyTitle="Infective Cause" EntityIconName="ion-bug">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="LowRiskBlock" />
         <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="RedFlagsBlock" />
@@ -31,7 +33,7 @@
       </Activities>
     </Block>
 
-    <Block Type="Assessment" Title="Is ONE Red Flag present?" Identifier="RedFlagsBlock" FriendlyTitle="Red Flags">
+    <Block Type="Assessment" Title="Is ONE Red Flag present?" Identifier="RedFlagsBlock" FriendlyTitle="Red Flags" EntityIconName="ion-alert">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="AmberFlagsBlock" />
         <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="RedFlagSepsisBlock" />
@@ -50,12 +52,12 @@
       </Activities>
     </Block>
 
-    <Block Type="Summary" Title="Low Risk of Sepsis" Identifier="LowRiskBlock" FriendlyTitle="Low Risk" SummaryText="Use standard protocols, review if deteriorates" SummaryImagePath="">
+    <Block Type="Summary" Title="Low Risk of Sepsis" SummaryType="1" Identifier="LowRiskBlock" FriendlyTitle="Low Risk" SummaryText="Use standard protocols, review if deteriorates" SummaryImagePath="http://www.iconsdb.com/icons/preview/white/high-importance-xxl.png">
       <Links>
       </Links>
     </Block>
 
-    <Block Type="Assessment" Title="Any Amber Flag criteria?" Identifier="AmberFlagsBlock" FriendlyTitle="Amber Flags">
+    <Block Type="Assessment" Title="Any Amber Flag criteria?" Identifier="AmberFlagsBlock" FriendlyTitle="Amber Flags" EntityIconName="ion-information">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="LowRiskBlock" />
         <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="BloodsReviewBlock" />

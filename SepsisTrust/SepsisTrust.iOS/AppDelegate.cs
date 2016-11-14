@@ -28,6 +28,12 @@ namespace SepsisTrust.iOS
             global::Xamarin.Forms.Forms.Init();
             CurrentPlatform.Init();
             CachedImageRenderer.Init();
+
+            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule())
+                      .With(new Plugin.Iconize.Fonts.IoniconsModule());
+            FormsPlugin.Iconize.iOS.IconControls.Init();
+
+
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

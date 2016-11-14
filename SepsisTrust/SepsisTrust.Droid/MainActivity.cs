@@ -26,7 +26,13 @@ namespace SepsisTrust.Droid
 
             base.OnCreate(bundle);
 
+            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule())
+                      .With(new Plugin.Iconize.Fonts.IoniconsModule());
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            FormsPlugin.Iconize.Droid.IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
+
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

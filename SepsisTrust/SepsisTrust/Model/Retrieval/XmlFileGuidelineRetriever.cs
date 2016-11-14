@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Guidelines.Model;
-using Microsoft.WindowsAzure.MobileServices;
 
 namespace Guidelines.IO
 {
@@ -15,10 +14,12 @@ namespace Guidelines.IO
         public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
         {
             // Load the guideline element data.
-            var mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net");
+            /*var mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net");
             var guidelineTable = mobileServiceClient.GetTable("Guideline");
             var mainGuideline = await guidelineTable.LookupAsync("6b75729b504648e795cbef6dd75e0398");
-            var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);
+            var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);*/
+            var guideLineElement = XElement.Load("TestGuideline.xml");
+
 
             // Retrieve the data from that guideline elements.
             var guideline = new Guideline();
@@ -178,6 +179,7 @@ namespace Guidelines.IO
             foreach ( var property in typeof(T).GetRuntimeProperties() )
             {
                 var value = xmlElement.Attribute(property.Name)?.Value;
+
                 if ( value != null )
                 {
                     if ( property.PropertyType.GetTypeInfo().IsEnum )
