@@ -12,7 +12,7 @@
                      HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
       
         <Button Command="{Binding ProceedCommand}" Style="{StaticResource BottomPageButtonStyle}"
-                Text="{Binding ProceedButtonText}" />
+                Text="{Binding ProceedButtonText}" HeightRequest="60" />
       
     </StackLayout>
 

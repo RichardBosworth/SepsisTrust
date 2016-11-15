@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Actions\FadeTriggerAction.cs" />
     <Compile Include="Behaviours\ActivateSelectedItemBehaviour.cs" />
     <Compile Include="Behaviours\NonSelectableListBehaviour.cs" />
     <Compile Include="Extensions\ImageResourceExtension.cs" />

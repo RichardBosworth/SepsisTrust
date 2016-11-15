@@ -10,7 +10,7 @@
              BackgroundColor="{StaticResource DarkOrangeBaseColor}">
     <ContentView.Content>
         <StackLayout Spacing="10">
-            <iconize:IconImage Icon="{Binding Block.EntityIconName}" IconSize="64" IconColor="White"></iconize:IconImage>
+            <iconize:IconImage Icon="{Binding Block.EntityIconName}" IconSize="64" IconColor="White" />
             <Label Style="{DynamicResource HeroTitleStyle}" Text="{Binding BlockTitle}" />
             <Label Style="{DynamicResource HeroTitleStyle}" FontSize="12" Text="Select all that are present." />
         </StackLayout>
