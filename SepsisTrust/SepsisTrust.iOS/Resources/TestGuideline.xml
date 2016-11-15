@@ -2,7 +2,7 @@
 
 <Guideline Title="Test" Description="Nah" Identifier="adult-1" EntryPhaseId="AssessmentPhase">
 
-  <Phase Identifier="AssessmentPhase" EntryBlockId="BloodsReviewBlock">
+  <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
 
     <Block Type="Assessment"
            Title="Could this be sepsis?"
@@ -69,7 +69,7 @@
     </Block>
 
     <Block Type="Summary" Title="Low Risk of Sepsis" SummaryType="Information" Identifier="LowRiskBlock"
-           FriendlyTitle="Low Risk" SummaryText="Use standard protocols, review if deteriorates"
+           FriendlyTitle="Low Risk" SummaryText="Use standard protocols, consider discharge (approved by senior decision maker) with safety netting"
            EntityIconName="ion-chevron-down">
       <Links>
       </Links>
@@ -117,7 +117,7 @@
       </Activities>
     </Block>
 
-    <Block Type="Assessment" Title="Is AKI Present?" Identifier="AKIBlock" FriendlyTitle="AKI Present?"
+    <Block Type="Assessment" Title="Is AKI present OR is lactate &gt;2?" Identifier="AKIBlock" FriendlyTitle="AKI Present?"
            AssessmentType="Question" EntityIconName="ion-ios-list" >
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9"
@@ -131,16 +131,71 @@
       </Activities>
     </Block>
 
-    <Block Type="Action" Title="Clinicial to make antimicrobial prescribing decision"
-           Identifier="AntimicrobialDecisionBlock" FriendlyTitle="Antibiotics?" EntityIconName="fa-user-md" >
+    <Block Type="Action" Title="Further management"
+           Identifier="AntimicrobialDecisionBlock" FriendlyTitle="Further management" EntityIconName="fa-user-md" >
       <Links>
       </Links>
       <Activities>
+        <Activity Title="Antibiotics" DescriptiveText="Clinician to make antimicrobial prescribing decision within 3h" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Consider discharge" DescriptiveText="If senior clinician happy, may discharge with appropriate safety netting" ScoreWhenActivated="1" Activated="false" />
       </Activities>
     </Block>
 
     <Block Type="Summary" Title="Red Flag Sepsis" Identifier="RedFlagSepsisBlock" FriendlyTitle="Red Flag Sepsis"
            SummaryText="Start Sepsis 6 pathway NOW" SummaryImagePath="">
+      <Links>
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="1" LinkedGuidelineEntityIdentifier="PreSepsisSixBlock" />
+      </Links>
+    </Block>
+
+    <Block Type="Action" Title="Pre-Management Considerations" Identifier="PreSepsisSixBlock" FriendlyTitle="Considerations" EntityIconName="ion-chatbubbles">
+      <Links>
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="100" LinkedGuidelineEntityIdentifier="SepsisSixBlock" />
+      </Links>
+      <Activities>
+        <Activity Title="Treatment/CPR" DescriptiveText="Make a treatment escalation plan and decide on CPR status!" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Inform Consultant" DescriptiveText="Inform Consultant (use SBAR) patient has Red Flag Sepsis!" ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+      
+    <Block Type="Action" Title="Sepsis Six" Identifier="SepsisSixBlock" FriendlyTitle="Sepsis Six" EntityIconName="ion-ios-stopwatch-outline">
+      <Links>
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="1" LinkedGuidelineEntityIdentifier="PostCheckBlock" />
+      </Links>
+      <Activities>
+        <Activity Title="Administer Oxygen"  DescriptiveText="Aim to keep saturations &gt; 94%!&#xD;(88-92% if at risk of CO2 retention e.g. COPD)" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Take blood cultures" DescriptiveText="At least a peripheral set. Consider e.g. CSF, urine, sputum!&#xD;Think source control! Call surgeon/ radiologist if needed!&#xD;CXR and urinalysis for all adults" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Give IV Antibiotics" DescriptiveText="According to Trust protocol!&#xD;Consider allergies prior to administration" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Give IV fluids" DescriptiveText="If hypotensive/ lactate &gt;2mmol/l, 500 ml stat. May be repeated if clinically indicated- do not exceed 30ml/kg" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Check serial lactates" DescriptiveText="Corroborate high VBG lactate with arterial sample!&#xD;If lactate &gt;4mmol/l, call Critical Care and recheck after each 10ml/kg challenge !" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Measure urine output" DescriptiveText="May require urinary catheter!&#xD;Ensure fluid balance chart commenced &amp; completed hourly" ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+
+    <Block Type="Assessment" Title="Are any of the following still present?" Identifier="PostCheckBlock" FriendlyTitle="Post Check" EntityIconName="ion-ios-list-outline">
+      <Links>
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="FinishedBlock" />
+        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="100" LinkedGuidelineEntityIdentifier="CriticalCareBlock" />
+      </Links>
+      <Activities>
+        <Activity Title="Systolic BP &lt;90 mmHg" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Reduced level of consciousness despite resuscitation!" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Respiratory rate over 25 breaths per minute" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Lactate not reducing" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Patient is clearly critically ill at any time" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+
+    <Block Type="Action" Title="Critical Care Outreach" Identifier="CriticalCareBlock" FriendlyTitle="Critical Care" EntityIconName="ion-ios-telephone">
+      <Links>
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="100" LinkedGuidelineEntityIdentifier="FinishedBlock" />
+      </Links>
+      <Activities>
+        <Activity Title="Call Critical Care Outreach Immediately" DescriptiveText="Contact them via extension number or bleep." ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+
+    <Block Type="Summary" Title="Finished" Identifier="FinishedBlock" FriendlyTitle="Finished" SummaryText="Completed the pathway." SummaryImagePath="">
       <Links>
       </Links>
     </Block>

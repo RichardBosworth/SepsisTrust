@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SepsisTrust.Views.MainPage"
              Title="MainPage">
-  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-    <Button Text="Demo - Get Started" Command="{Binding NavigateCommand}" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+  <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20">
+    <Button Text="Sepsis Demo" Command="{Binding NavigateCommand}" CommandParameter="TestGuideline.xml" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="60" BackgroundColor="{StaticResource LightOrangeBaseColor}" TextColor="{StaticResource WhitishBaseColor}"/>
+    <Button Text="First Microbiology Guidelines Demo" Command="{Binding NavigateCommand}" CommandParameter="FirstMicroTest.xml" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="60" BackgroundColor="{StaticResource LightOrangeBaseColor}" TextColor="{StaticResource WhitishBaseColor}"/>
   </StackLayout>
 </ContentPage>

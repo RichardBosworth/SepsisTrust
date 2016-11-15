@@ -46,7 +46,7 @@
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center" />
                               
-                              <Label Text="{Binding Title}" Style="{StaticResource HeroTitleStyle}" FontSize="16" />
+                              <Label Text="{Binding Title}" Style="{StaticResource HeroTitleStyle}" FontSize="20" />
                             </StackLayout>
                         </ContentView>
                     </AbsoluteLayout>

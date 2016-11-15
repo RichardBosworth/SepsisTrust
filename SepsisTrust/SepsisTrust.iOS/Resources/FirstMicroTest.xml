@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Guideline Title="Test" Description="Nah" Identifier="micro-1" EntryPhaseId="AssessmentPhase">
+
+  <Phase Identifier="AssessmentPhase" EntryBlockId="LocationBlock">
+    
+    <Block Type="Assessment" AssessmentType="Question" Title="Where is the infection?" Identifier="LocationBlock" FriendlyTitle="Infection Focus" EntityIconName="ion-pinpoint">
+      <Links>
+        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="10" LinkedGuidelineEntityIdentifier="RespiratoryBlock" />
+      </Links>
+      <Activities>
+        <Activity Title="Respiratory System" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+
+    <Block Type="Assessment" AssessmentType="Question" Title="What is the clinical cause of the infection?" Identifier="RespiratoryBlock" FriendlyTitle="LRTI" EntityIconName="ion-ios-help-outline">
+      <Links>
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="1" LinkedGuidelineEntityIdentifier="PenicillinAllergyBlock" />
+      </Links>
+      <Activities>
+        <Activity Title="Acute Exacerbation of COPD" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+
+    <Block Type="Assessment" AssessmentType="Question" Title="Does the patient have a penicillin allergy?" Identifier="PenicillinAllergyBlock" FriendlyTitle="Penicillin Allergy" EntityIconName="ion-alert-circled">
+      <Links>
+        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="5" LinkedGuidelineEntityIdentifier="COPDExacerbationBlock" />
+        <Link MinimumScoreToActivate="10" MaximumScoreToActivate="100" LinkedGuidelineEntityIdentifier="COPDAllergyExacerbationBlock" />
+      </Links>
+      <Activities>
+        <Activity Title="No" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Yes" DescriptiveText="" ScoreWhenActivated="10" Activated="false" />
+      </Activities>
+    </Block>
+
+    <Block Type="Action" Title="Acute Exacerbation of COPD" Identifier="COPDExacerbationBlock" FriendlyTitle="COPD Exacerbation" EntityIconName="ion-ios-list-outline">
+      <Links>
+      </Links>
+      <Activities>
+        <Activity Title="First Line" DescriptiveText="Amoxicillin ORAL 500mg TDS" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Alternatively" DescriptiveText="Co-amoxiclav ORAL 625mg TDS" ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+
+    <Block Type="Action" Title="Acute Exacerbation of COPD" Identifier="COPDAllergyExacerbationBlock" FriendlyTitle="COPD Exacerbation" EntityIconName="ion-ios-list-outline">
+      <Links>
+      </Links>
+      <Activities>
+        <Activity Title="Penicillin Allergy" DescriptiveText="Doxycycline 200mg (day 1), then 100-200mg daily" ScoreWhenActivated="1" Activated="false" />
+      </Activities>
+    </Block>
+    
+  </Phase>
+
+</Guideline>

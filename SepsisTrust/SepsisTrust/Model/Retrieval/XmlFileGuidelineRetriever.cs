@@ -18,7 +18,7 @@ namespace Guidelines.IO
             var guidelineTable = mobileServiceClient.GetTable("Guideline");
             var mainGuideline = await guidelineTable.LookupAsync("6b75729b504648e795cbef6dd75e0398");
             var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);*/
-            var guideLineElement = XElement.Load("TestGuideline.xml");
+            var guideLineElement = XElement.Load(identifier);
 
 
             // Retrieve the data from that guideline elements.

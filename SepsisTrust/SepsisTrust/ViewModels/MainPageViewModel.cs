@@ -16,7 +16,7 @@ namespace SepsisTrust.ViewModels
         public MainPageViewModel( INavigationService navigationService )
         {
             _navigationService = navigationService;
-            NavigateCommand = new DelegateCommand(Navigate);
+            NavigateCommand = new DelegateCommand<string>(s => Navigate(s));
         }
 
         public string Title
@@ -25,7 +25,7 @@ namespace SepsisTrust.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public DelegateCommand NavigateCommand { get; set; }
+        public DelegateCommand<string> NavigateCommand { get; set; }
 
 
         public void OnNavigatedFrom( NavigationParameters parameters )
@@ -34,16 +34,6 @@ namespace SepsisTrust.ViewModels
 
         public async void OnNavigatedTo( NavigationParameters parameters )
         {
-            IGuidelineRetriever guidelineRetriever = new XmlFileGuidelineRetriever();
-            var guideline = await guidelineRetriever.RetrieveGuidelineAsync(string.Empty);
-            IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline);
-            var startBlock = guidelineRunner.Start();
-            var navigationModel = new GuidelinePageNavigationModel
-            {
-                CurrentBlock = startBlock,
-                CurrentGuidelineRunner = guidelineRunner
-            };
-            await _navigationService.NavigateAsync("GNav/GuidelinePage", navigationModel.ToNavigationParameters());
         }
 
         public void OnNavigatingTo( NavigationParameters parameters )
@@ -51,10 +41,10 @@ namespace SepsisTrust.ViewModels
             
         }
 
-        private async void Navigate( )
+        private async void Navigate( string guidelineFileName )
         {
             IGuidelineRetriever guidelineRetriever = new XmlFileGuidelineRetriever();
-            var guideline = await guidelineRetriever.RetrieveGuidelineAsync(string.Empty);
+            var guideline = await guidelineRetriever.RetrieveGuidelineAsync(guidelineFileName);
             IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline);
             var startBlock = guidelineRunner.Start();
             var navigationModel = new GuidelinePageNavigationModel
