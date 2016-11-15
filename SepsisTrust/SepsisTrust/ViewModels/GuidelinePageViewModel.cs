@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Guidelines.Model;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -16,6 +17,14 @@ namespace SepsisTrust.ViewModels
         private string _proceedButtonText;
         private DelegateCommand _proceedCommand;
         private View _template;
+
+        private string _instructionalText;
+
+        public string InstructionalText
+        {
+            get { return _instructionalText; }
+            set { SetProperty(ref _instructionalText, value); }
+        }
 
         public GuidelinePageViewModel( INavigationService navigationService )
         {
@@ -98,6 +107,28 @@ namespace SepsisTrust.ViewModels
             var hasLinks = Block.Links.Count > 0;
             ProceedButtonText = hasLinks ? "NEXT" : "FINISH";
             ProceedCommand = hasLinks ? new DelegateCommand(Proceed) : new DelegateCommand(Finish);
+            DetermineInstructionalText();
+        }
+
+        private void DetermineInstructionalText( )
+        {
+            if ( Block is AssessmentBlock )
+            {
+                var assessmentBlock = Block as AssessmentBlock;
+                switch ( assessmentBlock.AssessmentType )
+                {
+                    case AssessmentType.Question:
+                        InstructionalText = "Select the relevant answer.";
+                        break;
+                    case AssessmentType.Checklist:
+                        InstructionalText = "Select all that apply.";
+                        break;
+                }
+            }
+            if ( Block is ActionBlock )
+            {
+                InstructionalText = "Select all that apply.";
+            }
         }
 
         private void GenerateBlockActivityViewModels( )

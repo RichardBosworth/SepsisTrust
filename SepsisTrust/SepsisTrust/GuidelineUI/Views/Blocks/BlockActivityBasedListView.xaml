@@ -4,12 +4,11 @@
           xmlns:global="clr-namespace:;assembly=SepsisTrust"
           xmlns:behaviours="clr-namespace:SepsisTrust.Behaviours;assembly=SepsisTrust"
           xmlns:views="clr-namespace:SepsisTrust.GuidelineUI.Views;assembly=SepsisTrust"
-          x:Class="SepsisTrust.GuidelineUI.Views.Blocks.MultiItemListView"
+          x:Class="SepsisTrust.GuidelineUI.Views.Blocks.BlockActivityBasedListView"
           Header="{Binding .}" Footer="{Binding .}" HasUnevenRows="True" SeparatorVisibility="None"
-          BackgroundColor="{StaticResource WhitishBaseColor}">
+          BackgroundColor="{StaticResource WhitishBaseColor}" x:Name="ListView">
 
     <ListView.Behaviors>
-        <behaviours:ActivateSelectedItemBehaviour />
         <behaviours:NonSelectableListBehaviour />
     </ListView.Behaviors>
 

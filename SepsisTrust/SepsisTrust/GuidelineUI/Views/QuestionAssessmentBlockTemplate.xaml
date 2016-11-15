@@ -1,44 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:blocks="clr-namespace:SepsisTrust.GuidelineUI.Views.Blocks;assembly=SepsisTrust"
              x:Class="SepsisTrust.GuidelineUI.Views.QuestionAssessmentBlockTemplate">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <Style TargetType="ListView">
-                <Setter Property="SeparatorVisibility" Value="Default" />
-                <Setter Property="HasUnevenRows" Value="True" />
-            </Style>
-            <Style x:Key="AssessmentQuestionCellTitleStyle" TargetType="Label"/>
-        </ResourceDictionary>
-    </ContentView.Resources>
+
 
     <ContentView.Content>
-        <ListView ItemsSource="{Binding Block.BlockActivities}" Header="{Binding .}"
-                  ItemSelected="ListView_OnItemSelected" Footer="{Binding .}">
-            <ListView.HeaderTemplate>
-                <DataTemplate>
-                    <StackLayout HeightRequest="100">
-                        <Label Text="{Binding Block.Title}" Style="{StaticResource HeroTitleStyle}" />
-                    </StackLayout>
-                </DataTemplate>
-            </ListView.HeaderTemplate>
-          <ListView.FooterTemplate>
-            <DataTemplate>
-              <ContentView />
-            </DataTemplate>
-          </ListView.FooterTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ContentView HeightRequest="100" Margin="15">
-                            <ContentView.Content>
-                                <Label Text="{Binding Title}"
-                                       Style="{StaticResource AssessmentQuestionCellTitleStyle}" />
-                            </ContentView.Content>
-                        </ContentView>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <blocks:BlockActivityBasedListView ItemsSource="{Binding BlockActivityViewModels}" />
     </ContentView.Content>
 </ContentView>

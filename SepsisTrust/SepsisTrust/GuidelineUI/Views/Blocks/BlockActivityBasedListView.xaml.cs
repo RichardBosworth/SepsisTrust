@@ -2,9 +2,9 @@
 
 namespace SepsisTrust.GuidelineUI.Views.Blocks
 {
-    public partial class MultiItemListView : ListView
+    public partial class BlockActivityBasedListView : ListView
     {
-        public MultiItemListView( )
+        public BlockActivityBasedListView( )
         {
             InitializeComponent();
         }
