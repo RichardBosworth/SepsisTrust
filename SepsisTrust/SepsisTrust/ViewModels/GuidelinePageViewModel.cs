@@ -126,7 +126,7 @@ namespace SepsisTrust.ViewModels
             }
             if ( Block is ActionBlock )
             {
-                InstructionalText = "Please complete the actions on this screen.";
+                InstructionalText = "Complete the actions by tapping them.";
             }
         }
 

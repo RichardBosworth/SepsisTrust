@@ -28,7 +28,7 @@
                 <Grid BackgroundColor="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
-                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -37,23 +37,26 @@
 
                     <AbsoluteLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand"
-                                    BackgroundColor="{StaticResource LightOrangeBaseColor}"
-                                    HeightRequest="60">
+                                    BackgroundColor="{StaticResource LightOrangeBaseColor}">
                         <ContentView Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,1"
                                      AbsoluteLayout.LayoutFlags="All">
-                            <iconize:IconImage Icon="{Binding BlockActivityData.EntityIconName}" IconSize="32"
-                                               IconColor="{StaticResource WhitishBaseColor}" HorizontalOptions="Center"
-                                               VerticalOptions="Center" />
+                            <StackLayout>
+                                <iconize:IconImage Icon="{Binding BlockActivityData.EntityIconName}" IconSize="32"
+                                                   IconColor="{StaticResource WhitishBaseColor}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                              
+                              <Label Text="{Binding Title}" Style="{StaticResource HeroTitleStyle}" FontSize="16" />
+                            </StackLayout>
                         </ContentView>
                     </AbsoluteLayout>
 
                     <StackLayout Grid.Row="1" Grid.Column="0" Margin="10,10,10,10">
-                        <Label Text="{Binding Title}" Style="{DynamicResource ListItemTextStyle}" />
-                        <Label Text="{Binding DescriptiveText}" Style="{DynamicResource ListItemDetailTextStyle}" />
+                        <Label Text="{Binding DescriptiveText}" Style="{DynamicResource ListItemTextStyle}" />
                     </StackLayout>
 
                 </Grid>
-                </ContentView>
+            </ContentView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>
