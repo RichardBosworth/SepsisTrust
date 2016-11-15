@@ -10,6 +10,7 @@
 
     <ListView.Behaviors>
         <behaviours:NonSelectableListBehaviour />
+        <behaviours:ActivateSelectedItemBehaviour />
     </ListView.Behaviors>
 
     <ListView.HeaderTemplate>
@@ -22,12 +23,12 @@
             <ContentView />
         </DataTemplate>
     </ListView.FooterTemplate>
-    <ListView.ItemTemplate>
+    <!-- <ListView.ItemTemplate>
         <DataTemplate>
             <ViewCell>
                 <views:BlockActivityListItemView />
             </ViewCell>
         </DataTemplate>
-    </ListView.ItemTemplate>
+    </ListView.ItemTemplate>-->
 
 </ListView>

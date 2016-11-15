@@ -4,13 +4,12 @@ namespace SepsisTrust.Actions
 {
     public class FadeTriggerAction : TriggerAction<VisualElement>
     {
-        public FadeTriggerAction() { }
-
         public double DesiredOpacity { set; get; }
+        public int Time { get; set; } = 250;
 
-        protected override async void Invoke(VisualElement visual)
+        protected override async void Invoke( VisualElement visual )
         {
-            visual.FadeTo(DesiredOpacity, 250, Easing.SinInOut);
+            visual.FadeTo(DesiredOpacity, (uint) Time, Easing.CubicInOut);
         }
     }
 }

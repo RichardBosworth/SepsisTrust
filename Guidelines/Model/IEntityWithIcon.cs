@@ -6,7 +6,7 @@
     public interface IEntityWithIcon
     {
         /// <summary>
-        /// Gets or sets the Url to the icon file that will be used to enhance this entity.
+        /// Gets or sets the name of the icon (based on icon fonts available) that will be used to enhance this entity.
         /// </summary>
         string EntityIconName { get; set; }
     }

@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace SepsisTrust.GuidelineUI.Views.Blocks
 {
-    public partial class ActionBlockListItemTemplate : ContentView
+    public partial class QuestionItemView : ContentView
     {
-        public ActionBlockListItemTemplate()
+        public QuestionItemView()
         {
             InitializeComponent();
         }

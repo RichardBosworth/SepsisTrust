@@ -5,12 +5,17 @@
              xmlns:global="clr-namespace:;assembly=SepsisTrust"
              xmlns:blocks="clr-namespace:SepsisTrust.GuidelineUI.Views.Blocks;assembly=SepsisTrust"
              xmlns:behaviours="clr-namespace:SepsisTrust.Behaviours;assembly=SepsisTrust"
+             xmlns:views="clr-namespace:SepsisTrust.GuidelineUI.Views;assembly=SepsisTrust"
              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
     <ContentView.Content>
         <blocks:BlockActivityBasedListView ItemsSource="{Binding BlockActivityViewModels}">
-            <blocks:BlockActivityBasedListView.Behaviors>
-                <behaviours:ActivateSelectedItemBehaviour />
-            </blocks:BlockActivityBasedListView.Behaviors>
+            <blocks:BlockActivityBasedListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <views:BlockActivityListItemView />
+                    </ViewCell>
+                </DataTemplate>
+            </blocks:BlockActivityBasedListView.ItemTemplate>
         </blocks:BlockActivityBasedListView>
     </ContentView.Content>
 </ContentView>

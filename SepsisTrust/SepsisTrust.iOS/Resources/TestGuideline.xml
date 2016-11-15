@@ -1,22 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Guideline Title="Test" Description="Nah" Identifier="adult-1" EntryPhaseId="AssessmentPhase">
 
-  <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
+  <Phase Identifier="AssessmentPhase" EntryBlockId="BloodsReviewBlock">
 
     <Block Type="Assessment"
-           Title="Do you think the patient is ill?"
+           Title="Could this be sepsis?"
            Identifier="IllBlock"
-           FriendlyTitle="?Sepsis" EntityIconName="ion-thermometer">
+           FriendlyTitle="Sepsis?" EntityIconName="ion-thermometer">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="LowRiskBlock" />
-        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="InfectiveSourcesBlock" />
+        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999"
+              LinkedGuidelineEntityIdentifier="InfectiveSourcesBlock" />
       </Links>
       <Activities>
-        <Activity Title="Is NEWS 3 or above?" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="AND/OR does the patient look sick?" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Patient looks sick" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Patient, carer or relative very worried" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="NEWS is triggering" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Risk factors present" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
       </Activities>
     </Block>
-    <Block Type="Assessment" Title="Could this be due to an infection?" Identifier="InfectiveSourcesBlock" FriendlyTitle="Infective Cause" EntityIconName="ion-bug">
+    <Block Type="Assessment" Title="Could this be due to an infection?" Identifier="InfectiveSourcesBlock"
+           FriendlyTitle="Infective Cause" EntityIconName="ion-bug">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="LowRiskBlock" />
         <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="RedFlagsBlock" />
@@ -26,70 +31,99 @@
         <Activity Title="Pneumonia" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Urinary Tract Infection" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Abdominal pain/distension" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Cellulitis/septic arthritis/infected wound" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Cellulitis/septic arthritis/infected wound" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
         <Activity Title="Device-related infection" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Meningitis" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Other" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
       </Activities>
     </Block>
 
-    <Block Type="Assessment" Title="Is ONE Red Flag present?" Identifier="RedFlagsBlock" FriendlyTitle="Red Flags" EntityIconName="ion-alert">
+    <Block Type="Assessment" Title="Is ONE Red Flag present?" Identifier="RedFlagsBlock" FriendlyTitle="Red Flags"
+           EntityIconName="ion-alert">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="AmberFlagsBlock" />
-        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="RedFlagSepsisBlock" />
+        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999"
+              LinkedGuidelineEntityIdentifier="RedFlagSepsisBlock" />
       </Links>
       <Activities>
-        <Activity Title="Responds only to voice or pain/unresponsive" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Systolic B.P ≤ 90 mmHg" DescriptiveText=" (or drop &gt;40 from normal)" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Heart rate &gt; 130 per minute" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Respiratory rate ≥ 25 per minute" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Needs oxygen to keep SpO2 ≥92% " DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Non-blanching rash, mottled/ashen/cyanotic" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Not passed urine in last 18 hours" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Urine output less than 0.5 ml/kg/hr" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="AVPU = V, P or U (if changed from normal)" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" CategoryName="Conscious Level" />
+        <Activity Title="Systolic B.P ≤ 90 mmHg" DescriptiveText=" (or drop &gt;40 from normal)" ScoreWhenActivated="1"
+                  Activated="false" CategoryName="Cardiovascular" />
+        <Activity Title="Heart rate &gt; 130 per minute" DescriptiveText="" ScoreWhenActivated="1" Activated="false"
+                  CategoryName="Cardiovascular" />
+        <Activity Title="Respiratory rate ≥ 25 per minute" DescriptiveText="" ScoreWhenActivated="1" Activated="false"
+                  CategoryName="Respiratory" />
+        <Activity Title="Needs oxygen to keep SpO2 ≥92% " DescriptiveText="" ScoreWhenActivated="1" Activated="false"
+                  CategoryName="Respiratory" />
+        <Activity Title="Non-blanching rash, mottled/ashen/cyanotic" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" CategoryName="Dermatology" />
+        <Activity Title="Not passed urine in last 18 hours" DescriptiveText="" ScoreWhenActivated="1" Activated="false"
+                  CategoryName="Renal" />
+        <Activity Title="Urine output less than 0.5 ml/kg/hr" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" CategoryName="Renal" />
         <Activity Title="Lactate ≥2 mmol/l" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Recent chemotherapy" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
       </Activities>
     </Block>
 
-    <Block Type="Summary" Title="Low Risk of Sepsis" SummaryType="1" Identifier="LowRiskBlock" FriendlyTitle="Low Risk" SummaryText="Use standard protocols, review if deteriorates" SummaryImagePath="http://www.iconsdb.com/icons/preview/white/high-importance-xxl.png">
+    <Block Type="Summary" Title="Low Risk of Sepsis" SummaryType="Information" Identifier="LowRiskBlock"
+           FriendlyTitle="Low Risk" SummaryText="Use standard protocols, review if deteriorates"
+           EntityIconName="ion-chevron-down">
       <Links>
       </Links>
     </Block>
 
-    <Block Type="Assessment" Title="Any Amber Flag criteria?" Identifier="AmberFlagsBlock" FriendlyTitle="Amber Flags" EntityIconName="ion-information">
+    <Block Type="Assessment" Title="Any Amber Flag criteria?" Identifier="AmberFlagsBlock" FriendlyTitle="Amber Flags"
+           EntityIconName="ion-information">
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="LowRiskBlock" />
-        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="BloodsReviewBlock" />
+        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999"
+              LinkedGuidelineEntityIdentifier="BloodsReviewBlock" />
       </Links>
       <Activities>
-        <Activity Title="Relatives concerned about mental status" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Acute deterioration in functional ability" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Relatives concerned about mental status" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
+        <Activity Title="Acute deterioration in functional ability" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
         <Activity Title="Immunosuppressed" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Trauma/surgery/procedure in last 6 weeks" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Respiratory Rate 21-24 or breathing hard" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Heart Rate 111-130 or new arrhythmia" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Trauma/surgery/procedure in last 6 weeks" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
+        <Activity Title="Respiratory Rate 21-24 or breathing hard" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
+        <Activity Title="Heart Rate 111-130 or new arrhythmia" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
         <Activity Title="Systolic BP 91-100 mmHg" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Not passed urine in last 12-18 hours" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Not passed urine in last 12-18 hours" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
         <Activity Title="Temperature &lt; 36ºC" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Clinical signs of wound, device or skin infection" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Clinical signs of wound, device or skin infection" DescriptiveText="" ScoreWhenActivated="1"
+                  Activated="false" />
       </Activities>
     </Block>
 
-    <Block Type="Action" Title="Bloods Review" Identifier="BloodsReviewBlock" FriendlyTitle="Bloods and Review">
+    <Block Type="Action" Title="Bloods Review" Identifier="BloodsReviewBlock" FriendlyTitle="Bloods and Review"
+           EntityIconName="ion-erlenmeyer-flask" >
       <Links>
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="AKIBlock" />
       </Links>
       <Activities>
-        <Activity Title="Send bloods" DescriptiveText="Absolute if 2 criteria present, consider if 1 (include FBC, U&amp;Es, CRP, LFTs, clotting)" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Contact ST3+ doctor to review" DescriptiveText="USE SBAR! Must review results within 1 hour" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Send bloods"
+                  DescriptiveText="Absolute if 2 criteria present, consider if 1 (include FBC, U&amp;Es, CRP, LFTs, clotting)"
+                  ScoreWhenActivated="1" Activated="false" EntityIconName="ion-paper-airplane" />
+        <Activity Title="Contact ST3+ doctor to review" DescriptiveText="USE SBAR! Must review results within 1 hour"
+                  ScoreWhenActivated="1" Activated="false" EntityIconName="fa-user-md" />
       </Activities>
     </Block>
 
-    <Block Type="Assessment" Title="Is AKI Present?" Identifier="AKIBlock" FriendlyTitle="AKI Present?" AssessmentType="Question">
+    <Block Type="Assessment" Title="Is AKI Present?" Identifier="AKIBlock" FriendlyTitle="AKI Present?"
+           AssessmentType="Question" EntityIconName="ion-ios-list" >
       <Links>
-        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9" LinkedGuidelineEntityIdentifier="AntimicrobialDecisionBlock" />
-        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999" LinkedGuidelineEntityIdentifier="RedFlagSepsisBlock" />
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="0.9"
+              LinkedGuidelineEntityIdentifier="AntimicrobialDecisionBlock" />
+        <Link MinimumScoreToActivate="1" MaximumScoreToActivate="999"
+              LinkedGuidelineEntityIdentifier="RedFlagSepsisBlock" />
       </Links>
       <Activities>
         <Activity Title="Yes" DescriptiveText="" ScoreWhenActivated="1" Activated="false" />
@@ -97,18 +131,20 @@
       </Activities>
     </Block>
 
-    <Block Type="Action" Title="Clinicial to make antimicrobial prescribing decision" Identifier="AntimicrobialDecisionBlock" FriendlyTitle="Antibiotics?">
+    <Block Type="Action" Title="Clinicial to make antimicrobial prescribing decision"
+           Identifier="AntimicrobialDecisionBlock" FriendlyTitle="Antibiotics?" EntityIconName="fa-user-md" >
       <Links>
       </Links>
       <Activities>
       </Activities>
     </Block>
 
-    <Block Type="Summary" Title="Red Flag Sepsis" Identifier="RedFlagSepsisBlock" FriendlyTitle="Red Flag Sepsis" SummaryText="Start Sepsis 6 pathway NOW" SummaryImagePath="">
+    <Block Type="Summary" Title="Red Flag Sepsis" Identifier="RedFlagSepsisBlock" FriendlyTitle="Red Flag Sepsis"
+           SummaryText="Start Sepsis 6 pathway NOW" SummaryImagePath="">
       <Links>
       </Links>
     </Block>
-    
+
   </Phase>
-  
+
 </Guideline>

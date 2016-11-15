@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:actions="clr-namespace:SepsisTrust.Actions;assembly=SepsisTrust"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             x:Class="SepsisTrust.GuidelineUI.Views.Blocks.ActionItemView"
+             Margin="10,0,10,0">
+
+    <ContentView.Triggers>
+        <DataTrigger TargetType="ContentView" Binding="{Binding Activated}" Value="True">
+            <DataTrigger.EnterActions>
+                <actions:FadeTriggerAction DesiredOpacity="0.3" />
+            </DataTrigger.EnterActions>
+        </DataTrigger>
+        <DataTrigger TargetType="ContentView" Binding="{Binding Activated}" Value="False">
+            <DataTrigger.EnterActions>
+                <actions:FadeTriggerAction DesiredOpacity="1" />
+            </DataTrigger.EnterActions>
+        </DataTrigger>
+
+    </ContentView.Triggers>
+
+    <ContentView.Content>
+        <StackLayout Spacing="0">
+            <BoxView Color="Silver" WidthRequest="3" HorizontalOptions="Center" VerticalOptions="StartAndExpand"
+                     HeightRequest="30" />
+            <ContentView Padding="1" BackgroundColor="Silver">
+                <Grid BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <AbsoluteLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    BackgroundColor="{StaticResource LightOrangeBaseColor}"
+                                    HeightRequest="60">
+                        <ContentView Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                     AbsoluteLayout.LayoutFlags="All">
+                            <iconize:IconImage Icon="{Binding BlockActivityData.EntityIconName}" IconSize="32"
+                                               IconColor="{StaticResource WhitishBaseColor}" HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                        </ContentView>
+                    </AbsoluteLayout>
+
+                    <StackLayout Grid.Row="1" Grid.Column="0" Margin="10,10,10,10">
+                        <Label Text="{Binding Title}" Style="{DynamicResource ListItemTextStyle}" />
+                        <Label Text="{Binding DescriptiveText}" Style="{DynamicResource ListItemDetailTextStyle}" />
+                    </StackLayout>
+
+                </Grid>
+                </ContentView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Actions\FadeTriggerAction.cs" />
     <Compile Include="Behaviours\ActivateSelectedItemBehaviour.cs" />
+    <Compile Include="Behaviours\AutoProgressWithActivatedItem.cs" />
     <Compile Include="Behaviours\NonSelectableListBehaviour.cs" />
     <Compile Include="Extensions\ImageResourceExtension.cs" />
     <Compile Include="Extensions\NavigationParametersExtensions.cs" />
@@ -46,11 +47,14 @@
     <Compile Include="GuidelineUI\Views\BlockActivityListItemView.xaml.cs">
       <DependentUpon>BlockActivityListItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GuidelineUI\Views\Blocks\ActionBlockListItemTemplate.xaml.cs">
-      <DependentUpon>ActionBlockListItemTemplate.xaml</DependentUpon>
+    <Compile Include="GuidelineUI\Views\Blocks\ActionItemView.xaml.cs">
+      <DependentUpon>ActionItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GuidelineUI\Views\Blocks\BlockActivityBasedListView.xaml.cs">
       <DependentUpon>BlockActivityBasedListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidelineUI\Views\Blocks\QuestionItemView.xaml.cs">
+      <DependentUpon>QuestionItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="GuidelineUI\Views\GuidelineTitleBlockView.xaml.cs">
       <DependentUpon>GuidelineTitleBlockView.xaml</DependentUpon>
@@ -263,12 +267,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="GuidelineUI\Views\Blocks\ActionBlockListItemTemplate.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="LocalIcons\success.png" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +283,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LocalIcons\flag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GuidelineUI\Views\Blocks\QuestionItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GuidelineUI\Views\Blocks\ActionItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

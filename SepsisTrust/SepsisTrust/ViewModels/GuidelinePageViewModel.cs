@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Guidelines.Model;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -14,21 +13,23 @@ namespace SepsisTrust.ViewModels
     {
         private readonly INavigationService _navigationService;
         private Block _block;
+
+        private string _blockTitle;
+
+        private string _instructionalText;
         private string _proceedButtonText;
         private DelegateCommand _proceedCommand;
         private View _template;
 
-        private string _instructionalText;
+        public GuidelinePageViewModel( INavigationService navigationService )
+        {
+            _navigationService = navigationService;
+        }
 
         public string InstructionalText
         {
             get { return _instructionalText; }
             set { SetProperty(ref _instructionalText, value); }
-        }
-
-        public GuidelinePageViewModel( INavigationService navigationService )
-        {
-            _navigationService = navigationService;
         }
 
         public ObservableCollection<BlockActivityViewModel> BlockActivityViewModels { get; set; }
@@ -38,8 +39,6 @@ namespace SepsisTrust.ViewModels
             get { return _block; }
             set { SetProperty(ref _block, value); }
         }
-
-        private string _blockTitle;
 
         public string BlockTitle
         {
@@ -127,7 +126,7 @@ namespace SepsisTrust.ViewModels
             }
             if ( Block is ActionBlock )
             {
-                InstructionalText = "Select all that apply.";
+                InstructionalText = "Please complete the actions on this screen.";
             }
         }
 

@@ -34,10 +34,16 @@ namespace SepsisTrust.ViewModels
 
         public async void OnNavigatedTo( NavigationParameters parameters )
         {
-            if ( parameters.ContainsKey("title") )
+            IGuidelineRetriever guidelineRetriever = new XmlFileGuidelineRetriever();
+            var guideline = await guidelineRetriever.RetrieveGuidelineAsync(string.Empty);
+            IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline);
+            var startBlock = guidelineRunner.Start();
+            var navigationModel = new GuidelinePageNavigationModel
             {
-                Title = (string) parameters["title"] + " and Prism";
-            }
+                CurrentBlock = startBlock,
+                CurrentGuidelineRunner = guidelineRunner
+            };
+            await _navigationService.NavigateAsync("GNav/GuidelinePage", navigationModel.ToNavigationParameters());
         }
 
         public void OnNavigatingTo( NavigationParameters parameters )
