@@ -29,11 +29,11 @@
                             <actions:FadeTriggerAction DesiredOpacity="1" />
                         </DataTrigger.EnterActions>
                     </DataTrigger>
-                  <DataTrigger TargetType="Image" Binding="{Binding Activated}" Value="False">
-                    <DataTrigger.EnterActions>
-                      <actions:FadeTriggerAction DesiredOpacity="0.1" />
-                    </DataTrigger.EnterActions>
-                  </DataTrigger>
+                    <DataTrigger TargetType="Image" Binding="{Binding Activated}" Value="False">
+                        <DataTrigger.EnterActions>
+                            <actions:FadeTriggerAction DesiredOpacity="0.1" />
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
                 </Image.Triggers>
             </Image>
         </Grid>

@@ -1,7 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <prism:PrismApplication x:Class="SepsisTrust.App"
-                        xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms">
     <prism:PrismApplication.Resources>
         <ResourceDictionary>
@@ -15,11 +16,11 @@
             <Color x:Key="LightGreyBackgroundColor">#F2F2F2</Color>
 
             <!--  Generic Colours  -->
-            <Color x:Key="RedBaseColor">#F52212</Color>
-            <Color x:Key="YellowBaseColor">#FCBA08</Color>
-            <Color x:Key="LightOrangeBaseColor">#F6730F</Color>
-            <Color x:Key="DarkOrangeBaseColor">#F64A10</Color>
+            <Color x:Key="RedBaseColor">#eb2a27</Color>
+            <Color x:Key="YellowBaseColor">#ffc709</Color>
+            <Color x:Key="OrangeBaseColor">#f68722</Color>
             <Color x:Key="WhitishBaseColor">#FBF3F3</Color>
+            <Color x:Key="GreyBaseColor">#6d6e71</Color>
 
             <!--  Styles  -->
             <Style x:Key="BottomPageButtonStyle" TargetType="Button">
@@ -31,24 +32,30 @@
                 <Setter Property="BorderRadius" Value="0" />
             </Style>
 
-            <!--  Text  -->
-            <Style x:Key="GenericLabelStyle" TargetType="Label" />
+            <!--Font Settings-->
+            <OnPlatform x:Key="TitleFontSize" x:TypeArguments="x:Double" iOS="36.0" />
 
-            <Style x:Key="GenericHeadingLabelStyle"
-                   BasedOn="{StaticResource GenericLabelStyle}"
-                   TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource HeadingColor}" />
+            <!--  Text  -->
+            <Style x:Key="TitleLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource RedBaseColor}" />
+                <Setter Property="FontSize" Value="{StaticResource TitleFontSize}" />
+                <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
-            <Style x:Key="HeroTitleStyle"
-                   BasedOn="{StaticResource GenericHeadingLabelStyle}"
-                   TargetType="Label">
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="FontSize" Value="24" />
-                <Setter Property="TextColor" Value="{StaticResource WhitishBaseColor}" />
+            <Style x:Key="HeadingLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource OrangeBaseColor}" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="BodyLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+
+            <Style x:Key="DetailsLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource GreyBaseColor}" />
+                <Setter Property="FontSize" Value="Micro" />
             </Style>
 
 

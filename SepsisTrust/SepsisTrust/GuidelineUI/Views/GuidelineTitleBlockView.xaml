@@ -7,12 +7,12 @@
              x:Class="SepsisTrust.GuidelineUI.Views.GuidelineTitleBlockView"
              Padding="20"
              Margin="0,0,0,10"
-             BackgroundColor="{StaticResource DarkOrangeBaseColor}">
+             BackgroundColor="{StaticResource WhitishBaseColor}">
     <ContentView.Content>
         <StackLayout Spacing="10">
-            <iconize:IconImage Icon="{Binding Block.EntityIconName}" IconSize="64" IconColor="White" />
-            <Label Style="{DynamicResource HeroTitleStyle}" Text="{Binding BlockTitle}" />
-            <Label Style="{DynamicResource HeroTitleStyle}" FontSize="12" Text="{Binding InstructionalText}" />
+            <!--<iconize:IconImage Icon="{Binding Block.EntityIconName}" IconSize="64" IconColor="White" />-->
+            <Label Style="{DynamicResource TitleStyle}" Text="{Binding BlockTitle}" />
+            <Label Style="{DynamicResource DetailsLabelStyle}" Text="{Binding InstructionalText}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>
