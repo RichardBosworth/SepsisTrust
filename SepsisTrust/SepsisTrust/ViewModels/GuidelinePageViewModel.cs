@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Guidelines.Model;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -147,10 +149,24 @@ namespace SepsisTrust.ViewModels
         private void GenerateBlockActivityViewModels( )
         {
             BlockActivityViewModels = new ObservableCollection<BlockActivityViewModel>();
-            foreach ( var activity in Block.BlockActivities )
+            for ( var index = 0; index < Block.BlockActivities.Count; index++ )
             {
-                BlockActivityViewModels.Add(new BlockActivityViewModel(activity, this));
+                var activity = Block.BlockActivities[index];
+                var blockActivityViewModel = Block is ActionBlock ? new ActionBlockActivityViewModel(activity, this) {NumberColor = GenerateRandomColor(), IndexText = (index+1).ToString()} : new BlockActivityViewModel(activity, this);
+                BlockActivityViewModels.Add(blockActivityViewModel);
             }
+        }
+
+        private Color GenerateRandomColor( )
+        {
+            var red = (Color) Application.Current.Resources["RedBaseColor"];
+            var yellow = (Color) Application.Current.Resources["YellowBaseColor"];
+            var orange = (Color) Application.Current.Resources["OrangeBaseColor"];
+            var grey = (Color) Application.Current.Resources["GreyBaseColor"];
+            var colours = new List<Color> {red, yellow, orange, grey};
+            Random random = new Random();
+            var next = random.Next(0, 3);
+            return colours[next];
         }
 
 

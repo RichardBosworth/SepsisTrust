@@ -1,6 +1,7 @@
 ﻿using Guidelines.Model;
 using Prism.Commands;
 using Prism.Mvvm;
+using Xamarin.Forms;
 
 namespace SepsisTrust.ViewModels
 {
@@ -48,7 +49,6 @@ namespace SepsisTrust.ViewModels
                 SetProperty(ref _activated, value);
                 BlockActivityData.Activated = value;
                 _guidelinePageViewModel.UpdateCanProgress();
-                ActivationCommandText = value ? "Not Done" : "Done";
             }
         }
 
@@ -63,13 +63,28 @@ namespace SepsisTrust.ViewModels
             get { return _activateCommand; }
             set { SetProperty(ref _activateCommand, value); }
         }
+    }
 
-        private string _activationCommandText = "Done";
-
-        public string ActivationCommandText
+    public class ActionBlockActivityViewModel : BlockActivityViewModel
+    {
+        public ActionBlockActivityViewModel( BlockActivityData blockActivityData, GuidelinePageViewModel guidelinePageViewModel ) : base(blockActivityData, guidelinePageViewModel)
         {
-            get { return _activationCommandText; }
-            set { SetProperty(ref _activationCommandText, value); }
+        }
+
+        private string _indexText;
+
+        public string IndexText
+        {
+            get { return _indexText; }
+            set { SetProperty(ref _indexText, value); }
+        }
+        
+        private Color _numberColor;
+
+        public Color NumberColor
+        {
+            get { return _numberColor; }
+            set { SetProperty(ref _numberColor, value); }
         }
     }
 }

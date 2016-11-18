@@ -10,7 +10,6 @@
 
     <ListView.Behaviors>
         <behaviours:NonSelectableListBehaviour />
-        <behaviours:ActivateSelectedItemBehaviour />
     </ListView.Behaviors>
 
     <ListView.HeaderTemplate>

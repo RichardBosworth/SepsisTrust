@@ -4,9 +4,14 @@
              xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:blocks="clr-namespace:SepsisTrust.GuidelineUI.Views.Blocks;assembly=SepsisTrust"
              xmlns:views="clr-namespace:SepsisTrust.GuidelineUI.Views;assembly=SepsisTrust"
-             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize">
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             xmlns:behaviours="clr-namespace:SepsisTrust.Behaviours;assembly=SepsisTrust">
     <ContentView.Content>
         <blocks:BlockActivityBasedListView ItemsSource="{Binding BlockActivityViewModels}" Margin="0">
+
+            <blocks:BlockActivityBasedListView.Behaviors>
+                <behaviours:ActivateSelectedItemBehaviour />
+            </blocks:BlockActivityBasedListView.Behaviors>
 
             <blocks:BlockActivityBasedListView.FooterTemplate>
                 <DataTemplate>
@@ -17,9 +22,6 @@
             <blocks:BlockActivityBasedListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <ViewCell.ContextActions>
-                            <MenuItem Text="{Binding ActivationCommandText}" Command="{Binding ActivateCommand}" />
-                        </ViewCell.ContextActions>
                         <blocks:ActionItemView />
                     </ViewCell>
                 </DataTemplate>

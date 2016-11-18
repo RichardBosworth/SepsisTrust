@@ -7,13 +7,14 @@
              x:Class="SepsisTrust.GuidelineUI.Views.QuestionAssessmentBlockTemplate">
     <ContentView.Content>
         <blocks:BlockActivityBasedListView ItemsSource="{Binding BlockActivityViewModels}">
-          
-          
+
+
             <blocks:BlockActivityBasedListView.Behaviors>
+                <behaviours:ActivateSelectedItemBehaviour />
                 <behaviours:AutoProgressWithSelectedItemBehaviour />
             </blocks:BlockActivityBasedListView.Behaviors>
 
-          
+
             <blocks:BlockActivityBasedListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -21,8 +22,8 @@
                     </ViewCell>
                 </DataTemplate>
             </blocks:BlockActivityBasedListView.ItemTemplate>
-          
-          
+
+
         </blocks:BlockActivityBasedListView>
     </ContentView.Content>
 </ContentView>

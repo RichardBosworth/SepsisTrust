@@ -3,42 +3,63 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:actions="clr-namespace:SepsisTrust.Actions;assembly=SepsisTrust"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
-             x:Class="SepsisTrust.GuidelineUI.Views.Blocks.ActionItemView" Padding="20">
-
-    <ContentView.Triggers>
-        <DataTrigger TargetType="ContentView" Binding="{Binding Activated}" Value="True">
-            <DataTrigger.EnterActions>
-                <actions:FadeTriggerAction DesiredOpacity="0.3" />
-            </DataTrigger.EnterActions>
-        </DataTrigger>
-        <DataTrigger TargetType="ContentView" Binding="{Binding Activated}" Value="False">
-            <DataTrigger.EnterActions>
-                <actions:FadeTriggerAction DesiredOpacity="1" />
-            </DataTrigger.EnterActions>
-        </DataTrigger>
-    </ContentView.Triggers>
-
+             x:Class="SepsisTrust.GuidelineUI.Views.Blocks.ActionItemView" Padding="20,30,20,30">
     <ContentView.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="4*" />
-            </Grid.ColumnDefinitions>
+        <AbsoluteLayout>
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+
+              <Grid.Triggers>
+                  <DataTrigger TargetType="Grid" Binding="{Binding Activated}" Value="True">
+                    <DataTrigger.EnterActions>
+                      <actions:FadeTriggerAction DesiredOpacity="0.2" />
+                    </DataTrigger.EnterActions>
+                  </DataTrigger>
+                <DataTrigger TargetType="Grid" Binding="{Binding Activated}" Value="False">
+                  <DataTrigger.EnterActions>
+                    <actions:FadeTriggerAction DesiredOpacity="1" />
+                  </DataTrigger.EnterActions>
+                </DataTrigger>
+              </Grid.Triggers>
+              
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
 
 
-            <iconize:IconImage IconSize="32" IconColor="{StaticResource GreyBaseColor}"
-                               Icon="{Binding EntityIconName}" VerticalOptions="Start" />
+                <Label Style="{StaticResource TitleLabelStyle}" TextColor="{Binding NumberColor}"
+                       Text="{Binding IndexText}" />
 
 
-            <StackLayout Grid.Row="0" Grid.Column="1">
-                <Label Text="{Binding Title}" Style="{StaticResource HeadingLabelStyle}" />
-                <Label Text="{Binding DescriptiveText}" Style="{StaticResource DetailsLabelStyle}" />
-            </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="1">
+                    <Label Text="{Binding Title}" Style="{StaticResource HeadingLabelStyle}" />
+                    <Label Text="{Binding DescriptiveText}" Style="{StaticResource DetailsLabelStyle}" />
+                </StackLayout>
 
 
-        </Grid>
+            </Grid>
+            <iconize:IconImage
+                IconSize="64"
+                Icon="ion-ios-checkmark"
+                VerticalOptions="Center" Opacity="0.5" IconColor="{StaticResource OrangeBaseColor}"
+                AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+                <iconize:IconImage.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{Binding Activated}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <actions:FadeTriggerAction DesiredOpacity="1" />
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Image" Binding="{Binding Activated}" Value="False">
+                        <DataTrigger.EnterActions>
+                            <actions:FadeTriggerAction DesiredOpacity="0" />
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                </iconize:IconImage.Triggers>
+            </iconize:IconImage>
+
+        </AbsoluteLayout>
     </ContentView.Content>
 </ContentView>

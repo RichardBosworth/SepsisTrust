@@ -9,6 +9,9 @@
              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
     <ContentView.Content>
         <blocks:BlockActivityBasedListView ItemsSource="{Binding BlockActivityViewModels}">
+            <blocks:BlockActivityBasedListView.Behaviors>
+                <behaviours:ActivateSelectedItemBehaviour />
+            </blocks:BlockActivityBasedListView.Behaviors>
             <blocks:BlockActivityBasedListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
