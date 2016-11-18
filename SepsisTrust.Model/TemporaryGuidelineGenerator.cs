@@ -7,6 +7,7 @@ namespace SepsisTrust.Model
     {
         public static Guideline Generate()
         {
+/*
             // Generate guideline.
             var guideline = new Guideline
             {
@@ -69,6 +70,11 @@ namespace SepsisTrust.Model
             guideline.EntryPhase = assessmentPhase;
 
             return guideline;
+
+            
+*/
+
+            return new Guideline();
         }
     }
 }

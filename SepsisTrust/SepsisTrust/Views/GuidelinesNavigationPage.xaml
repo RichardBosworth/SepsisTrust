@@ -2,5 +2,4 @@
 <NavigationPage x:Class="SepsisTrust.Views.GuidelinesNavigationPage"
                 xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                prism:ViewModelLocator.AutowireViewModel="False"
-                BarBackgroundColor="{StaticResource YellowBaseColor}" />
+                prism:ViewModelLocator.AutowireViewModel="False" />

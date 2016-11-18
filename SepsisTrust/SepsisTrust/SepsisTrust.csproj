@@ -38,6 +38,7 @@
     <Compile Include="Actions\FadeTriggerAction.cs" />
     <Compile Include="Behaviours\ActivateSelectedItemBehaviour.cs" />
     <Compile Include="Behaviours\AutoProgressWithActivatedItem.cs" />
+    <Compile Include="Behaviours\CapitaliseTextBehaviour.cs" />
     <Compile Include="Behaviours\NonSelectableListBehaviour.cs" />
     <Compile Include="Extensions\ImageResourceExtension.cs" />
     <Compile Include="Extensions\NavigationParametersExtensions.cs" />

@@ -16,6 +16,8 @@ namespace SepsisTrust.ViewModels
 
         private string _blockTitle;
 
+        private bool _canProgress = true;
+
         private string _instructionalText;
         private string _proceedButtonText;
         private DelegateCommand _proceedCommand;
@@ -24,6 +26,12 @@ namespace SepsisTrust.ViewModels
         public GuidelinePageViewModel( INavigationService navigationService )
         {
             _navigationService = navigationService;
+        }
+
+        public bool CanProgress
+        {
+            get { return _canProgress; }
+            set { SetProperty(ref _canProgress, value); }
         }
 
         public string InstructionalText
@@ -102,10 +110,16 @@ namespace SepsisTrust.ViewModels
             Template = templateSelector.SelectUIForBlock(Block);
             Template.BindingContext = this;
 
+            // Determine if action block, and therefore whether can progress.
+            if ( Block is ActionBlock )
+            {
+                CanProgress = false;
+            }
+
             // Generate the proceed button text.
             var hasLinks = Block.Links.Count > 0;
             ProceedButtonText = hasLinks ? "NEXT" : "FINISH";
-            ProceedCommand = hasLinks ? new DelegateCommand(Proceed) : new DelegateCommand(Finish);
+            ProceedCommand = hasLinks ? new DelegateCommand(Proceed).ObservesCanExecute(o => CanProgress) : new DelegateCommand(Finish).ObservesCanExecute(o => CanProgress);
             DetermineInstructionalText();
         }
 
@@ -135,7 +149,7 @@ namespace SepsisTrust.ViewModels
             BlockActivityViewModels = new ObservableCollection<BlockActivityViewModel>();
             foreach ( var activity in Block.BlockActivities )
             {
-                BlockActivityViewModels.Add(new BlockActivityViewModel(activity));
+                BlockActivityViewModels.Add(new BlockActivityViewModel(activity, this));
             }
         }
 
@@ -160,6 +174,18 @@ namespace SepsisTrust.ViewModels
                                       CurrentGuidelineRunner = GuidelineRunner
                                   };
             await _navigationService.NavigateAsync("GuidelinePage", navigationModel.ToNavigationParameters());
+        }
+
+        public void UpdateCanProgress( )
+        {
+            if ( Block is ActionBlock )
+            {
+                CanProgress = Block.BlockActivities.TrueForAll(data => data.Activated);
+            }
+            else
+            {
+                CanProgress = true;
+            }
         }
     }
 }

@@ -10,13 +10,16 @@
 
             <blocks:BlockActivityBasedListView.FooterTemplate>
                 <DataTemplate>
-                    <BoxView BackgroundColor="Transparent" HeightRequest="50" />
+                    <Label />
                 </DataTemplate>
             </blocks:BlockActivityBasedListView.FooterTemplate>
 
             <blocks:BlockActivityBasedListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="{Binding ActivationCommandText}" Command="{Binding ActivateCommand}" />
+                        </ViewCell.ContextActions>
                         <blocks:ActionItemView />
                     </ViewCell>
                 </DataTemplate>

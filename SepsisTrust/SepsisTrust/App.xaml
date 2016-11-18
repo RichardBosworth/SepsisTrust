@@ -10,7 +10,7 @@
             <Color x:Key="HeadingColor">#C33B0D</Color>
             <Color x:Key="BodyColor">Black</Color>
             <Color x:Key="ButtonTextColor">White</Color>
-            <Color x:Key="GoodButtonColor">#20C342</Color>
+            <Color x:Key="GoodButtonColor">#1B9AF7</Color>
             <Color x:Key="BadButtonColor">#F52212</Color>
             <Color x:Key="NeutralButtonColor">#203AC3</Color>
             <Color x:Key="LightGreyBackgroundColor">#F2F2F2</Color>
@@ -19,8 +19,10 @@
             <Color x:Key="RedBaseColor">#eb2a27</Color>
             <Color x:Key="YellowBaseColor">#ffc709</Color>
             <Color x:Key="OrangeBaseColor">#f68722</Color>
-            <Color x:Key="WhitishBaseColor">#FBF3F3</Color>
+            <Color x:Key="WhitishBaseColor">White</Color>
             <Color x:Key="GreyBaseColor">#6d6e71</Color>
+            <Color x:Key="BackgroundColor">#EEEEEE</Color>
+          
 
             <!--  Styles  -->
             <Style x:Key="BottomPageButtonStyle" TargetType="Button">
@@ -70,8 +72,8 @@
                    BasedOn="{StaticResource DefaultStackLayoutStyle}"
                    TargetType="StackLayout" />
 
-            <Style TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="{StaticResource LightGreyBackgroundColor}" />
+            <Style TargetType="Page">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
             </Style>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>

@@ -9,8 +9,9 @@ namespace Guidelines.Model
     {
         private bool _activated;
 
-        public BlockActivityData( string title = "", int scoreWhenActivated = 1 )
+        public BlockActivityData( Block block, string title = "", int scoreWhenActivated = 1 )
         {
+            Block = block;
             Title = title;
             ScoreWhenActivated = scoreWhenActivated;
         }
@@ -19,6 +20,8 @@ namespace Guidelines.Model
         ///     Gets and sets a category name for this block activity (used for checklist assessment blocks).
         /// </summary>
         public string CategoryName { get; set; }
+
+        public Block Block { get; set; }
 
         /// <summary>
         ///     Gets or sets the title of the block activity.

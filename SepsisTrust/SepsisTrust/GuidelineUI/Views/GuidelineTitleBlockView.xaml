@@ -11,7 +11,7 @@
     <ContentView.Content>
         <StackLayout Spacing="10">
             <!--<iconize:IconImage Icon="{Binding Block.EntityIconName}" IconSize="64" IconColor="White" />-->
-            <Label Style="{DynamicResource TitleStyle}" Text="{Binding BlockTitle}" />
+            <Label Style="{DynamicResource TitleLabelStyle}" Text="{Binding BlockTitle}" />
             <Label Style="{DynamicResource DetailsLabelStyle}" Text="{Binding InstructionalText}" />
         </StackLayout>
     </ContentView.Content>

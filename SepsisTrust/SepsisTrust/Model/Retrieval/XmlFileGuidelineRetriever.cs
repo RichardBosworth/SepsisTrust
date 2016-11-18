@@ -110,7 +110,7 @@ namespace Guidelines.IO
                 foreach ( var activityElement in activitiesElement.Descendants("Activity") )
                 {
                     // Generate the BlockActivityData for this element.
-                    var blockActivityData = new BlockActivityData();
+                    var blockActivityData = new BlockActivityData(block);
 
                     // Generate the common properties for this BlockActivityData.
                     AddCommonProperties(activityElement, blockActivityData);
