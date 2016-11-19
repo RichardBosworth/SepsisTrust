@@ -1,4 +1,5 @@
-﻿using Guidelines.IO;
+﻿using Guidelines.Extensions;
+using Guidelines.IO;
 using Guidelines.Model;
 using Guidelines.Model.Running;
 using Prism.Commands;
@@ -14,12 +15,15 @@ namespace SepsisTrust.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
         private string _title;
+        private static AuditGuidelineExtension _auditGuidelineExtension;
 
         public MainPageViewModel( INavigationService navigationService, IEventAggregator eventAggregator )
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            NavigateCommand = new DelegateCommand<string>(s => Navigate(s));
+            NavigateCommand = new DelegateCommand<string>(Navigate);
+
+            GuidelineExtensions.Register<AuditGuidelineExtension>(eventAggregator);
         }
 
         public string Title

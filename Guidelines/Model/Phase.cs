@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Guidelines.Model.DataBag;
 
 namespace Guidelines.Model
 {
@@ -26,5 +27,6 @@ namespace Guidelines.Model
 
 
         public string Identifier { get; set; }
+        public EntityDataBag DataBag { get; set; }
     }
 }

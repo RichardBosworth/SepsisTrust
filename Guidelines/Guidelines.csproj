@@ -35,6 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Extensions\GuidelineExtension.cs" />
+    <Compile Include="Extensions\GuidelineExtensions.cs" />
     <Compile Include="IO\IGuidelineRetriever.cs" />
     <Compile Include="Messages\Guideline\GuidelineEntityFinishedEvent.cs" />
     <Compile Include="Messages\Guideline\GuidelineEntityStartedEvent.cs" />

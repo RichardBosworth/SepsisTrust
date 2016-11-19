@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Guidelines.Model;
-using Microsoft.WindowsAzure.MobileServices;
+using Guidelines.Model.DataBag;
 
 namespace Guidelines.IO
 {
@@ -193,6 +192,30 @@ namespace Guidelines.IO
                     {
                         property.SetValue(obj, Convert.ChangeType(value, property.PropertyType));
                     }
+                }
+            }
+
+            AddDataBag(xmlElement, obj);
+        }
+
+        private static void AddDataBag<T>( XElement element, T entity )
+        {
+            if ( !(entity is IDataBagEntity) )
+            {
+                return;
+            }
+
+            var dataBagEntity = entity as IDataBagEntity;
+
+            var databagNode = element.Descendants().SingleOrDefault(xElement => xElement.Name.ToString().ToLower() == "databag");
+            if (databagNode != null)
+            {
+                foreach ( var dataItem in databagNode.Descendants("DataItem") )
+                {
+                    var name = dataItem.Attribute("Name").Value;
+                    var value = dataItem.Attribute("Value").Value;
+
+                    dataBagEntity.DataBag.Add(name, value);
                 }
             }
         }

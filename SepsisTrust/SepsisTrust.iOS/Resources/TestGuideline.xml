@@ -2,7 +2,7 @@
 
 <Guideline Title="Test" Description="Nah" Identifier="adult-1" EntryPhaseId="AssessmentPhase">
 
-  <Phase Identifier="AssessmentPhase" EntryBlockId="SepsisSixBlock">
+  <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
 
     <Block Type="Assessment"
            Title="Could this be sepsis?"
@@ -48,7 +48,11 @@
       </Links>
       <Activities>
         <Activity Title="AVPU = V, P or U (if changed from normal)" DescriptiveText="" ScoreWhenActivated="1"
-                  Activated="false" CategoryName="Conscious Level" />
+                  Activated="false" CategoryName="Conscious Level">
+          <DataBag>
+            <DataItem Name="InsightsId" Value="avpu" />
+          </DataBag>
+        </Activity>
         <Activity Title="Systolic B.P ≤ 90 mmHg" DescriptiveText=" (or drop &gt;40 from normal)" ScoreWhenActivated="1"
                   Activated="false" CategoryName="Cardiovascular" />
         <Activity Title="Heart rate &gt; 130 per minute" DescriptiveText="" ScoreWhenActivated="1" Activated="false"

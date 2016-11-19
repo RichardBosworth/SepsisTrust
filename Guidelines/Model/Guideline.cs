@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Guidelines.Model.DataBag;
 using Guidelines.Model.Links;
 
 namespace Guidelines.Model
@@ -50,5 +51,7 @@ namespace Guidelines.Model
         /// The link manager handles the links between blocks and phases.
         /// </value>
         public IGuidelineLinkManager LinkManager { get; private set; } = new DefaultGuidelineLinkManager();
+
+        public EntityDataBag DataBag { get; set; }
     }
 }
