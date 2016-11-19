@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Guidelines.Model;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace Guidelines.IO
 {
@@ -14,11 +15,12 @@ namespace Guidelines.IO
         public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
         {
             // Load the guideline element data.
-            /*var mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net");
-            var guidelineTable = mobileServiceClient.GetTable("Guideline");
-            var mainGuideline = await guidelineTable.LookupAsync("6b75729b504648e795cbef6dd75e0398");
-            var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);*/
-            var guideLineElement = XElement.Load(identifier);
+            /*var mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net",);
+            var parameters = new Dictionary<string, string>() { {"expand", "RelatedGuideline"} };
+            var guidelineTable = mobileServiceClient.GetTable<Guideline>().WithParameters(parameters);
+            var mainGuideline = await guidelineTable.LookupAsync("6b75729b504648e795cbef6dd75e0398");*/
+            /*var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);*/
+            var guideLineElement = XElement.Load("TestGuideline.xml");
 
 
             // Retrieve the data from that guideline elements.

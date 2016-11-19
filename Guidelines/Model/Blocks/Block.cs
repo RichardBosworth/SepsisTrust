@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Guidelines.Characteristics;
 using Guidelines.Model.DataBag;
 
 namespace Guidelines.Model
@@ -11,7 +10,7 @@ namespace Guidelines.Model
     /// <seealso cref="IIdentifiableGuidelineEntity" />
     public class Block : IIdentifiableGuidelineEntity, IEntityWithIcon, IDataBagEntity
     {
-        public Block(Phase parentPhase)
+        public Block( Phase parentPhase )
         {
             ParentPhase = parentPhase;
         }
@@ -50,13 +49,6 @@ namespace Guidelines.Model
         /// </value>
         public List<BlockActivityData> BlockActivities { get; set; } = new List<BlockActivityData>();
 
-        /// <summary>
-        ///     Gets the characteristics holder for the block.
-        /// </summary>
-        /// <value>
-        ///     The characteristics holder provides characteristics.
-        /// </value>
-        public CharacteristicsHolder CharacteristicsHolder { get; private set; } = new CharacteristicsHolder();
 
         /// <summary>
         ///     Gets or sets the title for the block.
@@ -67,12 +59,13 @@ namespace Guidelines.Model
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets and sets a quick, interface friendly title that identifies the block.
+        ///     Gets and sets a quick, interface friendly title that identifies the block.
         /// </summary>
         public string FriendlyTitle { get; set; }
 
-        public string Identifier { get; set; }
-        public string EntityIconName { get; set; }
         public EntityDataBag DataBag { get; set; } = new EntityDataBag();
+        public string EntityIconName { get; set; }
+
+        public string Identifier { get; set; }
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="IconFonts\MedicalFontCollection.cs" />
     <Compile Include="Model\Azure\AzureEntityData.cs" />
     <Compile Include="Model\Azure\AzureFullGuideline.cs" />
+    <Compile Include="Model\Azure\ClinicalArea.cs" />
     <Compile Include="Model\Navigation\GuidelinePageNavigationModel.cs" />
     <Compile Include="Model\Navigation\INavigationModel.cs" />
     <Compile Include="Model\Retrieval\XmlFileGuidelineRetriever.cs" />
