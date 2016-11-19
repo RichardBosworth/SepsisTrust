@@ -43,6 +43,8 @@
     <Compile Include="Model\Blocks\AssessmentBlock.cs" />
     <Compile Include="Model\Blocks\Block.cs" />
     <Compile Include="Model\Activities\BlockActivityData.cs" />
+    <Compile Include="Model\DataBag\EntityDataBag.cs" />
+    <Compile Include="Model\DataBag\IDataBagEntity.cs" />
     <Compile Include="Model\Guideline.cs" />
     <Compile Include="Model\IGuidelineEntity.cs" />
     <Compile Include="Model\IGuidelineRunner.cs" />

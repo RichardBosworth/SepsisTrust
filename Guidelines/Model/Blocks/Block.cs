@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Guidelines.Characteristics;
+using Guidelines.Model.DataBag;
 
 namespace Guidelines.Model
 {
@@ -8,7 +9,7 @@ namespace Guidelines.Model
     ///     Represents a block of activities within a Guideline phase.
     /// </summary>
     /// <seealso cref="IIdentifiableGuidelineEntity" />
-    public class Block : IIdentifiableGuidelineEntity, IEntityWithIcon
+    public class Block : IIdentifiableGuidelineEntity, IEntityWithIcon, IDataBagEntity
     {
         public Block(Phase parentPhase)
         {
@@ -72,5 +73,6 @@ namespace Guidelines.Model
 
         public string Identifier { get; set; }
         public string EntityIconName { get; set; }
+        public EntityDataBag DataBag { get; set; } = new EntityDataBag();
     }
 }

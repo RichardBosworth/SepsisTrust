@@ -149,10 +149,11 @@ namespace SepsisTrust.ViewModels
         private void GenerateBlockActivityViewModels( )
         {
             BlockActivityViewModels = new ObservableCollection<BlockActivityViewModel>();
+            var randomColor = GenerateRandomColor();
             for ( var index = 0; index < Block.BlockActivities.Count; index++ )
             {
                 var activity = Block.BlockActivities[index];
-                var blockActivityViewModel = Block is ActionBlock ? new ActionBlockActivityViewModel(activity, this) {NumberColor = GenerateRandomColor(), IndexText = (index+1).ToString()} : new BlockActivityViewModel(activity, this);
+                var blockActivityViewModel = Block is ActionBlock ? new ActionBlockActivityViewModel(activity, this) {NumberColor = randomColor, IndexText = (index+1).ToString()} : new BlockActivityViewModel(activity, this);
                 BlockActivityViewModels.Add(blockActivityViewModel);
             }
         }

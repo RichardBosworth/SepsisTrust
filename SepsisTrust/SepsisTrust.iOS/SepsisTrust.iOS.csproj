@@ -102,6 +102,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FontIcons\MedicalFontModule.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="app.config" />
@@ -117,6 +118,7 @@
     <BundleResource Include="Resources\ionicons.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\medicalfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SepsisTrust\SepsisTrust.csproj">

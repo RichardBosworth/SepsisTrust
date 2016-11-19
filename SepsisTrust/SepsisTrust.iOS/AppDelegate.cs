@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FFImageLoading.Forms.Touch;
+﻿using FFImageLoading.Forms.Touch;
+using FormsPlugin.Iconize.iOS;
 using Foundation;
-using UIKit;
-using Prism.Unity;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
+using Plugin.Iconize;
+using Plugin.Iconize.Fonts;
+using Prism.Unity;
+using SepsisTrust.iOS.FontIcons;
+using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace SepsisTrust.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
-    [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    [Register( "AppDelegate" )]
+    public class AppDelegate : FormsApplicationDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -23,15 +26,16 @@ namespace SepsisTrust.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching( UIApplication app, NSDictionary options )
         {
-            global::Xamarin.Forms.Forms.Init();
+            Forms.Init();
             CurrentPlatform.Init();
             CachedImageRenderer.Init();
 
-            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule())
-                      .With(new Plugin.Iconize.Fonts.IoniconsModule());
-            FormsPlugin.Iconize.iOS.IconControls.Init();
+            Iconize.With(new FontAwesomeModule())
+                   .With(new IoniconsModule())
+                   .With(new MedicalFontModule());
+            IconControls.Init();
 
 
             LoadApplication(new App(new iOSInitializer()));
@@ -42,10 +46,8 @@ namespace SepsisTrust.iOS
 
     public class iOSInitializer : IPlatformInitializer
     {
-        public void RegisterTypes(IUnityContainer container)
+        public void RegisterTypes( IUnityContainer container )
         {
-
         }
     }
-
 }

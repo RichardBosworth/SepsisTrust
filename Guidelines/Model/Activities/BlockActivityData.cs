@@ -1,11 +1,12 @@
 ﻿using System;
+using Guidelines.Model.DataBag;
 
 namespace Guidelines.Model
 {
     /// <summary>
     ///     Provides data about a block activity (the smallest unit of a guideline).
     /// </summary>
-    public class BlockActivityData : IEntityWithIcon
+    public class BlockActivityData : IEntityWithIcon, IDataBagEntity
     {
         private bool _activated;
 
@@ -82,5 +83,6 @@ namespace Guidelines.Model
         public DateTime WhenActivated { get; private set; }
 
         public string EntityIconName { get; set; }
+        public EntityDataBag DataBag { get; set; } = new EntityDataBag();
     }
 }

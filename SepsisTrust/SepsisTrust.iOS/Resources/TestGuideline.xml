@@ -2,7 +2,7 @@
 
 <Guideline Title="Test" Description="Nah" Identifier="adult-1" EntryPhaseId="AssessmentPhase">
 
-  <Phase Identifier="AssessmentPhase" EntryBlockId="IllBlock">
+  <Phase Identifier="AssessmentPhase" EntryBlockId="SepsisSixBlock">
 
     <Block Type="Assessment"
            Title="Could this be sepsis?"
@@ -153,7 +153,7 @@
         <Link MinimumScoreToActivate="0" MaximumScoreToActivate="100" LinkedGuidelineEntityIdentifier="PostCheckBlock" />
       </Links>
       <Activities>
-        <Activity Title="Administer Oxygen" EntityIconName="ion-help-buoy"   DescriptiveText="Aim to keep saturations &gt; 94%!&#xD;(88-92% if at risk of CO2 retention e.g. COPD)" ScoreWhenActivated="1" Activated="false" />
+        <Activity Title="Administer Oxygen" EntityIconName="medical-i-anesthesia"   DescriptiveText="Aim to keep saturations &gt; 94%!&#xD;(88-92% if at risk of CO2 retention e.g. COPD)" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Take blood cultures" EntityIconName="ion-help-buoy" DescriptiveText="At least a peripheral set. Consider e.g. CSF, urine, sputum!&#xD;Think source control! Call surgeon/ radiologist if needed!&#xD;CXR and urinalysis for all adults" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Give IV Antibiotics" EntityIconName="ion-help-buoy" DescriptiveText="According to Trust protocol!&#xD;Consider allergies prior to administration" ScoreWhenActivated="1" Activated="false" />
         <Activity Title="Give IV fluids" EntityIconName="ion-help-buoy" DescriptiveText="If hypotensive/ lactate &gt;2mmol/l, 500 ml stat. May be repeated if clinically indicated- do not exceed 30ml/kg" ScoreWhenActivated="1" Activated="false" />

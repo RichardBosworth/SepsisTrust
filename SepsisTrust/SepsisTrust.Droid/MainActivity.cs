@@ -1,22 +1,23 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Droid;
-using Prism.Unity;
+using FormsPlugin.Iconize.Droid;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
+using Plugin.Iconize;
+using Plugin.Iconize.Fonts;
+using Prism.Unity;
+using SepsisTrust.Droid.IconFont;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace SepsisTrust.Droid
 {
-    [Activity(Label = "SepsisTrust", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity( Label = "SepsisTrust", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation )]
+    public class MainActivity : FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate( Bundle bundle )
         {
             TabLayoutResource = Resource.Layout.tabs;
             ToolbarResource = Resource.Layout.toolbar;
@@ -26,12 +27,13 @@ namespace SepsisTrust.Droid
 
             base.OnCreate(bundle);
 
-            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule())
-                      .With(new Plugin.Iconize.Fonts.IoniconsModule());
+            Iconize.With(new FontAwesomeModule())
+                   .With(new IoniconsModule())
+                   .With(new MedicalFontModule());
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            Forms.Init(this, bundle);
 
-            FormsPlugin.Iconize.Droid.IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
+            IconControls.Init(Resource.Id.toolbar, Resource.Id.sliding_tabs);
 
             LoadApplication(new App(new AndroidInitializer()));
         }
@@ -39,10 +41,8 @@ namespace SepsisTrust.Droid
 
     public class AndroidInitializer : IPlatformInitializer
     {
-        public void RegisterTypes(IUnityContainer container)
+        public void RegisterTypes( IUnityContainer container )
         {
-
         }
     }
 }
-

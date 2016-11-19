@@ -69,6 +69,7 @@
     <Compile Include="GuidelineUI\Views\SummaryBlockTemplate.xaml.cs">
       <DependentUpon>SummaryBlockTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IconFonts\MedicalFontCollection.cs" />
     <Compile Include="Model\Azure\AzureEntityData.cs" />
     <Compile Include="Model\Azure\AzureFullGuideline.cs" />
     <Compile Include="Model\Navigation\GuidelinePageNavigationModel.cs" />
