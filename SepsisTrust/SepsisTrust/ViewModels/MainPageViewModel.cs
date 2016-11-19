@@ -7,6 +7,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using SepsisTrust.Model.Navigation;
+using SepsisTrust.Model.Retrieval;
 
 namespace SepsisTrust.ViewModels
 {
@@ -50,7 +51,7 @@ namespace SepsisTrust.ViewModels
 
         private async void Navigate( string guidelineFileName )
         {
-            IGuidelineRetriever guidelineRetriever = new XmlFileGuidelineRetriever();
+            IGuidelineRetriever guidelineRetriever = new LocalXmlGuidelineRetriever();
             var guideline = await guidelineRetriever.RetrieveGuidelineAsync(guidelineFileName);
             IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline, _eventAggregator);
             var startBlock = guidelineRunner.Start();

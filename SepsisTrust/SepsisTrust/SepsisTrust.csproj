@@ -75,7 +75,6 @@
     <Compile Include="Model\Azure\ClinicalArea.cs" />
     <Compile Include="Model\Navigation\GuidelinePageNavigationModel.cs" />
     <Compile Include="Model\Navigation\INavigationModel.cs" />
-    <Compile Include="Model\Retrieval\XmlFileGuidelineRetriever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditPatientCharacteristicPageViewModel.cs" />
     <Compile Include="ViewModels\BlockActivityViewModel.cs" />

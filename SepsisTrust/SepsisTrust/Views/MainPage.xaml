@@ -21,7 +21,7 @@
       <iconize:IconImage Icon="medical-i-elevators" IconSize="64" IconColor="{StaticResource GreyBaseColor}"></iconize:IconImage>
       
         <Button Text="Sepsis Demo" FontAttributes="Bold" FontSize="Large" Command="{Binding NavigateCommand}"
-                CommandParameter="TestGuideline.xml" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                CommandParameter="TestGuideline" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                 HeightRequest="60" BackgroundColor="{StaticResource OrangeBaseColor}"
                 TextColor="{StaticResource WhitishBaseColor}" />
     </StackLayout>

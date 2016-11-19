@@ -38,6 +38,7 @@
     <Compile Include="Extensions\GuidelineExtension.cs" />
     <Compile Include="Extensions\GuidelineExtensions.cs" />
     <Compile Include="IO\IGuidelineRetriever.cs" />
+    <Compile Include="IO\Retrieval\GuidelineXmlParser.cs" />
     <Compile Include="Messages\Guideline\GuidelineEntityFinishedEvent.cs" />
     <Compile Include="Messages\Guideline\GuidelineEntityStartedEvent.cs" />
     <Compile Include="Model\Blocks\ActionBlock.cs" />

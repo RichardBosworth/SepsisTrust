@@ -4,23 +4,18 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Guidelines.IO;
 using Guidelines.Model;
 using Guidelines.Model.DataBag;
 
-namespace Guidelines.IO
+namespace SepsisTrust.Model.Retrieval
 {
-    public class XmlFileGuidelineRetriever : IGuidelineRetriever
+    public class GuidelineXmlParser
     {
-        public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
+        public async Task<Guideline> ParseGuidelineXmlAsync( string guidelineXml )
         {
             // Load the guideline element data.
-            /*var mobileServiceClient = new MobileServiceClient("http://sepsis.azurewebsites.net",);
-            var parameters = new Dictionary<string, string>() { {"expand", "RelatedGuideline"} };
-            var guidelineTable = mobileServiceClient.GetTable<Guideline>().WithParameters(parameters);
-            var mainGuideline = await guidelineTable.LookupAsync("6b75729b504648e795cbef6dd75e0398");*/
-            /*var guideLineElement = XElement.Parse((string) mainGuideline["guidelineContent"]);*/
-            var guideLineElement = XElement.Load("TestGuideline.xml");
-
+            var guideLineElement = XElement.Parse(guidelineXml);
 
             // Retrieve the data from that guideline elements.
             var guideline = new Guideline();
