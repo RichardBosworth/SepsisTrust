@@ -142,25 +142,15 @@
     </Block>
 
     <Block Type="Summary" Title="Red Flag Sepsis" Identifier="RedFlagSepsisBlock" FriendlyTitle="Red Flag Sepsis"
-           SummaryText="Start Sepsis 6 pathway NOW" SummaryImagePath="">
+           SummaryText="Start Sepsis 6 pathway NOW" EntityIconName="ion-close-circled" SummaryType="Alert" >
       <Links>
-        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="1" LinkedGuidelineEntityIdentifier="PreSepsisSixBlock" />
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="1" LinkedGuidelineEntityIdentifier="SepsisSixBlock" />
       </Links>
-    </Block>
-
-    <Block Type="Action" Title="Pre-Management Considerations" Identifier="PreSepsisSixBlock" FriendlyTitle="Considerations" EntityIconName="ion-chatbubbles">
-      <Links>
-        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="100" LinkedGuidelineEntityIdentifier="SepsisSixBlock" />
-      </Links>
-      <Activities>
-        <Activity Title="Treatment/CPR" DescriptiveText="Make a treatment escalation plan and decide on CPR status!" ScoreWhenActivated="1" Activated="false" />
-        <Activity Title="Inform Consultant" DescriptiveText="Inform Consultant (use SBAR) patient has Red Flag Sepsis!" ScoreWhenActivated="1" Activated="false" />
-      </Activities>
     </Block>
       
     <Block Type="Action" Title="Sepsis Six" Identifier="SepsisSixBlock" FriendlyTitle="Sepsis Six" EntityIconName="ion-ios-stopwatch-outline">
       <Links>
-        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="1" LinkedGuidelineEntityIdentifier="PostCheckBlock" />
+        <Link MinimumScoreToActivate="0" MaximumScoreToActivate="100" LinkedGuidelineEntityIdentifier="PostCheckBlock" />
       </Links>
       <Activities>
         <Activity Title="Administer Oxygen" EntityIconName="ion-help-buoy"   DescriptiveText="Aim to keep saturations &gt; 94%!&#xD;(88-92% if at risk of CO2 retention e.g. COPD)" ScoreWhenActivated="1" Activated="false" />

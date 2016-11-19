@@ -3,35 +3,57 @@
 <ContentView x:Class="SepsisTrust.GuidelineUI.Views.SummaryBlockTemplate"
              xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:SepsisTrust.GuidelineUI.Views;assembly=SepsisTrust"
+             xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
 
 
     <ContentView.Content>
-        <StackLayout>
+        <Grid>
 
-            <views:GuidelineTitleBlockView Padding="20,50,20,50">
-                <views:GuidelineTitleBlockView.Triggers>
-                    <DataTrigger TargetType="views:GuidelineTitleBlockView" Binding="{Binding Block.SummaryType}"
-                                 Value="1">
-                        <Setter Property="BackgroundColor" Value="{StaticResource YellowBaseColor}" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="views:GuidelineTitleBlockView" Binding="{Binding Block.SummaryType}"
-                                 Value="2">
-                        <Setter Property="BackgroundColor" Value="{StaticResource YellowBaseColor}" />
-                    </DataTrigger>
-                    <DataTrigger TargetType="views:GuidelineTitleBlockView" Binding="{Binding Block.SummaryType}"
-                                 Value="3">
-                        <Setter Property="BackgroundColor" Value="{StaticResource YellowBaseColor}" />
-                    </DataTrigger>
-                </views:GuidelineTitleBlockView.Triggers>
-            </views:GuidelineTitleBlockView>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <StackLayout Padding="20">
-                <Label Text="Plan:" Style="{DynamicResource TitleStyle}" VerticalTextAlignment="Center" />
-                <Label Text="{Binding Block.SummaryText}" Style="{DynamicResource SubtitleStyle}"
-                       VerticalTextAlignment="Center" />
+            <AbsoluteLayout Grid.Row="0">
+                <BoxView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <BoxView.Triggers>
+                        <DataTrigger TargetType="BoxView" Binding="{Binding Block.SummaryType}" Value="1">
+                            <Setter Property="Color" Value="{StaticResource YellowBaseColor}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="BoxView" Binding="{Binding Block.SummaryType}" Value="2">
+                            <Setter Property="Color" Value="{StaticResource OrangeBaseColor}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="BoxView" Binding="{Binding Block.SummaryType}" Value="3">
+                            <Setter Property="Color" Value="{StaticResource RedBaseColor}" />
+                        </DataTrigger>
+                    </BoxView.Triggers>
+                </BoxView>
+
+                <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                    <iconize:IconImage IconSize="120" Icon="{Binding Block.EntityIconName}"
+                                       IconColor="{StaticResource GreyBaseColor}"
+                                       VerticalOptions="Center" HorizontalOptions="Center">
+                        <iconize:IconImage.Triggers>
+                            <DataTrigger TargetType="iconize:IconImage" Binding="{Binding Block.SummaryType}" Value="1">
+                                <Setter Property="IconColor" Value="{StaticResource GreyBaseColor}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="iconize:IconImage" Binding="{Binding Block.SummaryType}" Value="2">
+                                <Setter Property="IconColor" Value="White" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="iconize:IconImage" Binding="{Binding Block.SummaryType}" Value="3">
+                                <Setter Property="IconColor" Value="White" />
+                            </DataTrigger>
+                        </iconize:IconImage.Triggers>
+                    </iconize:IconImage>
+                </ContentView>
+            </AbsoluteLayout>
+
+            <StackLayout Padding="20" Grid.Row="1">
+                <Label Style="{StaticResource TitleLabelStyle}" Text="{Binding Block.Title}" />
+                <Label Style="{StaticResource BodyLabelStyle}" Text="{Binding Block.SummaryText}" />
             </StackLayout>
 
-        </StackLayout>
+        </Grid>
     </ContentView.Content>
 </ContentView>
