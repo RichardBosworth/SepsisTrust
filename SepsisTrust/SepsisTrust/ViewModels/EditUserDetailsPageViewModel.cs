@@ -10,6 +10,7 @@ namespace SepsisTrust.ViewModels
 {
     public class EditUserDetailsPageViewModel : BindableBase, INavigationAware
     {
+        private readonly INavigationService _navigationService;
         private readonly IJsonObjectStreamReader _userDataStreamReader;
         private readonly IJsonObjectStreamWriter _userDataStreamWriter;
         private readonly IFileStreamRetriever _fileStreamRetriever;
@@ -29,8 +30,9 @@ namespace SepsisTrust.ViewModels
             set { SetProperty(ref _saveCommand, value); }
         }
 
-        public EditUserDetailsPageViewModel( IJsonObjectStreamReader userDataStreamReader, IJsonObjectStreamWriter userDataStreamWriter, IFileStreamRetriever fileStreamRetriever )
+        public EditUserDetailsPageViewModel( INavigationService navigationService , IJsonObjectStreamReader userDataStreamReader, IJsonObjectStreamWriter userDataStreamWriter, IFileStreamRetriever fileStreamRetriever )
         {
+            _navigationService = navigationService;
             _userDataStreamReader = userDataStreamReader;
             _userDataStreamWriter = userDataStreamWriter;
             _fileStreamRetriever = fileStreamRetriever;
@@ -127,7 +129,10 @@ namespace SepsisTrust.ViewModels
 
             // Write the data to persistent storage.
             var fileWriteStream = await _fileStreamRetriever.ObtainFileStreamAsync(StaticUserDataStore.UserFileName, true, FileAccess.ReadAndWrite);
-            await _userDataStreamWriter.Write(fileWriteStream, _appUserData);
+            var writeTask = _userDataStreamWriter.Write(fileWriteStream, _appUserData);
+
+            // Navigate back to previous page upon saving.
+            await _navigationService.GoBackAsync();
         }
 
         private async Task<AppUserData> LoadAppUserDataFromFileAsync( string userFileName )

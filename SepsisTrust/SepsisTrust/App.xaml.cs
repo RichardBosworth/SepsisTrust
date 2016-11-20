@@ -17,8 +17,7 @@ namespace SepsisTrust
         {
             InitializeComponent();
 
-//            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
-            NavigationService.NavigateAsync("GNav/EditUser");
+            NavigationService.NavigateAsync("GNav/MainPage");
         }
 
         protected override void RegisterTypes()

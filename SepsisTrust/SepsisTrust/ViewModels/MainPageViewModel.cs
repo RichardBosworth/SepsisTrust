@@ -18,6 +18,14 @@ namespace SepsisTrust.ViewModels
         private string _title;
         private static AuditGuidelineExtension _auditGuidelineExtension;
 
+        private DelegateCommand _navigateToUserDetailsCommand;
+
+        public DelegateCommand NavigateToUserDetailsCommand
+        {
+            get { return _navigateToUserDetailsCommand; }
+            set { SetProperty(ref _navigateToUserDetailsCommand, value); }
+        }
+
         public MainPageViewModel( INavigationService navigationService, IEventAggregator eventAggregator )
         {
             _navigationService = navigationService;
@@ -25,6 +33,8 @@ namespace SepsisTrust.ViewModels
             NavigateCommand = new DelegateCommand<string>(Navigate);
 
             GuidelineExtensions.Register<AuditGuidelineExtension>(eventAggregator);
+
+            NavigateToUserDetailsCommand = new DelegateCommand(( ) => navigationService.NavigateAsync("EditUser"));
         }
 
         public string Title
@@ -60,7 +70,7 @@ namespace SepsisTrust.ViewModels
                                       CurrentBlock = startBlock,
                                       CurrentGuidelineRunner = guidelineRunner
                                   };
-            await _navigationService.NavigateAsync("GNav/GuidelinePage", navigationModel.ToNavigationParameters());
+            await _navigationService.NavigateAsync("GuidelinePage", navigationModel.ToNavigationParameters());
         }
     }
 }
