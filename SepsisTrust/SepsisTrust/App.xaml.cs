@@ -1,5 +1,8 @@
 ﻿using Guidelines.IO;
+using Microsoft.Practices.Unity;
 using Prism.Unity;
+using SepsisTrust.Model.Storage;
+using SepsisTrust.Model.User;
 using SepsisTrust.Views;
 using Xamarin.Forms.Xaml;
 
@@ -14,15 +17,22 @@ namespace SepsisTrust
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
+//            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
+            NavigationService.NavigateAsync("GNav/EditUser");
         }
 
         protected override void RegisterTypes()
         {
+            Container.RegisterType<IJsonObjectStreamReader, JsonObjectStreamReader>();
+            Container.RegisterType<IJsonObjectStreamWriter, JsonObjectStreamWriter>();
+            Container.RegisterType<IFileStreamRetriever, FileStreamRetriever>();
+
             Container.RegisterTypeForNavigation<MainPage>();
             Container.RegisterTypeForNavigation<EditPatientCharacteristicPage>("CharacteristicPage");
             Container.RegisterTypeForNavigation<GuidelinePage>();
             Container.RegisterTypeForNavigation<GuidelinesNavigationPage>("GNav");
+            Container.RegisterTypeForNavigation<EditUserDetailsPage>("EditUser");
+
         }
     }
 }

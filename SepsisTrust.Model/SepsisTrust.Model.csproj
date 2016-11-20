@@ -41,7 +41,12 @@
     <Compile Include="Search\IGuidelineFinder.cs" />
     <Compile Include="Search\PatientCharacteristicsGuidelineFinder.cs" />
     <Compile Include="SepsisGuideline.cs" />
+    <Compile Include="Storage\IFileStreamRetriever.cs" />
+    <Compile Include="Storage\IJsonObjectStreamReader.cs" />
+    <Compile Include="Storage\IJsonObjectStreamWriter.cs" />
     <Compile Include="TemporaryGuidelineGenerator.cs" />
+    <Compile Include="User\AppUserData.cs" />
+    <Compile Include="User\StaticUserDataStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Guidelines\Guidelines.csproj">
@@ -98,6 +103,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Patient\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
