@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using PCLStorage;
@@ -12,35 +12,25 @@ namespace SepsisTrust.ViewModels
 {
     public class EditUserDetailsPageViewModel : BindableBase, INavigationAware
     {
+        private readonly IFileStreamRetriever _fileStreamRetriever;
         private readonly INavigationService _navigationService;
         private readonly IJsonObjectStreamReader _userDataStreamReader;
         private readonly IJsonObjectStreamWriter _userDataStreamWriter;
-        private readonly IFileStreamRetriever _fileStreamRetriever;
         private AppUserData _appUserData;
+
+        private string _currentClinicalAreaName;
 
         private string _designation;
 
         private string _forename;
 
-        private string _surname;
-
         private DelegateCommand _saveCommand;
 
-        public DelegateCommand SaveCommand
-        {
-            get { return _saveCommand; }
-            set { SetProperty(ref _saveCommand, value); }
-        }
+        private DelegateCommand _selectClinicalAreaCommand;
 
-        private List<string> _selectableItems;
+        private string _surname;
 
-        public List<string> SelectableItems
-        {
-            get { return _selectableItems; }
-            set { SetProperty(ref _selectableItems, value); }
-        }
-
-        public EditUserDetailsPageViewModel( INavigationService navigationService , IJsonObjectStreamReader userDataStreamReader, IJsonObjectStreamWriter userDataStreamWriter, IFileStreamRetriever fileStreamRetriever )
+        public EditUserDetailsPageViewModel( INavigationService navigationService, IJsonObjectStreamReader userDataStreamReader, IJsonObjectStreamWriter userDataStreamWriter, IFileStreamRetriever fileStreamRetriever )
         {
             _navigationService = navigationService;
             _userDataStreamReader = userDataStreamReader;
@@ -48,8 +38,25 @@ namespace SepsisTrust.ViewModels
             _fileStreamRetriever = fileStreamRetriever;
 
             SaveCommand = new DelegateCommand(SaveData);
+            new ObservableCollection<string>();
+        }
 
-            SelectableItems = new List<string>() {"Accident and Emergency", "Inpatient", "GP"};
+        public DelegateCommand SelectClinicalAreaCommand
+        {
+            get { return _selectClinicalAreaCommand; }
+            set { SetProperty(ref _selectClinicalAreaCommand, value); }
+        }
+
+        public string CurrentClinicalAreaName
+        {
+            get { return _currentClinicalAreaName; }
+            set { SetProperty(ref _currentClinicalAreaName, value); }
+        }
+
+        public DelegateCommand SaveCommand
+        {
+            get { return _saveCommand; }
+            set { SetProperty(ref _saveCommand, value); }
         }
 
         public string Forename
@@ -135,10 +142,19 @@ namespace SepsisTrust.ViewModels
             Forename = _appUserData?.Forename;
             Surname = _appUserData?.Surname;
             Designation = _appUserData?.Designation;
+            CurrentClinicalAreaName = _appUserData?.ClinicalArea?.Name;
+
+            // Generate the command to select a clinial area.
+            SelectClinicalAreaCommand = new DelegateCommand(( ) => OpenSelectClinicalAreaPage(_appUserData));
+        }
+
+        private void OpenSelectClinicalAreaPage( AppUserData currentAppUserData )
+        {
+            var navigationParameters = new NavigationParameters {{"currentAreaId", currentAppUserData.ClinicalArea.Id}};
         }
 
         /// <summary>
-        /// This method saves the user data both to memory, and subsequently to persistent storage.
+        ///     This method saves the user data both to memory, and subsequently to persistent storage.
         /// </summary>
         private async void SaveData( )
         {

@@ -5,6 +5,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:behaviours="clr-namespace:SepsisTrust.Behaviours;assembly=SepsisTrust"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
+             xmlns:freshEssentials="clr-namespace:FreshEssentials;assembly=FreshEssentials"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SepsisTrust.Views.MainPage"
              Title="Sepsis Trust">
@@ -22,6 +23,8 @@
         <Label Style="{StaticResource HeadingLabelStyle}" Text="Options" />
         <Label Style="{StaticResource BodyLabelStyle}" Text="The first option should be used!" />
         <Label Style="{StaticResource DetailsLabelStyle}" Text="The first option should be used!" />
+      
+      <freshEssentials:BindablePicker></freshEssentials:BindablePicker>
 
       <iconize:IconImage Icon="medical-i-elevators" IconSize="64" IconColor="{StaticResource GreyBaseColor}"></iconize:IconImage>
       

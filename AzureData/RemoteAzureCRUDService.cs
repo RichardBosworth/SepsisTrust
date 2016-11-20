@@ -37,6 +37,6 @@ namespace AzureData
 
         public IMobileServiceTableQuery<T> CreateQuery<T>( ) => _mobileServiceClient?.GetTable<T>()?.CreateQuery();
 
-        public async Task<List<T>> ExecuteQuery<T>( IMobileServiceTable<T> query ) => await query?.ToListAsync();
+        public async Task<List<T>> ExecuteQuery<T>( IMobileServiceTableQuery<T> query ) => await query?.ToListAsync();
     }
 }

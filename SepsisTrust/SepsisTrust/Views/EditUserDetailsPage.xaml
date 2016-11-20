@@ -13,26 +13,18 @@
 
     <TableView Intent="Settings">
         <TableRoot Title="User Details">
-            <TableSection Title="Me">
+            <TableSection Title="Personal">
                 <EntryCell Text="{Binding Forename, Mode=TwoWay}" Placeholder="Please enter forename" Label="Forename" />
                 <EntryCell Text="{Binding Surname, Mode=TwoWay}" Placeholder="Please enter surname" Label="Surname" />
             </TableSection>
-            <TableSection Title="My Job">
+            <TableSection Title="Job">
                 <EntryCell Label="Designation" Placeholder="e.g. FY1" Text="{Binding Designation}" />
+            </TableSection>
+            <TableSection Title="Clinical Area">
+                <TextCell Text="{Binding CurrentClinicalAreaName}" />
                 <ViewCell>
                     <ViewCell.View>
-                        <Grid Margin="15,15,0,15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Text="Clinical Area" Grid.Column="0" VerticalOptions="Center"
-                                   HorizontalOptions="End" />
-                            <freshEssentials:BindablePicker Grid.Column="1"
-                                                            VerticalOptions="FillAndExpand"
-                                                            HorizontalOptions="FillAndExpand"
-                                                            ItemsSource="{Binding SelectableItems}" />
-                        </Grid>
+                        <Button Text="Change Clinical Area..." Command="{Binding SelectClinicalAreaCommand}" />
                     </ViewCell.View>
                 </ViewCell>
             </TableSection>

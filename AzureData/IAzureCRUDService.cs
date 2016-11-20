@@ -64,6 +64,6 @@ namespace AzureData
         /// <typeparam name="T"></typeparam>
         /// <param name="query">The <see cref="IMobileServiceTableQuery{T}" /> that will be executed.</param>
         /// <returns>Returns a list of the data that is returned from the specified query.</returns>
-        Task<List<T>> ExecuteQuery<T>( IMobileServiceTable<T> query );
+        Task<List<T>> ExecuteQuery<T>( IMobileServiceTableQuery<T> query );
     }
 }

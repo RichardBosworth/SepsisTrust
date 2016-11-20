@@ -13,7 +13,7 @@ namespace AzureData
 
         public static IMobileServiceClient MobileServiceClient { get; private set; }
 
-        public static void Initialize( string appServiceUrl )
+        public static void Initialize( string appServiceUrl = AppServiceUrl )
         {
             if ( !string.IsNullOrEmpty(appServiceUrl) )
             {

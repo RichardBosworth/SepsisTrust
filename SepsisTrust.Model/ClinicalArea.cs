@@ -8,6 +8,11 @@ namespace SepsisTrust.Model
     public class ClinicalArea
     {
         /// <summary>
+        /// Gets or sets the ID of the clinical area.
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the <see cref="ClinicalArea"/>.
         /// </summary>
         /// <value>

@@ -1,4 +1,5 @@
-﻿using Guidelines.IO;
+﻿using System.Reflection;
+using Guidelines.IO;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 using SepsisTrust.Model.Storage;
@@ -6,6 +7,7 @@ using SepsisTrust.Model.User;
 using SepsisTrust.Views;
 using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SepsisTrust
 {
     public partial class App : PrismApplication
@@ -28,6 +30,7 @@ namespace SepsisTrust
             Container.RegisterTypeForNavigation<MainPage>();
             Container.RegisterTypeForNavigation<EditPatientCharacteristicPage>("CharacteristicPage");
             Container.RegisterTypeForNavigation<GuidelinePage>();
+            Container.RegisterTypeForNavigation<SelectClinicalAreaPage>();
             Container.RegisterTypeForNavigation<GuidelinesNavigationPage>("GNav");
             Container.RegisterTypeForNavigation<EditUserDetailsPage>("EditUser");
         }
