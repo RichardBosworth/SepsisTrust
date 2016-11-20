@@ -49,7 +49,7 @@ namespace SepsisTrust.ViewModels
 
             SaveCommand = new DelegateCommand(SaveData);
 
-            SelectableItems = new List<string>() {"Hello", "NOpe", "Yes"};
+            SelectableItems = new List<string>() {"Accident and Emergency", "Inpatient", "GP"};
         }
 
         public string Forename

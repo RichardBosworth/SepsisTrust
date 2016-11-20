@@ -172,6 +172,14 @@
       <HintPath>..\..\packages\Xam.FormsPlugin.Iconize.1.5.0.8-beta\lib\Xamarin.iOS10\FormsPlugin.Iconize.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FreshEssentials, Version=1.0.6122.21141, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FreshEssentials.2.1.2\lib\Xamarin.iOS10\FreshEssentials.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FreshEssentials.iOS, Version=1.0.6122.21142, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FreshEssentials.2.1.2\lib\Xamarin.iOS10\FreshEssentials.iOS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Humanizer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Humanizer.Core.2.1.0\lib\netstandard1.0\Humanizer.dll</HintPath>
       <Private>True</Private>

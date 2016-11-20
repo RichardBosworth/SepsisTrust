@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:cells="clr-namespace:SepsisTrust.Cells;assembly=SepsisTrust"
+             xmlns:freshEssentials="clr-namespace:FreshEssentials;assembly=FreshEssentials"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SepsisTrust.Views.EditUserDetailsPage"
              Title="My Details">
@@ -19,7 +19,22 @@
             </TableSection>
             <TableSection Title="My Job">
                 <EntryCell Label="Designation" Placeholder="e.g. FY1" Text="{Binding Designation}" />
-              <cells:PickerCell Items="{Binding SelectableItems}" Label="Clinical Area"></cells:PickerCell>
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid Margin="15,15,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Clinical Area" Grid.Column="0" VerticalOptions="Center"
+                                   HorizontalOptions="End" />
+                            <freshEssentials:BindablePicker Grid.Column="1"
+                                                            VerticalOptions="FillAndExpand"
+                                                            HorizontalOptions="FillAndExpand"
+                                                            ItemsSource="{Binding SelectableItems}" />
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
             </TableSection>
         </TableRoot>
     </TableView>

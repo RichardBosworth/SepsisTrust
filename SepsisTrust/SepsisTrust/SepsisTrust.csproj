@@ -40,9 +40,6 @@
     <Compile Include="Behaviours\AutoProgressWithActivatedItem.cs" />
     <Compile Include="Behaviours\CapitaliseTextBehaviour.cs" />
     <Compile Include="Behaviours\NonSelectableListBehaviour.cs" />
-    <Compile Include="Cells\PickerCell.xaml.cs">
-      <DependentUpon>PickerCell.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GuidelineUI\Views\ActionBlockTemplate.xaml.cs">
       <DependentUpon>ActionBlockTemplate.xaml</DependentUpon>
     </Compile>
@@ -136,6 +133,10 @@
     </Reference>
     <Reference Include="FormsPlugin.Iconize, Version=1.5.0.8, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.FormsPlugin.Iconize.1.5.0.8-beta\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FormsPlugin.Iconize.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FreshEssentials, Version=1.0.6122.21141, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FreshEssentials.2.1.2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\FreshEssentials.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Humanizer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
@@ -301,12 +302,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\EditUserDetailsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Cells\PickerCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
