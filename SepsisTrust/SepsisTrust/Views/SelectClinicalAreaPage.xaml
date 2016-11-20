@@ -1,12 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="SepsisTrust.Views.SelectClinicalAreaPage">
+             x:Class="SepsisTrust.Views.SelectClinicalAreaPage" Title="Select Clinical Area">
 
-<ListView Header="Select clinical area:" ItemsSource="{Binding AvailableClinicalAreas}">
-</ListView>  
+    <ListView HasUnevenRows="True" Footer="{Binding .}" ItemsSource="{Binding AvailableClinicalAreas}">
 
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,20,10,20">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectAsClinicalAreaCommand}" />
+                        </ContentView.GestureRecognizers>
+                        <Label Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}" />
+                    </ContentView>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        <ListView.FooterTemplate>
+            <DataTemplate>
+                <Label />
+            </DataTemplate>
+        </ListView.FooterTemplate>
+    </ListView>
 
 </ContentPage>

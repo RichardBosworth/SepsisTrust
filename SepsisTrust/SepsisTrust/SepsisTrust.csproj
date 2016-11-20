@@ -80,6 +80,7 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="GuidelineUI\ReflectiveGuidelineUITemplateSelector.cs" />
     <Compile Include="ViewModels\SelectClinicalAreaPageViewModel.cs" />
+    <Compile Include="ViewModels\Sub\ClinicalAreaListItemViewModel.cs" />
     <Compile Include="Views\EditPatientCharacteristicPage.xaml.cs">
       <DependentUpon>EditPatientCharacteristicPage.xaml</DependentUpon>
     </Compile>

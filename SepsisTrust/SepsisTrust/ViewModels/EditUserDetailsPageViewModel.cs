@@ -100,26 +100,29 @@ namespace SepsisTrust.ViewModels
 
         public async void OnNavigatingTo( NavigationParameters parameters )
         {
-            // Check if user data is already in memory
-            if ( StaticUserDataStore.UserData != null )
+            // Check if user data has been provided in the parameters.
+            if ( parameters.ContainsKey("userData") )
             {
-                // This copies the memory-based user data, thus ensuring that
-                // the Save/Back functionality works.
-                // If this is directly set to the memory-based store, changes will
-                // be automatically "saved".
-                var memoryAppUserData = StaticUserDataStore.UserData;
-                _appUserData = new AppUserData();
-                foreach ( var runtimeProperty in memoryAppUserData.GetType().GetRuntimeProperties() )
+                _appUserData = parameters["userData"] as AppUserData;
+            }
+
+            if ( _appUserData == null )
+            {
+                // Check if user data is already in memory
+                if ( StaticUserDataStore.UserData != null )
                 {
-                    var memoryAppData = runtimeProperty.GetValue(memoryAppUserData);
-                    runtimeProperty.SetValue(_appUserData, memoryAppData);
+                    // This copies the memory-based user data, thus ensuring that
+                    // the Save/Back functionality works.
+                    // If this is directly set to the memory-based store, changes will
+                    // be automatically "saved".
+                    var memoryAppUserData = StaticUserDataStore.UserData;
+                    _appUserData = new AppUserData();
+                    foreach ( var runtimeProperty in memoryAppUserData.GetType().GetRuntimeProperties() )
+                    {
+                        var memoryAppData = runtimeProperty.GetValue(memoryAppUserData);
+                        runtimeProperty.SetValue(_appUserData, memoryAppData);
+                    }
                 }
-                /*_appUserData = new AppUserData
-                               {
-                                   Forename = memoryAppUserData.Forename,
-                                   Surname = memoryAppUserData.Surname,
-                                   Designation = memoryAppUserData.Designation
-                               };*/
             }
 
             // Otherwise, load app user data from file path.
@@ -148,9 +151,10 @@ namespace SepsisTrust.ViewModels
             SelectClinicalAreaCommand = new DelegateCommand(( ) => OpenSelectClinicalAreaPage(_appUserData));
         }
 
-        private void OpenSelectClinicalAreaPage( AppUserData currentAppUserData )
+        private async void OpenSelectClinicalAreaPage( AppUserData currentAppUserData )
         {
-            var navigationParameters = new NavigationParameters {{"currentAreaId", currentAppUserData.ClinicalArea.Id}};
+            var navigationParameters = new NavigationParameters {{"userData", currentAppUserData}};
+            await _navigationService.NavigateAsync("SelectClinicalAreaPage", navigationParameters);
         }
 
         /// <summary>
