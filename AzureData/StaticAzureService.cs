@@ -4,7 +4,7 @@ namespace AzureData
 {
     public static class StaticAzureService
     {
-        private const string AppServiceUrl = "http://sepsis.azurewebsites.net";
+        public const string AppServiceUrl = "http://sepsis.azurewebsites.net";
 
         /// <summary>
         ///     Gets a value indicating whether the service is initialized.

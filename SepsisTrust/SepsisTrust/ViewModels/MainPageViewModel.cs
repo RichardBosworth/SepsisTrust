@@ -1,13 +1,18 @@
-﻿using Guidelines.Extensions;
+﻿using System.Linq;
+using AzureData;
+using Guidelines.Extensions;
 using Guidelines.IO;
 using Guidelines.Model;
 using Guidelines.Model.Running;
+using Microsoft.WindowsAzure.MobileServices;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
+using SepsisTrust.Model;
 using SepsisTrust.Model.Navigation;
 using SepsisTrust.Model.Retrieval;
+using ClinicalArea = SepsisTrust.Model.Azure.ClinicalArea;
 
 namespace SepsisTrust.ViewModels
 {
@@ -54,9 +59,9 @@ namespace SepsisTrust.ViewModels
         {
         }
 
-        public void OnNavigatingTo( NavigationParameters parameters )
+        public async void OnNavigatingTo( NavigationParameters parameters )
         {
-            
+            StaticAzureService.Initialize(StaticAzureService.AppServiceUrl);
         }
 
         private async void Navigate( string guidelineFileName )

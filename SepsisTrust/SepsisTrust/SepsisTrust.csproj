@@ -219,6 +219,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AzureData\AzureData.csproj">
+      <Project>{5D5CD8EE-EED0-4197-956E-E7AB43CD8D8B}</Project>
+      <Name>AzureData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Guidelines\Guidelines.csproj">
       <Project>{AEAEAFF0-C95F-46E9-AEBF-F8DFEFD97183}</Project>
       <Name>Guidelines</Name>

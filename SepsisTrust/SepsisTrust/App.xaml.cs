@@ -6,7 +6,6 @@ using SepsisTrust.Model.User;
 using SepsisTrust.Views;
 using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SepsisTrust
 {
     public partial class App : PrismApplication
