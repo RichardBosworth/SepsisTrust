@@ -7,7 +7,7 @@ namespace SepsisTrust.Model.Search
         /// <inheritdoc />
         public Guideline FindMostRelevantGuideline(Patient patientDetails)
         {
-            return TemporaryGuidelineGenerator.Generate();
+            return null;
         }
     }
 }

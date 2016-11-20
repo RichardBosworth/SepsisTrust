@@ -31,7 +31,6 @@ namespace SepsisTrust
             Container.RegisterTypeForNavigation<GuidelinePage>();
             Container.RegisterTypeForNavigation<GuidelinesNavigationPage>("GNav");
             Container.RegisterTypeForNavigation<EditUserDetailsPage>("EditUser");
-
         }
     }
 }
