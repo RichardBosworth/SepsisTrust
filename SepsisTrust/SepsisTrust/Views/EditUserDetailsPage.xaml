@@ -6,19 +6,19 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SepsisTrust.Views.EditUserDetailsPage"
              Title="My Details">
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Save" Command="{Binding SaveCommand}"></ToolbarItem>
-  </ContentPage.ToolbarItems>
-  
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
+
     <TableView Intent="Settings">
         <TableRoot Title="User Details">
             <TableSection Title="Me">
                 <EntryCell Text="{Binding Forename, Mode=TwoWay}" Placeholder="Please enter forename" Label="Forename" />
                 <EntryCell Text="{Binding Surname, Mode=TwoWay}" Placeholder="Please enter surname" Label="Surname" />
             </TableSection>
-          <TableSection Title="My Job">
-            <EntryCell Label="Designation" Placeholder="e.g. FY1" Text="{Binding Designation}"></EntryCell>
-          </TableSection>
+            <TableSection Title="My Job">
+                <EntryCell Label="Designation" Placeholder="e.g. FY1" Text="{Binding Designation}" />
+            </TableSection>
         </TableRoot>
     </TableView>
 </ContentPage>

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
 using PCLStorage;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -30,6 +32,14 @@ namespace SepsisTrust.ViewModels
             set { SetProperty(ref _saveCommand, value); }
         }
 
+        private List<string> _selectableItems;
+
+        public List<string> SelectableItems
+        {
+            get { return _selectableItems; }
+            set { SetProperty(ref _selectableItems, value); }
+        }
+
         public EditUserDetailsPageViewModel( INavigationService navigationService , IJsonObjectStreamReader userDataStreamReader, IJsonObjectStreamWriter userDataStreamWriter, IFileStreamRetriever fileStreamRetriever )
         {
             _navigationService = navigationService;
@@ -38,6 +48,8 @@ namespace SepsisTrust.ViewModels
             _fileStreamRetriever = fileStreamRetriever;
 
             SaveCommand = new DelegateCommand(SaveData);
+
+            SelectableItems = new List<string>() {"Hello", "NOpe", "Yes"};
         }
 
         public string Forename
@@ -89,12 +101,18 @@ namespace SepsisTrust.ViewModels
                 // If this is directly set to the memory-based store, changes will
                 // be automatically "saved".
                 var memoryAppUserData = StaticUserDataStore.UserData;
-                _appUserData = new AppUserData
+                _appUserData = new AppUserData();
+                foreach ( var runtimeProperty in memoryAppUserData.GetType().GetRuntimeProperties() )
+                {
+                    var memoryAppData = runtimeProperty.GetValue(memoryAppUserData);
+                    runtimeProperty.SetValue(_appUserData, memoryAppData);
+                }
+                /*_appUserData = new AppUserData
                                {
                                    Forename = memoryAppUserData.Forename,
                                    Surname = memoryAppUserData.Surname,
                                    Designation = memoryAppUserData.Designation
-                               };
+                               };*/
             }
 
             // Otherwise, load app user data from file path.
