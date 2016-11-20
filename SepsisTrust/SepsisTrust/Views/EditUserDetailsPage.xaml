@@ -3,6 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:cells="clr-namespace:SepsisTrust.Cells;assembly=SepsisTrust"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SepsisTrust.Views.EditUserDetailsPage"
              Title="My Details">
@@ -18,6 +19,7 @@
             </TableSection>
             <TableSection Title="My Job">
                 <EntryCell Label="Designation" Placeholder="e.g. FY1" Text="{Binding Designation}" />
+              <cells:PickerCell Items="{Binding SelectableItems}" Label="Clinical Area"></cells:PickerCell>
             </TableSection>
         </TableRoot>
     </TableView>

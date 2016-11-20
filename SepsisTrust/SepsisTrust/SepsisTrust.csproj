@@ -40,6 +40,9 @@
     <Compile Include="Behaviours\AutoProgressWithActivatedItem.cs" />
     <Compile Include="Behaviours\CapitaliseTextBehaviour.cs" />
     <Compile Include="Behaviours\NonSelectableListBehaviour.cs" />
+    <Compile Include="Cells\PickerCell.xaml.cs">
+      <DependentUpon>PickerCell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GuidelineUI\Views\ActionBlockTemplate.xaml.cs">
       <DependentUpon>ActionBlockTemplate.xaml</DependentUpon>
     </Compile>
@@ -302,7 +305,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Cells\PickerCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
