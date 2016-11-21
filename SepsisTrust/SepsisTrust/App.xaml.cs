@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using AzureData;
 using Guidelines.IO;
 using Microsoft.Practices.Unity;
 using PCLStorage;
