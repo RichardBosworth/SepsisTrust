@@ -78,10 +78,6 @@ namespace SepsisTrust.ViewModels
             var clinicalAreaId = _appUserData?.ClinicalArea?.Id;
 
             // Get the guidelines that match the clinical area.
-            if ( !StaticAzureService.IsInitialized )
-            {
-                StaticAzureService.Initialize();
-            }
             IAzureCRUDService azureCRUDService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
             var query = azureCRUDService.CreateQuery<Guideline>();
             var guidelinesOfAreaQuery = query.Where(guideline => guideline.ClinicalAreaId == clinicalAreaId);

@@ -3,6 +3,7 @@ using FormsPlugin.Iconize.iOS;
 using Foundation;
 using Microsoft.Practices.Unity;
 using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 using Plugin.Iconize;
 using Plugin.Iconize.Fonts;
 using Prism.Unity;
@@ -30,7 +31,9 @@ namespace SepsisTrust.iOS
         {
             Forms.Init();
             CurrentPlatform.Init();
+            SQLitePCL.Batteries.Init();
             CachedImageRenderer.Init();
+            
 
             Iconize.With(new FontAwesomeModule())
                    .With(new IoniconsModule())

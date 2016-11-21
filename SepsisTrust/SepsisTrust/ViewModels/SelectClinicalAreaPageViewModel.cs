@@ -42,11 +42,6 @@ namespace SepsisTrust.ViewModels
                 return;
             }
 
-            if ( !StaticAzureService.IsInitialized )
-            {
-                StaticAzureService.Initialize();
-            }
-
             IAzureCRUDService service = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
             var query = service.CreateQuery<ClinicalArea>();
             var parameterisedQuery = query.WithParameters(new Dictionary<string, string> {{"select", "name,id"}});

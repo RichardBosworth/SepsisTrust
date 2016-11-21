@@ -23,6 +23,8 @@ namespace SepsisTrust
         {
             InitializeComponent();
 
+            StaticAzureService.Initialize(StaticAzureService.AppServiceUrl);
+
             NavigationService.NavigateAsync("/LoadingPage/");
         }
 

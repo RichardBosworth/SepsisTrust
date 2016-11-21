@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using AzureData;
 using Guidelines.IO;
 using Guidelines.Model;
@@ -17,27 +16,29 @@ namespace SepsisTrust.ViewModels.Sub
 {
     public class GuidelineSelectionListItemViewModel : BindableBase
     {
-        private string _iconName;
-        private INavigationService _navigationService;
         private readonly IEventAggregator _eventAggregator;
+
+        private string _description;
+        private string _iconName;
+
+        private string _identifier;
+        private readonly INavigationService _navigationService;
 
         private DelegateCommand _startGuidelineCommand;
         private string _title;
 
-        private string _description;
-
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
-        }
-
-        public GuidelineSelectionListItemViewModel( INavigationService navigationService, IEventAggregator  eventAggregator)
+        public GuidelineSelectionListItemViewModel( INavigationService navigationService, IEventAggregator eventAggregator )
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
 
             StartGuidelineCommand = new DelegateCommand(StartGuideline);
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
         }
 
         public DelegateCommand StartGuidelineCommand
@@ -58,8 +59,6 @@ namespace SepsisTrust.ViewModels.Sub
             set { SetProperty(ref _iconName, value); }
         }
 
-        private string _identifier;
-
         public string Identifier
         {
             get { return _identifier; }
@@ -73,10 +72,10 @@ namespace SepsisTrust.ViewModels.Sub
             IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline, _eventAggregator);
             var startBlock = guidelineRunner.Start();
             var navigationModel = new GuidelinePageNavigationModel
-            {
-                CurrentBlock = startBlock,
-                CurrentGuidelineRunner = guidelineRunner
-            };
+                                  {
+                                      CurrentBlock = startBlock,
+                                      CurrentGuidelineRunner = guidelineRunner
+                                  };
             await _navigationService.NavigateAsync("GuidelinePage", navigationModel.ToNavigationParameters());
         }
     }
@@ -86,19 +85,15 @@ namespace SepsisTrust.ViewModels.Sub
         public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
         {
             // Obtain the guideline from the server.
-            if ( !StaticAzureService.IsInitialized )
-            {
-                StaticAzureService.Initialize();
-            }
             IAzureCRUDService azureCRUDService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
             var query = azureCRUDService.CreateQuery<Model.Azure.Guideline>();
-            var parameterisedQuery = query.WithParameters(new Dictionary<string, string>() {{"select", "guidelineIdentifier, guidelineContent"}});
+            var parameterisedQuery = query.WithParameters(new Dictionary<string, string> {{"select", "guidelineIdentifier, guidelineContent"}});
             var finalQuery = parameterisedQuery.Where(guideline => guideline.GuidelineIdentifier.ToLower() == identifier.ToLower());
             var guidelines = await azureCRUDService.ExecuteQuery(finalQuery);
             var returnedGuideline = guidelines.FirstOrDefault();
-            
+
             // Parse the XML for that guideline.
-            GuidelineXmlParser guidelineXmlParser = new GuidelineXmlParser();
+            var guidelineXmlParser = new GuidelineXmlParser();
             var parsedGuideline = await guidelineXmlParser.ParseGuidelineXmlAsync(returnedGuideline.GuidelineContent);
             return parsedGuideline;
         }
