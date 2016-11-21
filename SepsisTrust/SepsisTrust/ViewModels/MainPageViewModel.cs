@@ -1,54 +1,64 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Reflection;
+using System.Threading.Tasks;
 using AzureData;
 using Guidelines.Extensions;
-using Guidelines.IO;
-using Guidelines.Model;
-using Guidelines.Model.Running;
+using Humanizer;
 using Microsoft.WindowsAzure.MobileServices;
+using PCLStorage;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
-using SepsisTrust.Model;
-using SepsisTrust.Model.Navigation;
-using SepsisTrust.Model.Retrieval;
-using ClinicalArea = SepsisTrust.Model.Azure.ClinicalArea;
+using SepsisTrust.Model.Azure;
+using SepsisTrust.Model.Storage;
+using SepsisTrust.Model.User;
+using SepsisTrust.ViewModels.Sub;
 
 namespace SepsisTrust.ViewModels
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
-        private readonly INavigationService _navigationService;
-        private readonly IEventAggregator _eventAggregator;
-        private string _title;
         private static AuditGuidelineExtension _auditGuidelineExtension;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IFileStreamRetriever _fileStreamRetriever;
+        private readonly IJsonObjectStreamReader _jsonObjectStreamReader;
+        private readonly INavigationService _navigationService;
+        private AppUserData _appUserData;
 
         private DelegateCommand _navigateToUserDetailsCommand;
+
+        private ObservableCollection<GuidelineSelectionListItemViewModel> _selectableGuidelines;
+
+        public MainPageViewModel( INavigationService navigationService, IFileStreamRetriever fileStreamRetriever, IJsonObjectStreamReader jsonObjectStreamReader, IEventAggregator eventAggregator )
+        {
+            // Save variables.
+            _navigationService = navigationService;
+            _fileStreamRetriever = fileStreamRetriever;
+            _jsonObjectStreamReader = jsonObjectStreamReader;
+            _eventAggregator = eventAggregator;
+
+            // Generate commands.
+            NavigateToUserDetailsCommand = new DelegateCommand(( ) => navigationService.NavigateAsync("EditUser"));
+
+            // Register guideline extensions.
+            GuidelineExtensions.Register<AuditGuidelineExtension>(eventAggregator);
+
+            // Initialize properties.
+            SelectableGuidelines = new ObservableCollection<GuidelineSelectionListItemViewModel>();
+        }
+
+        public ObservableCollection<GuidelineSelectionListItemViewModel> SelectableGuidelines
+        {
+            get { return _selectableGuidelines; }
+            set { SetProperty(ref _selectableGuidelines, value); }
+        }
 
         public DelegateCommand NavigateToUserDetailsCommand
         {
             get { return _navigateToUserDetailsCommand; }
             set { SetProperty(ref _navigateToUserDetailsCommand, value); }
         }
-
-        public MainPageViewModel( INavigationService navigationService, IEventAggregator eventAggregator )
-        {
-            _navigationService = navigationService;
-            _eventAggregator = eventAggregator;
-            NavigateCommand = new DelegateCommand<string>(Navigate);
-
-            GuidelineExtensions.Register<AuditGuidelineExtension>(eventAggregator);
-
-            NavigateToUserDetailsCommand = new DelegateCommand(( ) => navigationService.NavigateAsync("EditUser"));
-        }
-
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
-        public DelegateCommand<string> NavigateCommand { get; set; }
 
 
         public void OnNavigatedFrom( NavigationParameters parameters )
@@ -61,21 +71,79 @@ namespace SepsisTrust.ViewModels
 
         public async void OnNavigatingTo( NavigationParameters parameters )
         {
-            StaticAzureService.Initialize(StaticAzureService.AppServiceUrl);
+            // Generate the most appropriate app user data.
+            await EstablishUserData(parameters);
+
+            // Get the clinical area for the app user.
+            var clinicalAreaId = _appUserData.ClinicalArea.Id;
+
+            // Get the guidelines that match the clinical area.
+            if ( !StaticAzureService.IsInitialized )
+            {
+                StaticAzureService.Initialize();
+            }
+            IAzureCRUDService azureCRUDService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
+            var query = azureCRUDService.CreateQuery<Guideline>();
+            var guidelinesOfAreaQuery = query.Where(guideline => guideline.ClinicalAreaId == clinicalAreaId);
+            var guidelines = await azureCRUDService.ExecuteQuery(guidelinesOfAreaQuery);
+
+            // Generate view models for those guidelines
+            SelectableGuidelines.Clear();
+            foreach ( var guideline in guidelines )
+            {
+                var itemViewModel = new GuidelineSelectionListItemViewModel(_navigationService, _eventAggregator)
+                         {
+                             Title = guideline.Title,
+                             Identifier = guideline.Identifier,
+                             IconName = guideline.IconName,
+                             Description = guideline.Description
+                         };
+                SelectableGuidelines.Add(itemViewModel);
+            }
         }
 
-        private async void Navigate( string guidelineFileName )
+        private async Task EstablishUserData( NavigationParameters parameters )
         {
-            IGuidelineRetriever guidelineRetriever = new LocalXmlGuidelineRetriever();
-            var guideline = await guidelineRetriever.RetrieveGuidelineAsync(guidelineFileName);
-            IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline, _eventAggregator);
-            var startBlock = guidelineRunner.Start();
-            var navigationModel = new GuidelinePageNavigationModel
-                                  {
-                                      CurrentBlock = startBlock,
-                                      CurrentGuidelineRunner = guidelineRunner
-                                  };
-            await _navigationService.NavigateAsync("GuidelinePage", navigationModel.ToNavigationParameters());
+            // Check if user data has been provided in the parameters.
+            if ( parameters.ContainsKey("userData") )
+            {
+                _appUserData = parameters["userData"] as AppUserData;
+            }
+
+            if ( _appUserData == null )
+            {
+                // Check if user data is already in memory
+                if ( StaticUserDataStore.UserData != null )
+                {
+                    // This copies the memory-based user data, thus ensuring that
+                    // the Save/Back functionality works.
+                    // If this is directly set to the memory-based store, changes will
+                    // be automatically "saved".
+                    var memoryAppUserData = StaticUserDataStore.UserData;
+                    _appUserData = new AppUserData();
+                    foreach ( var runtimeProperty in memoryAppUserData.GetType().GetRuntimeProperties() )
+                    {
+                        var memoryAppData = runtimeProperty.GetValue(memoryAppUserData);
+                        runtimeProperty.SetValue(_appUserData, memoryAppData);
+                    }
+                }
+            }
+
+            // Otherwise, load app user data from file path.
+            if ( _appUserData == null )
+            {
+                // This loads the data from persistent storage into a new instance
+                // of app user data.
+                _appUserData = new AppUserData();
+                _appUserData = await LoadAppUserDataFromFileAsync(StaticUserDataStore.UserFileName);
+            }
+        }
+
+
+        private async Task<AppUserData> LoadAppUserDataFromFileAsync( string userFileName )
+        {
+            var fileReadStream = await _fileStreamRetriever.ObtainFileStreamAsync(userFileName, false, FileAccess.Read);
+            return await _jsonObjectStreamReader.Read<AppUserData>(fileReadStream);
         }
     }
 }

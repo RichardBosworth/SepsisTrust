@@ -6,31 +6,45 @@
              xmlns:behaviours="clr-namespace:SepsisTrust.Behaviours;assembly=SepsisTrust"
              xmlns:iconize="clr-namespace:FormsPlugin.Iconize;assembly=FormsPlugin.Iconize"
              xmlns:freshEssentials="clr-namespace:FreshEssentials;assembly=FreshEssentials"
+             xmlns:sub="clr-namespace:SepsisTrust.Views.Sub;assembly=SepsisTrust"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SepsisTrust.Views.MainPage"
              Title="Sepsis Trust">
-  
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Me"  Command="{Binding NavigateToUserDetailsCommand}" />
-  </ContentPage.ToolbarItems>
-  
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="20">
-        <Label Style="{StaticResource TitleLabelStyle}" Text="Welcome to Sepsis Guide">
-          <Label.Behaviors>
-            <behaviours:CapitaliseTextBehaviour></behaviours:CapitaliseTextBehaviour>
-          </Label.Behaviors>
-        </Label>
-        <Label Style="{StaticResource HeadingLabelStyle}" Text="Options" />
-        <Label Style="{StaticResource BodyLabelStyle}" Text="The first option should be used!" />
-        <Label Style="{StaticResource DetailsLabelStyle}" Text="The first option should be used!" />
-      
-      <freshEssentials:BindablePicker></freshEssentials:BindablePicker>
 
-      <iconize:IconImage Icon="medical-i-elevators" IconSize="64" IconColor="{StaticResource GreyBaseColor}"></iconize:IconImage>
-      
-        <Button Text="Sepsis Demo" FontAttributes="Bold" FontSize="Large" Command="{Binding NavigateCommand}"
-                CommandParameter="TestGuideline" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                HeightRequest="60" BackgroundColor="{StaticResource OrangeBaseColor}"
-                TextColor="{StaticResource WhitishBaseColor}" />
-    </StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Me" Command="{Binding NavigateToUserDetailsCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ListView ItemsSource="{Binding SelectableGuidelines}" Header="{Binding .}" Footer="{Binding .}"
+              HasUnevenRows="True">
+        <ListView.HeaderTemplate>
+            <DataTemplate>
+                <StackLayout Padding="10" Margin="0,0,0,10" >
+                    <ContentView Padding="10">
+                        <forms:CachedImage HeightRequest="75" Aspect="AspectFit"
+                                           Source="http://sepsistrust.org/wp-content/uploads/2015/07/logo.jpg"
+                                           FadeAnimationEnabled="True" />
+                    </ContentView>
+                  <Label Text="Guidelines" Style="{StaticResource TitleLabelStyle}"></Label>
+                </StackLayout>
+            </DataTemplate>
+        </ListView.HeaderTemplate>
+
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <sub:GuidelineSelectionListItem />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        <ListView.FooterTemplate>
+            <DataTemplate>
+                <Label />
+            </DataTemplate>
+        </ListView.FooterTemplate>
+    </ListView>
+
 </ContentPage>

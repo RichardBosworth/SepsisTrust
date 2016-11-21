@@ -11,7 +11,6 @@
 
         static StaticUserDataStore( )
         {
-            
         }
     }
 }
