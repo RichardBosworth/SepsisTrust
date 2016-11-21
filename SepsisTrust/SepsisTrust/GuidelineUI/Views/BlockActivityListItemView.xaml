@@ -17,7 +17,10 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Text="{Binding Title}" Style="{DynamicResource ListItemTextStyle}" Margin="10,0,10,0" />
+            <StackLayout Grid.Column="0">
+                <Label Text="{Binding Title}" Style="{DynamicResource ListItemTextStyle}" Margin="10,0,10,0" />
+                <Label Text="{Binding DescriptiveText}" Style="{DynamicResource DetailsLabelStyle}" Margin="10,0,10,0" />
+            </StackLayout>
 
             <iconize:IconImage Grid.Column="1"
                                IconSize="32"

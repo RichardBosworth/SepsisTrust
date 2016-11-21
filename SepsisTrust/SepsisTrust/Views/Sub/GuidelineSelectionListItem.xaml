@@ -22,7 +22,7 @@
                          HorizontalOptions="FillAndExpand"
                          VerticalOptions="FillAndExpand" />
 
-                <iconize:IconImage Grid.Row="0" IconSize="32" Icon="{Binding IconName}" VerticalOptions="Center"
+                <iconize:IconImage Grid.Row="0" IconSize="38" Icon="{Binding IconName}" VerticalOptions="Center"
                                    HorizontalOptions="Center"
                                    IconColor="{StaticResource GreyBaseColor}" />
 
