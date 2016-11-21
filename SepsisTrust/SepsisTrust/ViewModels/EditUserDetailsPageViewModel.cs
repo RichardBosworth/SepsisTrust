@@ -170,7 +170,9 @@ namespace SepsisTrust.ViewModels
             var writeTask = _userDataStreamWriter.Write(fileWriteStream, _appUserData);
 
             // Navigate back to previous page upon saving.
-            await _navigationService.GoBackAsync();
+            NavigationParameters navigationParameters = new NavigationParameters();
+            navigationParameters.Add("userData", _appUserData);
+            await _navigationService.GoBackAsync(navigationParameters);
         }
 
         private async Task<AppUserData> LoadAppUserDataFromFileAsync( string userFileName )

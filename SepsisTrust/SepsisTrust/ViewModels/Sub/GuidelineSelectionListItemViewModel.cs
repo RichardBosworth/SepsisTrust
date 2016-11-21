@@ -1,4 +1,9 @@
-﻿using Guidelines.IO;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml;
+using AzureData;
+using Guidelines.IO;
 using Guidelines.Model;
 using Guidelines.Model.Running;
 using Prism.Commands;
@@ -6,6 +11,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using SepsisTrust.Model.Navigation;
+using SepsisTrust.Model.Retrieval;
 
 namespace SepsisTrust.ViewModels.Sub
 {
@@ -62,7 +68,7 @@ namespace SepsisTrust.ViewModels.Sub
 
         private async void StartGuideline( )
         {
-            IGuidelineRetriever guidelineRetriever = new LocalXmlGuidelineRetriever();
+            IGuidelineRetriever guidelineRetriever = new AzureRemoteGuidelineRetriever();
             var guideline = await guidelineRetriever.RetrieveGuidelineAsync(Identifier);
             IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline, _eventAggregator);
             var startBlock = guidelineRunner.Start();
@@ -72,6 +78,29 @@ namespace SepsisTrust.ViewModels.Sub
                 CurrentGuidelineRunner = guidelineRunner
             };
             await _navigationService.NavigateAsync("GuidelinePage", navigationModel.ToNavigationParameters());
+        }
+    }
+
+    public class AzureRemoteGuidelineRetriever : IGuidelineRetriever
+    {
+        public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
+        {
+            // Obtain the guideline from the server.
+            if ( !StaticAzureService.IsInitialized )
+            {
+                StaticAzureService.Initialize();
+            }
+            IAzureCRUDService azureCRUDService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
+            var query = azureCRUDService.CreateQuery<Model.Azure.Guideline>();
+            var parameterisedQuery = query.WithParameters(new Dictionary<string, string>() {{"select", "guidelineIdentifier, guidelineContent"}});
+            var finalQuery = parameterisedQuery.Where(guideline => guideline.GuidelineIdentifier.ToLower() == identifier.ToLower());
+            var guidelines = await azureCRUDService.ExecuteQuery(finalQuery);
+            var returnedGuideline = guidelines.FirstOrDefault();
+            
+            // Parse the XML for that guideline.
+            GuidelineXmlParser guidelineXmlParser = new GuidelineXmlParser();
+            var parsedGuideline = await guidelineXmlParser.ParseGuidelineXmlAsync(returnedGuideline.GuidelineContent);
+            return parsedGuideline;
         }
     }
 }

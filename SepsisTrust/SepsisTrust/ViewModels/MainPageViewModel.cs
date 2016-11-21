@@ -75,7 +75,7 @@ namespace SepsisTrust.ViewModels
             await EstablishUserData(parameters);
 
             // Get the clinical area for the app user.
-            var clinicalAreaId = _appUserData.ClinicalArea.Id;
+            var clinicalAreaId = _appUserData?.ClinicalArea?.Id;
 
             // Get the guidelines that match the clinical area.
             if ( !StaticAzureService.IsInitialized )
@@ -94,7 +94,7 @@ namespace SepsisTrust.ViewModels
                 var itemViewModel = new GuidelineSelectionListItemViewModel(_navigationService, _eventAggregator)
                          {
                              Title = guideline.Title,
-                             Identifier = guideline.Identifier,
+                             Identifier = guideline.GuidelineIdentifier,
                              IconName = guideline.IconName,
                              Description = guideline.Description
                          };

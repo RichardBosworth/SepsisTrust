@@ -173,7 +173,7 @@ namespace SepsisTrust.ViewModels
 
         private void Finish( )
         {
-            _navigationService.NavigateAsync("/MainPage");
+            _navigationService.NavigateAsync("/GNav/MainPage");
         }
 
         private async void Proceed( )

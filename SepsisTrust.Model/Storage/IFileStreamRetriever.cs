@@ -7,6 +7,7 @@ namespace SepsisTrust.Model.Storage
     public interface IFileStreamRetriever
     {
         Task<Stream> ObtainFileStreamAsync( string filePath, bool createIfNotFound, FileAccess fileAccessType );
+        Task<bool> CanObtainStreamFromPathAsync( string filePath );
     }
 
     public class FileStreamRetriever : IFileStreamRetriever
@@ -34,6 +35,12 @@ namespace SepsisTrust.Model.Storage
 
             var file = await localStorage.GetFileAsync(filePath);
             return await file.OpenAsync(fileAccessType);
+        }
+
+        public async Task<bool> CanObtainStreamFromPathAsync( string filePath )
+        {
+            var localStorage = FileSystem.Current.LocalStorage;
+            return await localStorage.CheckExistsAsync(filePath) != ExistenceCheckResult.NotFound;
         }
     }
 }

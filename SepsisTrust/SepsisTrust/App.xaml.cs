@@ -1,6 +1,10 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
+using System.Threading.Tasks;
 using Guidelines.IO;
 using Microsoft.Practices.Unity;
+using PCLStorage;
+using Prism.Navigation;
 using Prism.Unity;
 using SepsisTrust.Model.Storage;
 using SepsisTrust.Model.User;
@@ -18,7 +22,7 @@ namespace SepsisTrust
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("GNav/MainPage");
+            NavigationService.NavigateAsync("/LoadingPage/");
         }
 
         protected override void RegisterTypes()
@@ -33,6 +37,7 @@ namespace SepsisTrust
             Container.RegisterTypeForNavigation<SelectClinicalAreaPage>();
             Container.RegisterTypeForNavigation<GuidelinesNavigationPage>("GNav");
             Container.RegisterTypeForNavigation<EditUserDetailsPage>("EditUser");
+            Container.RegisterTypeForNavigation<LoadingPage>();
         }
     }
 }
