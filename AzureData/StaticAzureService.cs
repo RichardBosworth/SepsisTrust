@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
+﻿using System;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace AzureData
 {
@@ -22,6 +23,15 @@ namespace AzureData
             }
         }
 
+        public static void EnableLocalStorage()
+        {
+            // If not initialized, then throw an exception.
+            if (!IsInitialized)
+            {
+                throw new Exception("The Static Azure Service has not been initialized yet, so local storage cannot be enabled.");
+            }
 
+
+        }
     }
 }
