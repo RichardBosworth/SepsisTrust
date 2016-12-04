@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AzureData;
@@ -67,16 +68,28 @@ namespace SepsisTrust.ViewModels.Sub
 
         private async void StartGuideline( )
         {
-            IGuidelineRetriever guidelineRetriever = new AzureRemoteGuidelineRetriever();
-            var guideline = await guidelineRetriever.RetrieveGuidelineAsync(Identifier);
-            IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline, _eventAggregator);
-            var startBlock = guidelineRunner.Start();
-            var navigationModel = new GuidelinePageNavigationModel
-                                  {
-                                      CurrentBlock = startBlock,
-                                      CurrentGuidelineRunner = guidelineRunner
-                                  };
-            await _navigationService.NavigateAsync("GuidelinePage", navigationModel.ToNavigationParameters());
+            try
+            {
+
+                // Retrieve the guideline from the remote server.
+                IGuidelineRetriever guidelineRetriever = new AzureRemoteGuidelineRetriever();
+                var guideline = await guidelineRetriever.RetrieveGuidelineAsync(Identifier);
+
+                // Start running that guideline.
+                IGuidelineRunner guidelineRunner = new DefaultGuidelineRunner(guideline, _eventAggregator);
+                var startBlock = guidelineRunner.Start();
+                var navigationModel = new GuidelinePageNavigationModel
+                {
+                    CurrentBlock = startBlock,
+                    CurrentGuidelineRunner = guidelineRunner
+                };
+                await _navigationService.NavigateAsync("GuidelinePage", navigationModel.ToNavigationParameters());
+            }
+            catch (Exception exception)
+            {
+                
+                throw;
+            }
         }
     }
 
@@ -84,17 +97,17 @@ namespace SepsisTrust.ViewModels.Sub
     {
         public async Task<Guideline> RetrieveGuidelineAsync( string identifier )
         {
-            // Obtain the guideline from the server.
-            IAzureCRUDService azureCRUDService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
-            var query = azureCRUDService.CreateQuery<Model.Azure.Guideline>();
-            var parameterisedQuery = query.WithParameters(new Dictionary<string, string> {{"select", "guidelineIdentifier, guidelineContent"}});
-            var finalQuery = parameterisedQuery.Where(guideline => guideline.GuidelineIdentifier.ToLower() == identifier.ToLower());
-            var guidelines = await azureCRUDService.ExecuteQuery(finalQuery);
-            var returnedGuideline = guidelines.FirstOrDefault();
+            // Obtain the guideline content from the server.
+            IAzureCRUDService azureCrudService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
+            var query = azureCrudService.CreateQuery<Model.Azure.Guideline>()
+                .Where(guideline => guideline.GuidelineIdentifier.ToLower() == identifier.ToLower())
+                .Select(guideline => guideline.GuidelineContent);
+            var guidelines = await azureCrudService.ExecuteQuery(query);
+            var returnedGuidelineContent = guidelines.FirstOrDefault();
 
             // Parse the XML for that guideline.
             var guidelineXmlParser = new GuidelineXmlParser();
-            var parsedGuideline = await guidelineXmlParser.ParseGuidelineXmlAsync(returnedGuideline.GuidelineContent);
+            var parsedGuideline = await guidelineXmlParser.ParseGuidelineXmlAsync(returnedGuidelineContent);
             return parsedGuideline;
         }
     }

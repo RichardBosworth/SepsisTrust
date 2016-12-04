@@ -1,10 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using AzureData;
 using Guidelines.Extensions;
-using Humanizer;
-using Microsoft.WindowsAzure.MobileServices;
 using PCLStorage;
 using Prism.Commands;
 using Prism.Events;
@@ -30,7 +29,8 @@ namespace SepsisTrust.ViewModels
 
         private ObservableCollection<GuidelineSelectionListItemViewModel> _selectableGuidelines;
 
-        public MainPageViewModel( INavigationService navigationService, IFileStreamRetriever fileStreamRetriever, IJsonObjectStreamReader jsonObjectStreamReader, IEventAggregator eventAggregator )
+        public MainPageViewModel(INavigationService navigationService, IFileStreamRetriever fileStreamRetriever,
+            IJsonObjectStreamReader jsonObjectStreamReader, IEventAggregator eventAggregator)
         {
             // Save variables.
             _navigationService = navigationService;
@@ -39,7 +39,7 @@ namespace SepsisTrust.ViewModels
             _eventAggregator = eventAggregator;
 
             // Generate commands.
-            NavigateToUserDetailsCommand = new DelegateCommand(( ) => navigationService.NavigateAsync("EditUser"));
+            NavigateToUserDetailsCommand = new DelegateCommand(() => navigationService.NavigateAsync("EditUser"));
 
             // Register guideline extensions.
             GuidelineExtensions.Register<AuditGuidelineExtension>(eventAggregator);
@@ -61,15 +61,15 @@ namespace SepsisTrust.ViewModels
         }
 
 
-        public void OnNavigatedFrom( NavigationParameters parameters )
+        public void OnNavigatedFrom(NavigationParameters parameters)
         {
         }
 
-        public async void OnNavigatedTo( NavigationParameters parameters )
+        public async void OnNavigatedTo(NavigationParameters parameters)
         {
         }
 
-        public async void OnNavigatingTo( NavigationParameters parameters )
+        public async void OnNavigatingTo(NavigationParameters parameters)
         {
             // Generate the most appropriate app user data.
             await EstablishUserData(parameters);
@@ -80,36 +80,42 @@ namespace SepsisTrust.ViewModels
             // Get the guidelines that match the clinical area.
             IAzureCRUDService azureCRUDService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
             var query = azureCRUDService.CreateQuery<Guideline>();
-            var guidelinesOfAreaQuery = query.Where(guideline => guideline.ClinicalAreaId == clinicalAreaId);
+            var guidelinesOfAreaQuery =
+                query.Where(guideline => guideline.ClinicalAreaId == clinicalAreaId)
+                    .Select(
+                        guideline =>
+                            new
+                            {
+                                Title = guideline.Title,
+                                GuidelineIdentifier = guideline.GuidelineIdentifier,
+                                IconName = guideline.IconName,
+                                Description = guideline.Description
+                            });
             var guidelines = await azureCRUDService.ExecuteQuery(guidelinesOfAreaQuery);
 
             // Generate view models for those guidelines
             SelectableGuidelines.Clear();
-            foreach ( var guideline in guidelines )
+            foreach (var guideline in guidelines)
             {
                 var itemViewModel = new GuidelineSelectionListItemViewModel(_navigationService, _eventAggregator)
-                         {
-                             Title = guideline.Title,
-                             Identifier = guideline.GuidelineIdentifier,
-                             IconName = guideline.IconName,
-                             Description = guideline.Description
-                         };
+                {
+                    Title = guideline.Title,
+                    Identifier = guideline.GuidelineIdentifier,
+                    IconName = guideline.IconName,
+                    Description = guideline.Description
+                };
                 SelectableGuidelines.Add(itemViewModel);
             }
         }
 
-        private async Task EstablishUserData( NavigationParameters parameters )
+        private async Task EstablishUserData(NavigationParameters parameters)
         {
             // Check if user data has been provided in the parameters.
-            if ( parameters.ContainsKey("userData") )
-            {
+            if (parameters.ContainsKey("userData"))
                 _appUserData = parameters["userData"] as AppUserData;
-            }
 
-            if ( _appUserData == null )
-            {
-                // Check if user data is already in memory
-                if ( StaticUserDataStore.UserData != null )
+            if (_appUserData == null)
+                if (StaticUserDataStore.UserData != null)
                 {
                     // This copies the memory-based user data, thus ensuring that
                     // the Save/Back functionality works.
@@ -117,16 +123,15 @@ namespace SepsisTrust.ViewModels
                     // be automatically "saved".
                     var memoryAppUserData = StaticUserDataStore.UserData;
                     _appUserData = new AppUserData();
-                    foreach ( var runtimeProperty in memoryAppUserData.GetType().GetRuntimeProperties() )
+                    foreach (var runtimeProperty in memoryAppUserData.GetType().GetRuntimeProperties())
                     {
                         var memoryAppData = runtimeProperty.GetValue(memoryAppUserData);
                         runtimeProperty.SetValue(_appUserData, memoryAppData);
                     }
                 }
-            }
 
             // Otherwise, load app user data from file path.
-            if ( _appUserData == null )
+            if (_appUserData == null)
             {
                 // This loads the data from persistent storage into a new instance
                 // of app user data.
@@ -136,7 +141,7 @@ namespace SepsisTrust.ViewModels
         }
 
 
-        private async Task<AppUserData> LoadAppUserDataFromFileAsync( string userFileName )
+        private async Task<AppUserData> LoadAppUserDataFromFileAsync(string userFileName)
         {
             var fileReadStream = await _fileStreamRetriever.ObtainFileStreamAsync(userFileName, false, FileAccess.Read);
             return await _jsonObjectStreamReader.Read<AppUserData>(fileReadStream);
