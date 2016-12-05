@@ -39,7 +39,7 @@
 
             <!--  Text  -->
             <Style x:Key="TitleLabelStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource RedBaseColor}" />
+                <Setter Property="TextColor" Value="{StaticResource WhitishBaseColor}" />
                 <Setter Property="FontSize" Value="{StaticResource TitleFontSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>

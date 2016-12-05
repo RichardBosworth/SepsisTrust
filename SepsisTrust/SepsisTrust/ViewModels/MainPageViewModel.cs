@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using AzureData;
@@ -78,20 +77,19 @@ namespace SepsisTrust.ViewModels
             var clinicalAreaId = _appUserData?.ClinicalArea?.Id;
 
             // Get the guidelines that match the clinical area.
-            IAzureCRUDService azureCRUDService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
-            var query = azureCRUDService.CreateQuery<Guideline>();
-            var guidelinesOfAreaQuery =
-                query.Where(guideline => guideline.ClinicalAreaId == clinicalAreaId)
-                    .Select(
-                        guideline =>
-                            new
-                            {
-                                Title = guideline.Title,
-                                GuidelineIdentifier = guideline.GuidelineIdentifier,
-                                IconName = guideline.IconName,
-                                Description = guideline.Description
-                            });
-            var guidelines = await azureCRUDService.ExecuteQuery(guidelinesOfAreaQuery);
+            IAzureCRUDService azureCrudService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
+            var guidelinesOfAreaQuery = azureCrudService.CreateQuery<Guideline>()
+                .Where(guideline => (guideline.ClinicalAreaId == clinicalAreaId) && (guideline.GuidelineContent != null))
+                .Select(
+                    guideline =>
+                        new
+                        {
+                            guideline.Title,
+                            guideline.GuidelineIdentifier,
+                            guideline.IconName,
+                            guideline.Description
+                        });
+            var guidelines = await azureCrudService.ExecuteQuery(guidelinesOfAreaQuery);
 
             // Generate view models for those guidelines
             SelectableGuidelines.Clear();

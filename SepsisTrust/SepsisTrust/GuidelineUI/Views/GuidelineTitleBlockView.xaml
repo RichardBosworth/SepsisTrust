@@ -8,12 +8,13 @@
              x:Class="SepsisTrust.GuidelineUI.Views.GuidelineTitleBlockView"
              Padding="20"
              Margin="0,0,0,10"
-             BackgroundColor="{StaticResource WhitishBaseColor}">
+             BackgroundColor="{StaticResource OrangeBaseColor}">
     <ContentView.Content>
         <StackLayout Spacing="10">
             <!--<iconize:IconImage Icon="{Binding Block.EntityIconName}" IconSize="64" IconColor="White" />-->
-            <Label Style="{DynamicResource TitleLabelStyle}" Text="{Binding BlockTitle}" />
-            <Label Style="{DynamicResource BodyLabelStyle}" Text="{Binding InstructionalText}" />
+            <Label Style="{DynamicResource TitleLabelStyle}" VerticalTextAlignment="Center" Text="{Binding BlockTitle}" />
+            <Label Style="{DynamicResource BodyLabelStyle}" TextColor="White" VerticalTextAlignment="Center"
+                   Text="{Binding InstructionalText}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

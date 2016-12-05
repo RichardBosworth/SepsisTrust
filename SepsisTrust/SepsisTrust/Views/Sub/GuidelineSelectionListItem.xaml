@@ -12,7 +12,7 @@
     <ContentView.Content>
         <Grid BackgroundColor="White">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 

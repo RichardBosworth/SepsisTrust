@@ -21,10 +21,8 @@ namespace SepsisTrust.ViewModels.Sub
 
         private string _description;
         private string _iconName;
-
         private string _identifier;
         private readonly INavigationService _navigationService;
-
         private DelegateCommand _startGuidelineCommand;
         private string _title;
 
@@ -87,7 +85,6 @@ namespace SepsisTrust.ViewModels.Sub
             }
             catch (Exception exception)
             {
-                
                 throw;
             }
         }
