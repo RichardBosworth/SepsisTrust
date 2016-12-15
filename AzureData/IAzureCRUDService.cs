@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 
@@ -65,4 +66,14 @@ namespace AzureData
         /// <returns>Returns a list of the data that is returned from the specified query.</returns>
         Task<List<T>> ExecuteQuery<T>( IMobileServiceTableQuery<T> query );
     }
+
+    public interface ISyncronisedAzureCrudService : IAzureCRUDService
+    {
+        Task InitiateSyncTables(params Type[] tableTypes);
+
+        Task SyncronizeTable<T>();
+        Task SyncronizeTable<T>(string queryId);
+        Task SyncronizeTable<T>(string queryId, IMobileServiceTableQuery<T> tableQuery);
+    }
+
 }

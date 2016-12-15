@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 
 namespace AzureData
 {

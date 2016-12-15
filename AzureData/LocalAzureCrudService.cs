@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Newtonsoft.Json.Linq;
 
 namespace AzureData
 {
     /// <summary>
-    /// Provides functionality to obtain and syncronise (storing locally on a device) the data in an Azure service.
+    ///     Provides functionality to obtain and syncronise (storing locally on a device) the data in an Azure service.
     /// </summary>
-    public class LocalAzureCRUDService : IAzureCRUDService
+    public class LocalAzureCRUDService : ISyncronisedAzureCrudService
     {
         private readonly MobileServiceClient _mobileServiceClient;
 
@@ -17,39 +21,86 @@ namespace AzureData
         }
 
 
-        public Task<List<T>> GetAll<T>()
+        public async Task<List<T>> GetAll<T>()
         {
-            throw new System.NotImplementedException();
+            InitializedCheck();
+
+            var table = _mobileServiceClient.GetSyncTable<T>();
+            return await table.ToListAsync();
         }
 
-        public Task<T> GetOne<T>(string identifier)
+        public async Task<T> GetOne<T>(string identifier)
         {
-            throw new System.NotImplementedException();
+            return await _mobileServiceClient.GetSyncTable<T>().LookupAsync(identifier);
         }
 
-        public Task Create<T>(T data)
+        public async Task Create<T>(T data)
         {
-            throw new System.NotImplementedException();
+            await _mobileServiceClient.GetSyncTable<T>().InsertAsync(data);
         }
 
-        public Task Update<T>(T data)
+        public async Task Update<T>(T data)
         {
-            throw new System.NotImplementedException();
+            await _mobileServiceClient.GetSyncTable<T>().UpdateAsync(data);
         }
 
-        public Task Delete<T>(string identifier)
+        public async Task Delete<T>(string identifier)
         {
-            throw new System.NotImplementedException();
+            await _mobileServiceClient.GetSyncTable<T>().DeleteAsync(new JObject {{"Id", identifier}});
         }
 
         public IMobileServiceTableQuery<T> CreateQuery<T>()
         {
-            throw new System.NotImplementedException();
+            return _mobileServiceClient.GetSyncTable<T>().CreateQuery();
         }
 
-        public Task<List<T>> ExecuteQuery<T>(IMobileServiceTableQuery<T> query)
+        public async Task<List<T>> ExecuteQuery<T>(IMobileServiceTableQuery<T> query)
         {
-            throw new System.NotImplementedException();
+            return await query.ToListAsync();
+        }
+
+        public async Task InitiateSyncTables(params Type[] tableTypes)
+        {
+            // Check if the sync context is already initialized.
+            if (_mobileServiceClient.SyncContext.IsInitialized)
+                return;
+
+            // Create the SQL data store.
+            var localStore = new MobileServiceSQLiteStore("local_database.sq3");
+
+            // Add tables for the specified types.
+            foreach (var tableType in tableTypes)
+            {
+                var tableTypeInstance = Activator.CreateInstance(tableType);
+                localStore.DefineTable(tableType.Name, JObject.FromObject(tableTypeInstance));
+            }
+
+            // Initialize the sync context.
+            await _mobileServiceClient.SyncContext.InitializeAsync(localStore);
+        }
+
+        public async Task SyncronizeTable<T>()
+        {
+            await SyncronizeTable<T>($"full_{typeof(T).Name.ToLowerInvariant()}");
+        }
+
+        public async Task SyncronizeTable<T>(string queryId)
+        {
+            await SyncronizeTable(queryId, _mobileServiceClient.GetSyncTable<T>().CreateQuery());
+        }
+
+        public async Task SyncronizeTable<T>(string queryId, IMobileServiceTableQuery<T> tableQuery)
+        {
+            await _mobileServiceClient.GetSyncTable<T>()
+                .PullAsync(queryId, tableQuery, true, CancellationToken.None);
+        }
+
+        private void InitializedCheck()
+        {
+            // If not initialized, state that need to initailize first.
+            var initialized = _mobileServiceClient.SyncContext.IsInitialized;
+            if (!initialized)
+                throw new Exception("Need to initialize sync context first.");
         }
     }
 }
