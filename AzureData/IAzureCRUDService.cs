@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
 
 namespace AzureData
 {
@@ -69,11 +70,11 @@ namespace AzureData
 
     public interface ISyncronisedAzureCrudService : IAzureCRUDService
     {
-        Task InitiateSyncTables(params Type[] tableTypes);
+        Task InitiateSyncTablesAsync(params Action<MobileServiceSQLiteStore>[] tableDefinitionActions);
 
-        Task SyncronizeTable<T>();
-        Task SyncronizeTable<T>(string queryId);
-        Task SyncronizeTable<T>(string queryId, IMobileServiceTableQuery<T> tableQuery);
+        Task SyncronizeTableAsync<T>();
+        Task SyncronizeTableAsync<T>(string queryId);
+        Task SyncronizeTableAsync<T>(string queryId, IMobileServiceTableQuery<T> tableQuery);
     }
 
 }

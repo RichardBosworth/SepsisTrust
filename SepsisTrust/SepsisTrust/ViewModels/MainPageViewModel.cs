@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using AzureData;
 using Guidelines.Extensions;
+using Humanizer;
 using PCLStorage;
 using Prism.Commands;
 using Prism.Events;
@@ -23,6 +24,14 @@ namespace SepsisTrust.ViewModels
         private readonly IJsonObjectStreamReader _jsonObjectStreamReader;
         private readonly INavigationService _navigationService;
         private AppUserData _appUserData;
+
+        private string _currentClinicalAreaName;
+
+        public string CurrentClinicalAreaName
+        {
+            get { return _currentClinicalAreaName; }
+            set { SetProperty(ref _currentClinicalAreaName, value); }
+        }
 
         private DelegateCommand _navigateToUserDetailsCommand;
 
@@ -72,12 +81,13 @@ namespace SepsisTrust.ViewModels
         {
             // Generate the most appropriate app user data.
             await EstablishUserData(parameters);
+            CurrentClinicalAreaName = _appUserData.ClinicalArea.Name.Humanize();
 
             // Get the clinical area for the app user.
             var clinicalAreaId = _appUserData?.ClinicalArea?.Id;
 
             // Get the guidelines that match the clinical area.
-            IAzureCRUDService azureCrudService = new RemoteAzureCRUDService(StaticAzureService.MobileServiceClient);
+            ISyncronisedAzureCrudService azureCrudService = new LocalAzureCRUDService(StaticAzureService.MobileServiceClient);
             var guidelinesOfAreaQuery = azureCrudService.CreateQuery<Guideline>()
                 .Where(guideline => (guideline.ClinicalAreaId == clinicalAreaId) && (guideline.GuidelineContent != null))
                 .Select(

@@ -26,7 +26,7 @@
                                            Source="http://sepsistrust.org/wp-content/uploads/2015/07/logo.jpg"
                                            FadeAnimationEnabled="True" />
                     </ContentView>
-                  <Label Text="Guidelines" Style="{StaticResource TitleLabelStyle}"></Label>
+                  <Label Text="{Binding CurrentClinicalAreaName}" Style="{StaticResource TitleLabelStyle}"></Label>
                 </StackLayout>
             </DataTemplate>
         </ListView.HeaderTemplate>

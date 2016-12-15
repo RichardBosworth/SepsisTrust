@@ -4,9 +4,12 @@ using System.Threading.Tasks;
 using AzureData;
 using Guidelines.IO;
 using Microsoft.Practices.Unity;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 using PCLStorage;
 using Prism.Navigation;
 using Prism.Unity;
+using SepsisTrust.Model.Azure;
 using SepsisTrust.Model.Storage;
 using SepsisTrust.Model.User;
 using SepsisTrust.Views;
@@ -23,7 +26,8 @@ namespace SepsisTrust
         {
             InitializeComponent();
 
-            StaticAzureService.Initialize(StaticAzureService.AppServiceUrl);
+            StaticAzureService.Initialize();
+            StaticAzureService.EnableLocalStorage(store => store.DefineTable<Guideline>(), store => store.DefineTable<ClinicalArea>());
 
             NavigationService.NavigateAsync("/LoadingPage/");
         }

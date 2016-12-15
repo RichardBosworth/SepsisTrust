@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
@@ -13,9 +14,9 @@ namespace AzureData
     /// </summary>
     public class LocalAzureCRUDService : ISyncronisedAzureCrudService
     {
-        private readonly MobileServiceClient _mobileServiceClient;
+        private readonly IMobileServiceClient _mobileServiceClient;
 
-        public LocalAzureCRUDService(MobileServiceClient mobileServiceClient)
+        public LocalAzureCRUDService(IMobileServiceClient mobileServiceClient)
         {
             _mobileServiceClient = mobileServiceClient;
         }
@@ -59,7 +60,7 @@ namespace AzureData
             return await query.ToListAsync();
         }
 
-        public async Task InitiateSyncTables(params Type[] tableTypes)
+        public async Task InitiateSyncTablesAsync(params Action<MobileServiceSQLiteStore>[] tableDefinitionActions)
         {
             // Check if the sync context is already initialized.
             if (_mobileServiceClient.SyncContext.IsInitialized)
@@ -68,28 +69,27 @@ namespace AzureData
             // Create the SQL data store.
             var localStore = new MobileServiceSQLiteStore("local_database.sq3");
 
-            // Add tables for the specified types.
-            foreach (var tableType in tableTypes)
+            // Run the table generation routines.
+            foreach (var definitionAction in tableDefinitionActions)
             {
-                var tableTypeInstance = Activator.CreateInstance(tableType);
-                localStore.DefineTable(tableType.Name, JObject.FromObject(tableTypeInstance));
+                definitionAction.Invoke(localStore);
             }
 
             // Initialize the sync context.
             await _mobileServiceClient.SyncContext.InitializeAsync(localStore);
         }
 
-        public async Task SyncronizeTable<T>()
+        public async Task SyncronizeTableAsync<T>()
         {
-            await SyncronizeTable<T>($"full_{typeof(T).Name.ToLowerInvariant()}");
+            await SyncronizeTableAsync<T>($"full_{typeof(T).Name.ToLowerInvariant()}");
         }
 
-        public async Task SyncronizeTable<T>(string queryId)
+        public async Task SyncronizeTableAsync<T>(string queryId)
         {
-            await SyncronizeTable(queryId, _mobileServiceClient.GetSyncTable<T>().CreateQuery());
+            await SyncronizeTableAsync(queryId, _mobileServiceClient.GetSyncTable<T>().CreateQuery());
         }
 
-        public async Task SyncronizeTable<T>(string queryId, IMobileServiceTableQuery<T> tableQuery)
+        public async Task SyncronizeTableAsync<T>(string queryId, IMobileServiceTableQuery<T> tableQuery)
         {
             await _mobileServiceClient.GetSyncTable<T>()
                 .PullAsync(queryId, tableQuery, true, CancellationToken.None);
