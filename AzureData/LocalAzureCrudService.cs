@@ -12,7 +12,7 @@ namespace AzureData
     /// <summary>
     ///     Provides functionality to obtain and syncronise (storing locally on a device) the data in an Azure service.
     /// </summary>
-    public class LocalAzureCRUDService : ISyncronisedAzureCrudService
+    public class LocalAzureCRUDService : ISyncronizedAzureCrudService
     {
         private readonly IMobileServiceClient _mobileServiceClient;
 

@@ -68,10 +68,9 @@ namespace AzureData
         Task<List<T>> ExecuteQuery<T>( IMobileServiceTableQuery<T> query );
     }
 
-    public interface ISyncronisedAzureCrudService : IAzureCRUDService
+    public interface ISyncronizedAzureCrudService : IAzureCRUDService
     {
         Task InitiateSyncTablesAsync(params Action<MobileServiceSQLiteStore>[] tableDefinitionActions);
-
         Task SyncronizeTableAsync<T>();
         Task SyncronizeTableAsync<T>(string queryId);
         Task SyncronizeTableAsync<T>(string queryId, IMobileServiceTableQuery<T> tableQuery);

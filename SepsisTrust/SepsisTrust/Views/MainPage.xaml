@@ -17,7 +17,7 @@
     </ContentPage.ToolbarItems>
 
     <ListView ItemsSource="{Binding SelectableGuidelines}" Header="{Binding .}" Footer="{Binding .}"
-              HasUnevenRows="True">
+              HasUnevenRows="True" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}">
         <ListView.HeaderTemplate>
             <DataTemplate>
                 <StackLayout Padding="10" Margin="0,0,0,10" >

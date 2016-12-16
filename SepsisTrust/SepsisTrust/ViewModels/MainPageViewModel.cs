@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using AzureData;
@@ -27,6 +28,22 @@ namespace SepsisTrust.ViewModels
 
         private string _currentClinicalAreaName;
 
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
+        }
+
+        private DelegateCommand _refreshCommand;
+
+        public DelegateCommand RefreshCommand
+        {
+            get { return _refreshCommand; }
+            set { SetProperty(ref _refreshCommand, value); }
+        }
+
         public string CurrentClinicalAreaName
         {
             get { return _currentClinicalAreaName; }
@@ -36,6 +53,7 @@ namespace SepsisTrust.ViewModels
         private DelegateCommand _navigateToUserDetailsCommand;
 
         private ObservableCollection<GuidelineSelectionListItemViewModel> _selectableGuidelines;
+        private Model.ClinicalArea _currentClinicalArea;
 
         public MainPageViewModel(INavigationService navigationService, IFileStreamRetriever fileStreamRetriever,
             IJsonObjectStreamReader jsonObjectStreamReader, IEventAggregator eventAggregator)
@@ -54,6 +72,16 @@ namespace SepsisTrust.ViewModels
 
             // Initialize properties.
             SelectableGuidelines = new ObservableCollection<GuidelineSelectionListItemViewModel>();
+
+            // Generate the refresh command.
+            RefreshCommand = new DelegateCommand(RefreshListData);
+        }
+
+        private async void RefreshListData()
+        {
+            IsBusy = true;
+            await RefreshGuidelineDataAsync(_currentClinicalArea.Id, true);
+            IsBusy = false;
         }
 
         public ObservableCollection<GuidelineSelectionListItemViewModel> SelectableGuidelines
@@ -84,10 +112,24 @@ namespace SepsisTrust.ViewModels
             CurrentClinicalAreaName = _appUserData.ClinicalArea.Name.Humanize();
 
             // Get the clinical area for the app user.
-            var clinicalAreaId = _appUserData?.ClinicalArea?.Id;
+            _currentClinicalArea = _appUserData?.ClinicalArea;
+            var clinicalAreaId = _currentClinicalArea?.Id;
 
+            // Refresh the guideline data based on the clinical area of the user.
+            await RefreshGuidelineDataAsync(clinicalAreaId);
+        }
+
+        private async Task RefreshGuidelineDataAsync(string clinicalAreaId, bool syncData = false)
+        {
             // Get the guidelines that match the clinical area.
-            ISyncronisedAzureCrudService azureCrudService = new LocalAzureCRUDService(StaticAzureService.MobileServiceClient);
+            ISyncronizedAzureCrudService azureCrudService = new LocalAzureCRUDService(StaticAzureService.MobileServiceClient);
+
+            if (syncData)
+            {
+                await azureCrudService.SyncronizeTableAsync<Guideline>();
+                await azureCrudService.SyncronizeTableAsync<ClinicalArea>();
+            }
+
             var guidelinesOfAreaQuery = azureCrudService.CreateQuery<Guideline>()
                 .Where(guideline => (guideline.ClinicalAreaId == clinicalAreaId) && (guideline.GuidelineContent != null))
                 .Select(

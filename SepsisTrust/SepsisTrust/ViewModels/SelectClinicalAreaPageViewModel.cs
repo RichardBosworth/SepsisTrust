@@ -42,7 +42,7 @@ namespace SepsisTrust.ViewModels
                 return;
             }
 
-            ISyncronisedAzureCrudService service = new LocalAzureCRUDService(StaticAzureService.MobileServiceClient);
+            ISyncronizedAzureCrudService service = new LocalAzureCRUDService(StaticAzureService.MobileServiceClient);
             var query = service.CreateQuery<ClinicalArea>();
             var parameterisedQuery = query.WithParameters(new Dictionary<string, string> {{"select", "name,id"}});
             var clinicalAreas = await service.ExecuteQuery(parameterisedQuery);
