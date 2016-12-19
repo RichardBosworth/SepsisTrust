@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using AppScripting;
 using AzureData;
 using Guidelines.IO;
 using Microsoft.Practices.Unity;
@@ -28,6 +29,7 @@ namespace SepsisTrust
 
             StaticAzureService.Initialize();
             StaticAzureService.EnableLocalStorage(store => store.DefineTable<Guideline>(), store => store.DefineTable<ClinicalArea>());
+
 
             NavigationService.NavigateAsync("/LoadingPage/");
         }

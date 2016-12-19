@@ -241,6 +241,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AppScripting\AppScripting.csproj">
+      <Project>{b7032bed-e2bb-4780-a49f-657d05fd0826}</Project>
+      <Name>AppScripting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\AzureData\AzureData.csproj">
       <Project>{5D5CD8EE-EED0-4197-956E-E7AB43CD8D8B}</Project>
       <Name>AzureData</Name>
