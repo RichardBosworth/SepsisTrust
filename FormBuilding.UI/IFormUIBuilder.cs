@@ -21,16 +21,26 @@ namespace FormBuilding.UI
                 throw new Exception("The form provided to the Calculator Form UI Builder is not a calculator form.");
 
             // Get the form in the correct format.
-            CalculatorForm calculatorForm = (CalculatorForm) form;
+            var calculatorForm = (CalculatorForm) form;
+
+            // Generate the stack layout for the form variables.
+            StackLayout formStackLayout = new StackLayout();
 
             // Build the view for each variable.
             foreach (var formVariable in calculatorForm.Variables)
             {
-                StackLayout stackLayout = new StackLayout() {Orientation = StackOrientation.Horizontal};
-                stackLayout.Children.Add(new Label() {Text = formVariable.Name});
-                var entry = new Entry() {Text = formVariable.Value.ToString()};
-                stackLayout.Children.Add(entry);
+                // Generate a horizontal stack layout for the variable views.
+                var variableStackLayout = new StackLayout {Orientation = StackOrientation.Horizontal};
+                variableStackLayout.Children.Add(new Label {Text = formVariable.Name});
+                var entry = new Entry {Text = formVariable.Value.ToString()};
+                variableStackLayout.Children.Add(entry);
+
+                // Add the variable stack layout to the form stack layout.
+                formStackLayout.Children.Add(variableStackLayout);
             }
+
+            // Return the stacklayout.
+            return formStackLayout; 
         }
     }
 }

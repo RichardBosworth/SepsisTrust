@@ -124,6 +124,7 @@ namespace SepsisTrust.ViewModels
             // Get the guidelines that match the clinical area.
             ISyncronizedAzureCrudService azureCrudService = new LocalAzureCRUDService(StaticAzureService.MobileServiceClient);
 
+            // Sync data if required.
             if (syncData)
             {
                 await azureCrudService.SyncronizeTableAsync<Guideline>();
