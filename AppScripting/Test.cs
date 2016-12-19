@@ -19,8 +19,8 @@ namespace AppScripting
 
         public string RunTest()
         {
-            Engine engine = new Engine(options => options.AllowClr(typeof(View).GetTypeInfo().Assembly));
-            Label jsValue = (Label) engine.Execute("var Xamarin = importNamespace(\"Xamarin.Forms\");\r\n\r\nfunction BuildLabel(text) {\r\n    var label = new Xamarin.Label();\r\n    label.Text = text;\r\n    return label;\r\n}\r\n\r\nvar label = BuildLabel(\"Alright mate\");")
+            Engine engine = new Engine(options => options.AllowClr(typeof(View).GetTypeInfo().Assembly)));
+            Label jsValue = (Label) engine.Execute("var Xamarin = importNamespace(\"Xamarin.Forms\");\r\n\r\nfunction BuildLabel(text) {\r\n    var label = new Xamarin.Label();\r\n    label.Text = text;\r\n    return label;\r\n}\r\n\r\nfunction BuildImage(imageSource) {\r\n    var image = new Xamarin.Image();\r\n}\r\n\r\nvar label = BuildLabel(\"Test Label\");")
                 .GetValue("label").ToObject();
             return jsValue.Text;
         }

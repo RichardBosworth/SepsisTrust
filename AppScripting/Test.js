@@ -6,4 +6,8 @@ function BuildLabel(text) {
     return label;
 }
 
-var label = BuildLabel("Alright mate");
+function BuildImage(imageSource) {
+    var image = new Xamarin.Image();
+}
+
+var label = BuildLabel("Test Label");
