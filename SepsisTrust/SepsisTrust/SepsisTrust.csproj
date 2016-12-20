@@ -105,6 +105,7 @@
     <Compile Include="Views\Sub\GuidelineSelectionListItem.xaml.cs">
       <DependentUpon>GuidelineSelectionListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WebServices\LocalAzureClinicalAreaBasedGuidelineListRetriever.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">

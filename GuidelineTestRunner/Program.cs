@@ -7,10 +7,7 @@ namespace GuidelineTestRunner
     {
         private static void Main()
         {
-            var test = new Test();
-            var text = test.RunTest();
-            Console.WriteLine(text);
-            Console.Read();
+
         }
     }
 }

@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
-using AzureData;
 using Guidelines.Extensions;
+using Guidelines.IO;
 using Humanizer;
 using PCLStorage;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
-using SepsisTrust.Model.Azure;
+using SepsisTrust.Model;
 using SepsisTrust.Model.Storage;
 using SepsisTrust.Model.User;
 using SepsisTrust.ViewModels.Sub;
+using SepsisTrust.WebServices;
 
 namespace SepsisTrust.ViewModels
 {
@@ -25,35 +25,17 @@ namespace SepsisTrust.ViewModels
         private readonly IJsonObjectStreamReader _jsonObjectStreamReader;
         private readonly INavigationService _navigationService;
         private AppUserData _appUserData;
+        private ClinicalArea _currentClinicalArea;
 
         private string _currentClinicalAreaName;
 
         private bool _isBusy;
 
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set { SetProperty(ref _isBusy, value); }
-        }
+        private DelegateCommand _navigateToUserDetailsCommand;
 
         private DelegateCommand _refreshCommand;
 
-        public DelegateCommand RefreshCommand
-        {
-            get { return _refreshCommand; }
-            set { SetProperty(ref _refreshCommand, value); }
-        }
-
-        public string CurrentClinicalAreaName
-        {
-            get { return _currentClinicalAreaName; }
-            set { SetProperty(ref _currentClinicalAreaName, value); }
-        }
-
-        private DelegateCommand _navigateToUserDetailsCommand;
-
         private ObservableCollection<GuidelineSelectionListItemViewModel> _selectableGuidelines;
-        private Model.ClinicalArea _currentClinicalArea;
 
         public MainPageViewModel(INavigationService navigationService, IFileStreamRetriever fileStreamRetriever,
             IJsonObjectStreamReader jsonObjectStreamReader, IEventAggregator eventAggregator)
@@ -77,11 +59,22 @@ namespace SepsisTrust.ViewModels
             RefreshCommand = new DelegateCommand(RefreshListData);
         }
 
-        private async void RefreshListData()
+        public bool IsBusy
         {
-            IsBusy = true;
-            await RefreshGuidelineDataAsync(_currentClinicalArea.Id, true);
-            IsBusy = false;
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
+        }
+
+        public DelegateCommand RefreshCommand
+        {
+            get { return _refreshCommand; }
+            set { SetProperty(ref _refreshCommand, value); }
+        }
+
+        public string CurrentClinicalAreaName
+        {
+            get { return _currentClinicalAreaName; }
+            set { SetProperty(ref _currentClinicalAreaName, value); }
         }
 
         public ObservableCollection<GuidelineSelectionListItemViewModel> SelectableGuidelines
@@ -119,30 +112,18 @@ namespace SepsisTrust.ViewModels
             await RefreshGuidelineDataAsync(clinicalAreaId);
         }
 
+        private async void RefreshListData()
+        {
+            IsBusy = true;
+            await RefreshGuidelineDataAsync(_currentClinicalArea.Id, true);
+            IsBusy = false;
+        }
+
         private async Task RefreshGuidelineDataAsync(string clinicalAreaId, bool syncData = false)
         {
-            // Get the guidelines that match the clinical area.
-            ISyncronizedAzureCrudService azureCrudService = new LocalAzureCRUDService(StaticAzureService.MobileServiceClient);
-
-            // Sync data if required.
-            if (syncData)
-            {
-                await azureCrudService.SyncronizeTableAsync<Guideline>();
-                await azureCrudService.SyncronizeTableAsync<ClinicalArea>();
-            }
-
-            var guidelinesOfAreaQuery = azureCrudService.CreateQuery<Guideline>()
-                .Where(guideline => (guideline.ClinicalAreaId == clinicalAreaId) && (guideline.GuidelineContent != null))
-                .Select(
-                    guideline =>
-                        new
-                        {
-                            guideline.Title,
-                            guideline.GuidelineIdentifier,
-                            guideline.IconName,
-                            guideline.Description
-                        });
-            var guidelines = await azureCrudService.ExecuteQuery(guidelinesOfAreaQuery);
+            // Execute a query.
+            IGuidelineListRetriever guidelineListRetriever = new LocalAzureClinicalAreaBasedGuidelineListRetriever(clinicalAreaId, syncData);
+            var guidelines = await guidelineListRetriever.RetrieveAvailableGuidelinesAsync();
 
             // Generate view models for those guidelines
             SelectableGuidelines.Clear();
@@ -151,8 +132,7 @@ namespace SepsisTrust.ViewModels
                 var itemViewModel = new GuidelineSelectionListItemViewModel(_navigationService, _eventAggregator)
                 {
                     Title = guideline.Title,
-                    Identifier = guideline.GuidelineIdentifier,
-                    IconName = guideline.IconName,
+                    Identifier = guideline.Identifier,
                     Description = guideline.Description
                 };
                 SelectableGuidelines.Add(itemViewModel);
